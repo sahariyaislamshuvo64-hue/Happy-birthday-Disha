@@ -1,284 +1,252 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Target Date: 6 September 2026, 03:10:00 ---
-  const targetDate = new Date("September 6, 2026 03:10:00").getTime();
+  // Target Time: 6 September 2026, 03:10:00
+  const targetTime = new Date("September 6, 2026 03:10:00").getTime();
 
-  // Element Selectors
-  const daysEl = document.getElementById("days");
-  const hoursEl = document.getElementById("hours");
-  const minutesEl = document.getElementById("minutes");
-  const secondsEl = document.getElementById("seconds");
+  const cdDays = document.getElementById("cdDays");
+  const cdHours = document.getElementById("cdHours");
+  const cdMinutes = document.getElementById("cdMinutes");
+  const cdSeconds = document.getElementById("cdSeconds");
 
   const countdownOverlay = document.getElementById("countdownOverlay");
   const countdownCard = document.getElementById("countdownCard");
-  const cakeContainer = document.getElementById("cake3DContainer");
-  const birthdayText3D = document.getElementById("birthdayText3D");
-  const bannerContainer = document.getElementById("bannerContainer");
-  const mainApp = document.getElementById("mainApp");
-  const skipBtn = document.getElementById("skipBtn");
+  const cake3DModule = document.getElementById("cake3DModule");
+  const revealTitle3D = document.getElementById("revealTitle3D");
+  const clothBanner = document.getElementById("clothBanner");
+  const spatialApp = document.getElementById("spatialApp");
+  const skipCountdown = document.getElementById("skipCountdown");
 
-  let isRevealed = false;
+  let isTriggered = false;
 
-  // --- Countdown Logic ---
-  function updateTimer() {
+  // Realtime Countdown Engine
+  function runTimer() {
     const now = new Date().getTime();
-    const distance = targetDate - now;
+    const gap = targetTime - now;
 
-    if (distance <= 0 && !isRevealed) {
-      triggerBirthdayReveal();
+    if (gap <= 0 && !isTriggered) {
+      launchBirthdayReveal();
       return;
     }
 
-    if (distance > 0) {
-      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((distance % (1000 * 60)) / 1000);
+    if (gap > 0) {
+      const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+      const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((gap % (1000 * 60)) / 1000);
 
-      daysEl.textContent = d < 10 ? "0" + d : d;
-      hoursEl.textContent = h < 10 ? "0" + h : h;
-      minutesEl.textContent = m < 10 ? "0" + m : m;
-      secondsEl.textContent = s < 10 ? "0" + s : s;
+      cdDays.textContent = d < 10 ? "0" + d : d;
+      cdHours.textContent = h < 10 ? "0" + h : h;
+      cdMinutes.textContent = m < 10 ? "0" + m : m;
+      cdSeconds.textContent = s < 10 ? "0" + s : s;
     }
   }
 
-  const timerInterval = setInterval(updateTimer, 1000);
-  updateTimer();
+  const timerLoop = setInterval(runTimer, 1000);
+  runTimer();
 
-  // --- Skip / Manual Reveal ---
-  skipBtn.addEventListener("click", () => {
-    clearInterval(timerInterval);
-    triggerBirthdayReveal();
+  skipCountdown.addEventListener("click", () => {
+    clearInterval(timerLoop);
+    launchBirthdayReveal();
   });
 
-  // --- Cinematic Reveal Sequence ---
-  function triggerBirthdayReveal() {
-    isRevealed = true;
-    countdownCard.classList.add("hidden-element");
+  // Reveal Sequence
+  function launchBirthdayReveal() {
+    isTriggered = true;
+    countdownCard.classList.add("hidden-node");
 
-    // Show Cake
-    cakeContainer.classList.remove("hidden-element");
+    cake3DModule.classList.remove("hidden-node");
 
     setTimeout(() => {
-      // Show Glowing 3D Text & Particles Burst
-      birthdayText3D.classList.remove("hidden-element");
-      triggerConfettiBurst();
+      revealTitle3D.classList.remove("hidden-node");
+      burstSpatialParticles();
 
       setTimeout(() => {
-        // Hide Overlay & Show Hanging Banner + Main App
         countdownOverlay.style.display = "none";
-        bannerContainer.classList.remove("hidden-element");
-        mainApp.classList.remove("hidden-element");
+        clothBanner.classList.remove("hidden-node");
+        spatialApp.classList.remove("hidden-node");
       }, 3500);
 
     }, 2000);
   }
 
-  // --- Background Particle & Confetti Canvas ---
-  const canvas = document.getElementById("bgCanvas");
+  // Particle Canvas Engine
+  const canvas = document.getElementById("spatialCanvas");
   const ctx = canvas.getContext("2d");
-  let particles = [];
+  let nodes = [];
 
-  function resizeCanvas() {
+  function adjustCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
+  window.addEventListener("resize", adjustCanvas);
+  adjustCanvas();
 
-  class Particle {
-    constructor(x, y, isConfetti = false) {
+  class SpatialParticle {
+    constructor(x, y, isExplosion = false) {
       this.x = x || Math.random() * canvas.width;
       this.y = y || Math.random() * canvas.height;
-      this.size = isConfetti ? Math.random() * 8 + 4 : Math.random() * 3 + 1;
-      this.speedX = isConfetti ? (Math.random() - 0.5) * 6 : (Math.random() - 0.5) * 0.8;
-      this.speedY = isConfetti ? (Math.random() - 0.5) * 6 : (Math.random() - 0.5) * 0.8 - 0.2;
-      this.color = isConfetti 
-        ? `hsl(${Math.random() * 360}, 100%, 60%)` 
-        : `rgba(56, 189, 248, ${Math.random() * 0.5})`;
+      this.radius = isExplosion ? Math.random() * 6 + 3 : Math.random() * 2.5 + 1;
+      this.vx = isExplosion ? (Math.random() - 0.5) * 8 : (Math.random() - 0.5) * 0.6;
+      this.vy = isExplosion ? (Math.random() - 0.5) * 8 : (Math.random() - 0.5) * 0.6 - 0.3;
+      this.fill = isExplosion 
+        ? `hsl(${Math.random() * 360}, 100%, 65%)` 
+        : `rgba(56, 189, 248, ${Math.random() * 0.45})`;
     }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    step() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
-    draw() {
-      ctx.fillStyle = this.color;
+    render() {
+      ctx.fillStyle = this.fill;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  function initParticles() {
-    particles = [];
-    for (let i = 0; i < 60; i++) {
-      particles.push(new Particle());
-    }
+  function generateBackground() {
+    nodes = [];
+    for (let i = 0; i < 70; i++) nodes.push(new SpatialParticle());
   }
-  initParticles();
+  generateBackground();
 
-  function triggerConfettiBurst() {
-    for (let i = 0; i < 120; i++) {
-      particles.push(new Particle(canvas.width / 2, canvas.height / 2, true));
+  function burstSpatialParticles() {
+    for (let i = 0; i < 150; i++) {
+      nodes.push(new SpatialParticle(canvas.width / 2, canvas.height / 2, true));
     }
   }
 
-  function animateParticles() {
+  function renderLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, index) => {
-      p.update();
-      p.draw();
+    nodes.forEach(n => {
+      n.step();
+      n.render();
     });
-    requestAnimationFrame(animateParticles);
+    requestAnimationFrame(renderLoop);
   }
-  animateParticles();
+  renderLoop();
 
-  // --- Navigation & Page Management ---
-  const navBtns = document.querySelectorAll(".nav-btn");
-  const pages = document.querySelectorAll(".page-section");
-  const mobileMenuBtn = document.getElementById("menuToggle");
-  const mobileNav = document.getElementById("mobileNav");
+  // Navigation System
+  const navLinks = document.querySelectorAll(".nav-link");
+  const appPages = document.querySelectorAll(".app-page");
+  const navToggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-  navBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-target");
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const pageTarget = link.getAttribute("data-target");
 
-      navBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      navLinks.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
 
-      pages.forEach(p => {
-        if (p.id === target) {
-          p.classList.add("active-page");
-        } else {
-          p.classList.remove("active-page");
-        }
+      appPages.forEach(p => {
+        p.id === pageTarget ? p.classList.add("active-page") : p.classList.remove("active-page");
       });
 
-      mobileNav.classList.remove("open");
+      mobileMenu.classList.remove("open");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 
-  mobileMenuBtn.addEventListener("click", () => {
-    mobileNav.classList.toggle("open");
-  });
+  navToggle.addEventListener("click", () => mobileMenu.classList.toggle("open"));
 
-  // --- Audio Control ---
-  const musicBtn = document.getElementById("musicBtn");
-  const bgMusic = document.getElementById("bgMusic");
-  let isPlaying = false;
+  // Audio Control
+  const spatialAudioBtn = document.getElementById("spatialAudioBtn");
+  const bgAudio = document.getElementById("bgAudio");
+  let playing = false;
 
-  musicBtn.addEventListener("click", () => {
-    if (isPlaying) {
-      bgMusic.pause();
-      musicBtn.classList.remove("playing");
+  spatialAudioBtn.addEventListener("click", () => {
+    if (playing) {
+      bgAudio.pause();
+      spatialAudioBtn.classList.remove("playing");
     } else {
-      bgMusic.play().then(() => {
-        musicBtn.classList.add("playing");
-      }).catch(() => {
-        alert("Audio playback interaction needed.");
-      });
+      bgAudio.play().then(() => spatialAudioBtn.classList.add("playing")).catch(() => {});
     }
-    isPlaying = !isPlaying;
+    playing = !playing;
   });
 
-  // --- 3D Mouse Parallax Tilt for Cards ---
+  // 3D Tilt Effect on Mouse Move
   document.addEventListener("mousemove", (e) => {
-    const cards = document.querySelectorAll(".tilt-card");
-    const mouseX = e.clientX / window.innerWidth - 0.5;
-    const mouseY = e.clientY / window.innerHeight - 0.5;
+    const tiltNodes = document.querySelectorAll(".tilt-node");
+    const mX = e.clientX / window.innerWidth - 0.5;
+    const mY = e.clientY / window.innerHeight - 0.5;
 
-    cards.forEach(card => {
-      card.style.transform = `rotateY(${mouseX * 15}deg) rotateX(${-mouseY * 15}deg)`;
+    tiltNodes.forEach(node => {
+      node.style.transform = `rotateY(${mX * 14}deg) rotateX(${-mY * 14}deg)`;
     });
   });
 
-  // --- Populate 20 Pin Board Notes ---
-  const pinboardGrid = document.getElementById("pinboardGrid");
-  const pinNotesData = [
+  // Populate Pinboard (20 Notes)
+  const pinboardContainer = document.getElementById("pinboardContainer");
+  const pinNotes = [
     "Happy Birthday Disha ❤️", "Stay happy always.", "Keep smiling.", "তোমার প্রতিটা দিন সুন্দর হোক।",
     "আজকের দিনটা শুধু তোমার।", "Shine like a star! ✨", "Best wishes to you!", "Dream big, fly high.",
     "মেপল পাতার মতো রঙিন হোক জীবন।", "সব স্বপ্ন সত্যি হোক।", "Stay awesome always!", "May success follow you.",
-    "Happiness looks good on you.", "have an incredible year ahead!", "Stay blessed always.",
-    "স্মৃতিগুলো চিরকাল থাকুক।", "Enjoy every single moment.", "a very special birthday!",
+    "Happiness looks good on you.", "Have an incredible year ahead!", "Stay blessed always.",
+    "স্মৃতিগুলো চিরকাল থাকুক।", "Enjoy every single moment.", "A very special birthday!",
     "চিরদিন এমন মিষ্টি থেকো।", "Cheers to another great year! 🥂"
   ];
 
-  pinNotesData.forEach((text, i) => {
-    const rotation = (Math.random() - 0.5) * 12; // Subtle random 3D rotations
-    const note = document.createElement("div");
-    note.className = "pin-note-3d";
-    note.style.transform = `rotate(${rotation}deg)`;
-    note.innerHTML = `<div class="pin-head"></div><p>${text}</p>`;
-    pinboardGrid.appendChild(note);
+  pinNotes.forEach(text => {
+    const rot = (Math.random() - 0.5) * 12;
+    const item = document.createElement("div");
+    item.className = "pin-card-3d";
+    item.style.transform = `rotate(${rot}deg)`;
+    item.innerHTML = `<div class="pin-dot"></div><p>${text}</p>`;
+    pinboardContainer.appendChild(item);
   });
 
-  // --- Populate Gallery (30 Images with Lazy Loading) ---
+  // Populate Gallery Grid (30 Items)
   const galleryGrid = document.getElementById("galleryGrid");
-  const lightboxModal = document.getElementById("lightboxModal");
-  const lightboxImg = document.getElementById("lightboxImg");
-  let currentImgIdx = 0;
+  const lightbox = document.getElementById("lightbox");
+  const lbImage = document.getElementById("lbImage");
+  let activeIndex = 0;
 
   for (let i = 1; i <= 30; i++) {
-    const padNum = i < 10 ? "0" + i : i;
+    const pad = i < 10 ? "0" + i : i;
     const card = document.createElement("div");
-    card.className = "glass-card-3d gallery-card-3d tilt-card";
-    card.innerHTML = `
-      <img src="assets/images/photo${padNum}.jpg" 
-           loading="lazy" 
-           alt="Gallery Photo ${i}" 
-           onerror="this.src='https://via.placeholder.com/300x300/1e293b/fff?text=Photo+${padNum}'">
-    `;
+    card.className = "liquid-card-3d gallery-item-3d tilt-node";
+    card.innerHTML = `<img src="assets/images/photo${pad}.jpg" loading="lazy" alt="Gallery Photo ${i}" onerror="this.src='https://via.placeholder.com/300x300/1e293b/fff?text=Photo+${pad}'">`;
     card.addEventListener("click", () => openLightbox(i - 1));
     galleryGrid.appendChild(card);
   }
 
-  function openLightbox(index) {
-    currentImgIdx = index;
-    const padNum = (index + 1) < 10 ? "0" + (index + 1) : (index + 1);
-    lightboxImg.src = `assets/images/photo${padNum}.jpg`;
-    lightboxModal.style.display = "flex";
+  function openLightbox(idx) {
+    activeIndex = idx;
+    const pad = (idx + 1) < 10 ? "0" + (idx + 1) : (idx + 1);
+    lbImage.src = `assets/images/photo${pad}.jpg`;
+    lightbox.style.display = "flex";
   }
 
-  document.getElementById("closeLightbox").addEventListener("click", () => {
-    lightboxModal.style.display = "none";
-  });
+  document.getElementById("closeLb").addEventListener("click", () => lightbox.style.display = "none");
+  document.getElementById("prevLb").addEventListener("click", () => openLightbox((activeIndex - 1 + 30) % 30));
+  document.getElementById("nextLb").addEventListener("click", () => openLightbox((activeIndex + 1) % 30));
 
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    currentImgIdx = (currentImgIdx - 1 + 30) % 30;
-    openLightbox(currentImgIdx);
-  });
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    currentImgIdx = (currentImgIdx + 1) % 30;
-    openLightbox(currentImgIdx);
-  });
-
-  // --- Populate Golpo Page (20 Story Cards) ---
+  // Populate Golpo Grid (20 Stories)
   const golpoGrid = document.getElementById("golpoGrid");
   const storyModal = document.getElementById("storyModal");
-  const storyModalNumber = document.getElementById("storyModalNumber");
-  const storyModalTitle = document.getElementById("storyModalTitle");
-  const storyModalBody = document.getElementById("storyModalBody");
+  const storyTag = document.getElementById("storyTag");
+  const storyTitle = document.getElementById("storyTitle");
+  const storyBody = document.getElementById("storyBody");
 
   for (let i = 1; i <= 20; i++) {
-    const numTag = i < 10 ? "0" + i : i;
+    const pad = i < 10 ? "0" + i : i;
     const card = document.createElement("div");
-    card.className = "glass-card-3d golpo-card-3d tilt-card";
+    card.className = "liquid-card-3d golpo-card tilt-node";
     card.innerHTML = `
       <div>
-        <span class="badge-tag">STORY #${numTag}</span>
-        <h3>গল্পের শিরোনাম ${numTag}</h3>
+        <span class="badge-tag-glow">STORY #${pad}</span>
+        <h3>মিষ্টি গল্পের শিরোনাম ${pad}</h3>
         <p>এটি একটি সুন্দর স্মৃতির ছোট্ট ঝলক। দিশার জন্মদিনের এই বিশেষ দিনে পুরনো গল্পগুলো নতুন করে মনে করার এক মিষ্টি মুহূর্ত...</p>
       </div>
-      <button class="ios-btn-sm" style="align-self: flex-start; margin-top: 10px;">Read More ➔</button>
+      <button class="ios-liquid-btn" style="align-self: flex-start; margin-top: 10px; padding: 8px 20px; font-size: 0.8rem;">Read Story ➔</button>
     `;
 
     card.querySelector("button").addEventListener("click", () => {
-      storyModalNumber.textContent = `STORY #${numTag}`;
-      storyModalTitle.textContent = `গল্পের শিরোনাম ${numTag}`;
-      storyModalBody.innerHTML = `
+      storyTag.textContent = `STORY #${pad}`;
+      storyTitle.textContent = `মিষ্টি গল্পের শিরোনাম ${pad}`;
+      storyBody.innerHTML = `
         <p>এখানে থাকবে সম্পূর্ণ গল্পের মূল লেখা। দিশার জীবনের সুন্দর কোনো স্মৃতি, বিশেষ মুহূর্ত কিংবা অনুভূতির প্রকাশ যা এই দিনটিকে আরও স্মরণীয় করে তোলে।</p>
         <br>
         <p>প্রতিটি গল্পে লুকিয়ে আছে কিছু না বলা কথা, হাসি আর ভালোবাসার মুহূর্ত। শুভ জন্মদিন দিশা!</p>
@@ -289,8 +257,5 @@ document.addEventListener("DOMContentLoaded", () => {
     golpoGrid.appendChild(card);
   }
 
-  document.getElementById("closeStory").addEventListener("click", () => {
-    storyModal.style.display = "none";
-  });
+  document.getElementById("closeStory").addEventListener("click", () => storyModal.style.display = "none");
 });
-
