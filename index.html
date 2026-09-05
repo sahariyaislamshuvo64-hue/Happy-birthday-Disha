@@ -1,329 +1,433 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Disha</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --accent-blue: #007aff;
+            --text-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Common Style */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Countdown Overlay Screen */
+        #countdown-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .timer-box {
+            font-size: 3rem;
+            font-weight: 700;
+            padding: 20px 40px;
+            letter-spacing: 2px;
+        }
+
+        /* Top Drop Banner Screen */
+        #banner-screen {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.9);
+            z-index: 8888;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            transition: top 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fabric-banner {
+            background: linear-gradient(135deg, #ff2a5f, #ff758c);
+            width: 80%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 15px 30px rgba(255, 42, 95, 0.4);
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            border-bottom: 5px solid #fff;
+        }
+
+        /* Main Content Container */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            padding-bottom: 50px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 15px;
+            margin: 0 20px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+            width: 150px;
+        }
+
+        .nav-links.active { display: flex; }
+        .nav-links a { color: #fff; text-decoration: none; padding: 5px 10px; }
+
+        /* Profile Section */
+        .profile-card {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-blue);
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .blue-badge {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            color: #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Section Layouts */
+        .section-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Billboard */
+        .billboard {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00c6ff, #007aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+        }
+
+        /* Dynamic Grid Layout */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Pin Board */
+        .pin-board {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .pin-note {
+            width: 200px;
+            padding: 15px;
+            background: rgba(255, 235, 59, 0.15);
+            border: 1px solid rgba(255, 235, 59, 0.3);
+            position: relative;
+        }
+
+        .pin-note::before {
+            content: '📌';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Canvas Fireworks */
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9990;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- BACKGROUND 3D PARTICLES CONTAINER -->
-    <div id="particle-container" aria-hidden="true"></div>
+    <canvas id="fireworks"></canvas>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="bg-music" loop src="assets/music/birthday-music.mp3" preload="auto"></audio>
+    <div id="countdown-screen">
+        <h2>Website Unlocks In</h2>
+        <br>
+        <div class="glass timer-box" id="timer">Loading...</div>
+    </div>
 
-    <!-- FLOATING MUSIC BUTTON -->
-    <button id="music-toggle" class="glass-pill" aria-label="Toggle Birthday Music">
-        <span class="music-icon">🎵</span>
-        <span class="music-wave"></span>
-    </button>
+    <div id="banner-screen">
+        <div class="fabric-banner">
+            🎉 Happy Birthday Disha! 🎂
+        </div>
+    </div>
 
-    <!-- 1. COUNTDOWN / OPENING 3D STAGE -->
-    <div id="opening-stage" class="stage-active">
-        <div class="stage-camera">
+    <div id="main-content">
+        <nav class="glass">
+            <div style="font-weight: bold;">HBD DISHA</div>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <div class="nav-links glass" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#stories">Golpo</a>
+            </div>
+        </nav>
+
+        <div class="glass profile-card" id="home">
+            <img src="https://via.placeholder.com/150" alt="Disha" class="profile-img">
+            <div class="profile-name">
+                Disha <span class="blue-badge">✓</span>
+            </div>
+            <p style="margin-top: 10px; opacity: 0.8;">Happy Birthday Disha!</p>
+        </div>
+
+        <div class="section-container glass billboard">
+            ✨ HAPPY BIRTHDAY DISHA ✨
+        </div>
+
+        <div class="section-container">
+            <h3 class="section-title">Special Memories</h3>
+            <div class="grid-3" id="profileNotesContainer"></div>
+        </div>
+
+        <div class="section-container glass">
+            <h3 class="section-title">Pin Board</h3>
+            <div class="pin-board" id="pinBoardContainer"></div>
+        </div>
+
+        <div class="section-container" id="gallery">
+            <h3 class="section-title">Gallery (30 Photos)</h3>
+            <div class="grid-3" id="galleryContainer"></div>
+        </div>
+
+        <div class="section-container" id="stories">
+            <h3 class="section-title">Golpo Collection</h3>
+            <div id="storyContainer" style="display: flex; flex-direction: column; gap: 15px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set target date to Sept 6, 2026 03:10:00 AM
+        const targetDate = new Date("September 6, 2026 03:10:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference <= 0) {
+                clearInterval(timerInterval);
+                triggerUnlockSequence();
+            } else {
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                document.getElementById("timer").innerText = `${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        const timerInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Unlock Site Animations
+        function triggerUnlockSequence() {
+            document.getElementById("countdown-screen").style.display = "none";
             
-            <!-- COUNTDOWN CARD -->
-            <div id="countdown-card" class="glass-card-3d">
-                <div class="glass-reflection"></div>
-                <h2 class="stage-subtitle">A Special Surprise Awaits...</h2>
-                <h1 class="stage-title">Counting Down To Disha's Day</h1>
-                
-                <div class="countdown-timer">
-                    <div class="time-block">
-                        <span id="cd-days" class="time-num">00</span>
-                        <span class="time-label">DAYS</span>
-                    </div>
-                    <div class="time-colon">:</div>
-                    <div class="time-block">
-                        <span id="cd-hours" class="time-num">00</span>
-                        <span class="time-label">HOURS</span>
-                    </div>
-                    <div class="time-colon">:</div>
-                    <div class="time-block">
-                        <span id="cd-mins" class="time-num">00</span>
-                        <span class="time-label">MINUTES</span>
-                    </div>
-                    <div class="time-colon">:</div>
-                    <div class="time-block">
-                        <span id="cd-secs" class="time-num">00</span>
-                        <span class="time-label">SECONDS</span>
-                    </div>
-                </div>
-            </div>
+            // Firework Blast Simulation
+            explodeFireworks();
 
-            <!-- 3D BIRTHDAY CAKE & REVEAL SECTION -->
-            <div id="cake-reveal-container" class="hidden-stage">
-                <div class="cake-3d-wrapper">
-                    <div class="cake-tier tier-bottom">
-                        <div class="tier-top"></div>
-                        <div class="tier-side"></div>
-                    </div>
-                    <div class="cake-tier tier-middle">
-                        <div class="tier-top"></div>
-                        <div class="tier-side"></div>
-                    </div>
-                    <div class="cake-tier tier-top-layer">
-                        <div class="tier-top"></div>
-                        <div class="tier-side"></div>
-                    </div>
-                    <!-- 3D CANDLES WITH GLOWING FLAMES -->
-                    <div class="candle candle-1">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle candle-2">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle candle-3">
-                        <div class="flame"></div>
-                    </div>
-                </div>
-                <div id="reveal-text-3d" class="text-3d-glowing">
-                    HAPPY BIRTHDAY DISHA
-                </div>
-            </div>
+            // Drop Banner
+            const banner = document.getElementById("banner-screen");
+            banner.style.top = "0";
 
-            <!-- 2. 3D HANGING FABRIC BANNER -->
-            <div id="hanging-banner-wrapper" class="hidden-stage">
-                <div class="rope rope-left"></div>
-                <div class="rope rope-right"></div>
-                <div class="banner-cloth">
-                    <div class="banner-content">
-                        <span class="banner-star">★</span>
-                        <h1>HAPPY BIRTHDAY DISHA</h1>
-                        <span class="banner-star">★</span>
-                    </div>
-                </div>
-            </div>
+            setTimeout(() => {
+                banner.style.top = "-100%";
+                const mainContent = document.getElementById("main-content");
+                mainContent.style.display = "block";
+                setTimeout(() => mainContent.style.opacity = "1", 50);
+            }, 3000);
+        }
 
-        </div>
-    </div>
+        // Generate Dynamic Elements
+        // 1. Profile Notes (10 Items)
+        const profileNotes = document.getElementById("profileNotesContainer");
+        for (let i = 1; i <= 10; i++) {
+            profileNotes.innerHTML += `
+                <div class="glass card">
+                    <img src="https://picsum.photos/300/200?random=${i}" alt="Photo">
+                    <p style="font-size: 0.9rem;">Memory Note #${i}: Happy Birthday Disha! Hope your day is amazing.</p>
+                </div>`;
+        }
 
-    <!-- 3. MAIN WEBSITE WRAPPER -->
-    <div id="main-website" class="website-hidden">
-        
-        <!-- NAVIGATION BAR -->
-        <header class="glass-nav-container">
-            <nav class="glass-nav">
-                <div class="nav-brand">DISHA • 2026</div>
-                <button class="nav-hamburger" id="nav-toggle" aria-label="Open Navigation">
-                    <span></span><span></span><span></span>
-                </button>
-                <ul class="nav-links" id="nav-menu">
-                    <li><a href="#home" class="nav-link active">HOME</a></li>
-                    <li><a href="#gallery" class="nav-link">GALLERY</a></li>
-                    <li><a href="#golpo" class="nav-link">GOLPO</a></li>
-                </ul>
-            </nav>
-        </header>
+        // 2. Pin Board Notes
+        const pinBoard = document.getElementById("pinBoardContainer");
+        for (let i = 1; i <= 8; i++) {
+            pinBoard.innerHTML += `
+                <div class="glass pin-note">
+                    <p>Sticky Note #${i}<br>Stay smiling always, Disha!</p>
+                </div>`;
+        }
 
-        <!-- 4. HOME PAGE / HERO SECTION -->
-        <section id="home" class="section-container">
-            <div class="hero-3d-card glass-card-3d tilt-card">
-                <div class="glass-reflection"></div>
-                <div class="profile-frame-3d">
-                    <img src="assets/images/profile.jpg" alt="Disha Profile" class="profile-img" loading="eager">
-                </div>
-                <h1 class="hero-title">Happy Birthday Disha</h1>
-                <p class="hero-intro">
-                    Welcome to your custom-crafted cinematic realm. Here's to celebrating your elegance, radiant laughter, and the unforgettable moments you create every single day.
-                </p>
-            </div>
-        </section>
+        // 3. Gallery (30 Photos)
+        const gallery = document.getElementById("galleryContainer");
+        for (let i = 1; i <= 30; i++) {
+            gallery.innerHTML += `
+                <div class="glass card">
+                    <img src="https://picsum.photos/300/200?random=${i+10}" alt="Gallery Photo">
+                </div>`;
+        }
 
-        <!-- 5. PROFILE SECTION (10 SPOTLIGHT MEMORIES) -->
-        <section id="profile-memories" class="section-container">
-            <h2 class="section-heading">Spotlight Memories</h2>
-            <div class="spotlight-grid">
-                
-                <!-- 10 Glass Cards with Editable Notes -->
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo01.jpg" alt="Memory 01" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 01</span>
-                        <p>“একটা সুন্দর স্মৃতি, যেটা সবসময় মনে থাকবে।”</p>
-                    </div>
-                </div>
+        // 4. Golpo (20+ Stories)
+        const stories = document.getElementById("storyContainer");
+        for (let i = 1; i <= 20; i++) {
+            stories.innerHTML += `
+                <div class="glass card">
+                    <h4>Golpo Chapter #${i}</h4>
+                    <p style="margin-top: 5px; opacity: 0.8;">Ek choto golpo ar memory likha thakbe eikhane...</p>
+                </div>`;
+        }
 
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo02.jpg" alt="Memory 02" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 02</span>
-                        <p>“তোমার হাসিটাই এই ছবিটার সবচেয়ে সুন্দর অংশ।”</p>
-                    </div>
-                </div>
+        // Navigation Toggle
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
 
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo03.jpg" alt="Memory 03" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 03</span>
-                        <p>“এই মুহূর্তটা হয়তো ছোট, কিন্তু স্মৃতিটা অনেক বড়।”</p>
-                    </div>
-                </div>
+        // Canvas Fireworks Effect Simple Logic
+        function explodeFireworks() {
+            const canvas = document.getElementById('fireworks');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo04.jpg" alt="Memory 04" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 04</span>
-                        <p>“প্রতিটি সাধারণ দিন তোমার উপস্থিতিতে বিশেষ হয়ে ওঠে।”</p>
-                    </div>
-                </div>
+            let particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    dx: (Math.random() - 0.5) * 10,
+                    dy: (Math.random() - 0.5) * 10,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    radius: Math.random() * 3 + 1
+                });
+            }
 
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo05.jpg" alt="Memory 05" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 05</span>
-                        <p>“তোমার সাথে কাটানো সময়গুলো সবসময়ই সবচেয়ে প্রিয়।”</p>
-                    </div>
-                </div>
-
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo06.jpg" alt="Memory 06" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 06</span>
-                        <p>“এই সুন্দর দিনগুলোর রঙ যেন কখনো মুছে না যায়।”</p>
-                    </div>
-                </div>
-
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo07.jpg" alt="Memory 07" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 07</span>
-                        <p>“একফালি রোদ আর তোমার মিষ্টি একটি হাঁসি।”</p>
-                    </div>
-                </div>
-
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo08.jpg" alt="Memory 08" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 08</span>
-                        <p>“জীবন ক্যানভাসে সুন্দরতম একটি ফ্রেম।”</p>
-                    </div>
-                </div>
-
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo09.jpg" alt="Memory 09" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 09</span>
-                        <p>“তোমার চোখজুড়ে যেন হাজারটা গল্পের মেলা।”</p>
-                    </div>
-                </div>
-
-                <div class="glass-card-3d tilt-card memory-card">
-                    <div class="card-image-wrap">
-                        <img src="assets/images/photo10.jpg" alt="Memory 10" loading="lazy">
-                    </div>
-                    <div class="card-caption">
-                        <span class="card-tag">PHOTO 10</span>
-                        <p>“সবসময় এমন প্রাণবন্ত এবং হাসিখুশি থেকো।”</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 6. GALLERY PAGE (30 RESPONSIVE ITEMS WITH LIGHTBOX) -->
-        <section id="gallery" class="section-container">
-            <h2 class="section-heading">3D Photo Gallery</h2>
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- Dynamically generated or statically injected 30 items -->
-            </div>
-        </section>
-
-        <!-- LIGHTBOX MODAL -->
-        <div id="lightbox" class="lightbox-modal">
-            <button class="lightbox-close" id="lightbox-close">&times;</button>
-            <button class="lightbox-nav lb-prev" id="lb-prev">&#10094;</button>
-            <div class="lightbox-content glass-card-3d">
-                <img id="lightbox-img" src="" alt="Gallery Preview">
-                <p id="lightbox-caption" class="lightbox-caption-text"></p>
-            </div>
-            <button class="lightbox-nav lb-next" id="lb-next">&#10095;</button>
-        </div>
-
-        <!-- 7. GOLPO PAGE (20+ STORIES WITH MODAL VIEW) -->
-        <section id="golpo" class="section-container">
-            <h2 class="section-heading">Golpo • stories of us</h2>
-            <div class="story-grid" id="story-grid">
-                <!-- Dynamic or inline story cards populated by JS -->
-            </div>
-        </section>
-
-        <!-- STORY MODAL -->
-        <div id="story-modal" class="story-modal-overlay">
-            <div class="story-modal-content glass-card-3d">
-                <button class="story-modal-close" id="story-modal-close">&times;</button>
-                <span id="modal-story-num" class="card-tag">STORY #01</span>
-                <h2 id="modal-story-title" class="story-modal-title">Story Title</h2>
-                <div id="modal-story-body" class="story-modal-body">
-                    <p>Story body goes here...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 8. BILLBOARD SECTION -->
-        <section id="billboard-section" class="section-container">
-            <div class="billboard-3d-frame tilt-card">
-                <div class="billboard-glass-display">
-                    <div class="billboard-light-sweep"></div>
-                    <div class="billboard-neon-text">HAPPY BIRTHDAY DISHA</div>
-                    <div class="billboard-sub-text">CELEBRATING EXCELLENCE & ELEGANCE</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 9. PIN BOARD SECTION (20+ PHYSICAL 3D NOTES) -->
-        <section id="pinboard-section" class="section-container">
-            <h2 class="section-heading">The Pin Board</h2>
-            <div class="pinboard-container glass-card-3d">
-                <div class="pinboard-grid" id="pinboard-grid">
-                    <!-- 20+ Pinned Paper Notes generated dynamically -->
-                </div>
-            </div>
-        </section>
-
-        <!-- 10. BLUE VERIFICATION BADGE -->
-        <section id="verification-section" class="section-container">
-            <div class="blue-badge-container glass-card-3d tilt-card">
-                <div class="badge-icon-wrap">
-                    <svg class="badge-svg" viewBox="0 0 24 24">
-                        <path fill="#1DA1F2" d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.05 1.273 2.42 2.148 4 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.05 2.148-2.42 2.148-4z"/>
-                        <path fill="#FFFFFF" d="M10.2 16.2l-3.5-3.5 1.4-1.4 2.1 2.1 5.3-5.3 1.4 1.4z"/>
-                    </svg>
-                </div>
-                <div class="badge-text-wrap">
-                    <div class="badge-title">Birthday Special • Disha</div>
-                    <div class="badge-subtitle">Verified Celebration Profile</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="site-footer">
-            <p>Crafted with 3D Precision & Glass Aesthetics for Disha • 2026</p>
-        </footer>
-
-    </div>
-
-    <script src="script.js"></script>
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p) => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+            setTimeout(() => ctx.clearRect(0,0,canvas.width, canvas.height), 2500);
+        }
+    </script>
 </body>
 </html>
