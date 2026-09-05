@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Disha 🎂</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- Floating Background Particles Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Audio Player -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/music/birthday-music.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicBtn" class="floating-music-btn" aria-label="Toggle Music">🎵</button>
+
+  <!-- 1. CINEMATIC COUNTDOWN & REVEAL OVERLAY -->
+  <section id="countdownOverlay" class="glass-overlay">
+    <div id="countdownScene" class="scene-3d">
+      
+      <!-- Live Countdown Card -->
+      <div id="countdownCard" class="glass-card-3d">
+        <h2 class="countdown-title">Counting Down To Disha's Special Moment</h2>
+        <div class="timer-grid">
+          <div class="time-box"><span id="days">00</span><p>Days</p></div>
+          <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
+          <div class="time-box"><span id="minutes">00</span><p>Minutes</p></div>
+          <div class="time-box"><span id="seconds">00</span><p>Seconds</p></div>
+        </div>
+        <button id="skipBtn" class="ios-btn-sm">Skip Intro ➔</button>
+      </div>
+
+      <!-- 3D Birthday Cake Container (Hidden initially) -->
+      <div id="cake3DContainer" class="hidden-element">
+        <div class="cake-3d">
+          <div class="plate-3d"></div>
+          <div class="layer layer-bottom"></div>
+          <div class="layer layer-middle"></div>
+          <div class="layer layer-top"></div>
+          <div class="candle-3d">
+            <div class="flame-3d"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Birthday Text Reveal -->
+      <div id="birthdayText3D" class="hidden-element">
+        <h1 class="text-3d-glow">HAPPY BIRTHDAY DISHA</h1>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. HANGING 3D CLOTH BANNER -->
+  <div id="bannerContainer" class="banner-wrapper hidden-element">
+    <div class="rope rope-left"></div>
+    <div class="rope rope-right"></div>
+    <div class="banner-fabric-3d">
+      <h2>HAPPY BIRTHDAY DISHA ✨</h2>
+    </div>
+  </div>
+
+  <!-- MAIN APP WRAPPER -->
+  <div id="mainApp" class="main-app hidden-element">
+
+    <!-- 3. NAVIGATION BAR -->
+    <header class="navbar-3d">
+      <div class="nav-logo">Disha • 2026</div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-target="homeSection">HOME</button>
+        <button class="nav-btn" data-target="gallerySection">GALLERY</button>
+        <button class="nav-btn" data-target="golpoSection">GOLPO</button>
+      </nav>
+      <button id="menuToggle" class="mobile-menu-btn">☰</button>
+    </header>
+
+    <!-- MOBILE NAV MODAL -->
+    <div id="mobileNav" class="mobile-nav-modal">
+      <button class="nav-btn active" data-target="homeSection">HOME</button>
+      <button class="nav-btn" data-target="gallerySection">GALLERY</button>
+      <button class="nav-btn" data-target="golpoSection">GOLPO</button>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="content-container">
+
+      <!-- 4 & 5. HOME PAGE & PROFILE SECTION -->
+      <section id="homeSection" class="page-section active-page">
+        
+        <!-- Hero Card -->
+        <div class="glass-card-3d hero-card tilt-card">
+          <div class="profile-frame-3d">
+            <img src="assets/images/profile.jpg" alt="Disha" class="profile-img" onerror="this.src='https://via.placeholder.com/180/0284c7/fff?text=Disha'">
+          </div>
+          <h1 class="hero-title">Happy Birthday Disha</h1>
+          <p class="hero-sub">Wishing you a year filled with endless laughter, boundless growth, and magical moments. Welcome to your cinematic birthday journey!</p>
+        </div>
+
+        <!-- 10 Profile Glass Cards -->
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Cherished Memories</h2>
+          <p class="section-sub">A glimpse into 10 beautiful moments</p>
+        </div>
+
+        <div class="profile-grid">
+          <!-- 10 Profile Cards -->
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo01.jpg" alt="Memory 1" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+01'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 01</span><p>“একটা সুন্দর স্মৃতি, যেটা সবসময় মনে থাকবে।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo02.jpg" alt="Memory 2" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+02'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 02</span><p>“তোমার হাসিটাই এই ছবিটার সবচেয়ে সুন্দর অংশ।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo03.jpg" alt="Memory 3" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+03'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 03</span><p>“এই মুহূর্তটা হয়তো ছোট, কিন্তু স্মৃতিটা অনেক বড়।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo04.jpg" alt="Memory 4" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+04'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 04</span><p>“যেখানে তুমি থাকবে, সেখানেই আনন্দ ছড়িয়ে পড়বে।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo05.jpg" alt="Memory 5" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+05'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 05</span><p>“তোমার সাথে কাটানো প্রতিটা সময় এক একটি সেরা উপহার।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo06.jpg" alt="Memory 6" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+06'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 06</span><p>“জীবনটা এমনি করে হাসিখুশি কাটুক সারাটা জীবন।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo07.jpg" alt="Memory 7" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+07'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 07</span><p>“কিছু ছবি কথা বলে, আর এই ছবিটা বলে এক মিষ্টি গল্পের কথা।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo08.jpg" alt="Memory 8" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+08'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 08</span><p>“আকাশের মতো বিশাল হোক তোমার স্বপ্নের সীমানা।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo09.jpg" alt="Memory 9" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+09'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 09</span><p>“সবসময় নিজের মতো অনন্য ও উজ্জ্বল থেকো।”</p></div>
+          </div>
+          <div class="glass-card-3d profile-item tilt-card">
+            <div class="img-wrapper-3d"><img src="assets/images/photo10.jpg" alt="Memory 10" onerror="this.src='https://via.placeholder.com/400x300/1e293b/fff?text=Photo+10'"></div>
+            <div class="card-caption"><span class="badge-tag">PHOTO 10</span><p>“তোমার আগামী দিনগুলো হোক বর্ণিল ও সাফল্যে ভরা।”</p></div>
+          </div>
+        </div>
+
+        <!-- 8. BILLBOARD SECTION -->
+        <section class="billboard-section-3d">
+          <div class="billboard-frame-3d">
+            <div class="billboard-screen">
+              <div class="billboard-light-sweep"></div>
+              <h2 class="billboard-text">HAPPY BIRTHDAY DISHA</h2>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. PIN BOARD SECTION -->
+        <section class="pinboard-section-3d">
+          <div class="section-title-wrapper">
+            <h2 class="section-title">The Birthday Pin Board</h2>
+            <p class="section-sub">20 notes floating in 3D space</p>
+          </div>
+          <div class="pinboard-container-3d" id="pinboardGrid">
+            <!-- Dynamic 20 Notes loaded via JavaScript -->
+          </div>
+        </section>
+
+        <!-- 10. BLUE BADGE -->
+        <div class="verified-badge-container-3d">
+          <div class="glass-badge-3d">
+            <div class="blue-check-icon">✓</div>
+            <span class="badge-text">Birthday Special • Disha</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 6. GALLERY PAGE (30 Lazy Loaded Photos) -->
+      <section id="gallerySection" class="page-section">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Photo Gallery</h2>
+          <p class="section-sub">A collection of 30 moments</p>
+        </div>
+        <div class="gallery-grid-3d" id="galleryGrid">
+          <!-- 30 Gallery items auto-generated in JS -->
+        </div>
+      </section>
+
+      <!-- 7. GOLPO PAGE (20+ Stories) -->
+      <section id="golpoSection" class="page-section">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Golpo - Stories of Disha</h2>
+          <p class="section-sub">20 sweet & emotional story cards</p>
+        </div>
+        <div class="golpo-grid-3d" id="golpoGrid">
+          <!-- 20 Golpo cards auto-generated in JS -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR GALLERY -->
+  <div id="lightboxModal" class="lightbox-modal">
+    <span id="closeLightbox" class="modal-close">&times;</span>
+    <button id="prevBtn" class="lb-nav lb-prev">❮</button>
+    <div class="lightbox-content-3d">
+      <img id="lightboxImg" src="" alt="Zoomed View">
+    </div>
+    <button id="nextBtn" class="lb-nav lb-next">❯</button>
+  </div>
+
+  <!-- STORY READER MODAL FOR GOLPO -->
+  <div id="storyModal" class="story-modal">
+    <div class="story-modal-card glass-card-3d">
+      <span id="closeStory" class="modal-close">&times;</span>
+      <span id="storyModalNumber" class="badge-tag">STORY #01</span>
+      <h2 id="storyModalTitle" style="margin: 15px 0 10px; color: #38bdf8;">Story Title</h2>
+      <div id="storyModalBody" class="story-full-body">
+        Full story content goes here...
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
