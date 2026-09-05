@@ -1,217 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Happy Birthday Disha</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Disha</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ================= AMBIENT 3D BACKGROUND ================= -->
-<div class="ambient" id="ambient" aria-hidden="true">
-  <div class="ambient-layer" data-depth="0.02" id="layerStarsFar"></div>
-  <div class="ambient-layer" data-depth="0.05" id="layerStarsNear"></div>
-  <div class="ambient-layer" data-depth="0.09" id="layerHearts"></div>
-  <div class="ambient-glow"></div>
-</div>
+    <!-- BACKGROUND 3D PARTICLES CONTAINER -->
+    <div id="particle-container" aria-hidden="true"></div>
 
-<!-- ================= 1. COUNTDOWN ================= -->
-<section id="stage-countdown" class="stage" aria-label="Countdown to birthday">
-  <div class="scene" id="countdownScene">
-    <p class="eyebrow-line">a surprise is waiting</p>
-    <h1 class="stage-title">For Disha</h1>
-    <div class="glass-card countdown-card" id="countdownCard">
-      <div class="countdown-grid">
-        <div class="count-unit"><span class="count-num" id="cd-days">00</span><span class="count-label">days</span></div>
-        <div class="count-sep">:</div>
-        <div class="count-unit"><span class="count-num" id="cd-hours">00</span><span class="count-label">hours</span></div>
-        <div class="count-sep">:</div>
-        <div class="count-unit"><span class="count-num" id="cd-mins">00</span><span class="count-label">mins</span></div>
-        <div class="count-sep">:</div>
-        <div class="count-unit"><span class="count-num" id="cd-secs">00</span><span class="count-label">secs</span></div>
-      </div>
-      <p class="countdown-sub">until something beautiful begins</p>
-    </div>
-    <button id="skipIntro" class="skip-btn" type="button">Already time? Enter ✦</button>
-  </div>
-</section>
+    <!-- AUDIO ELEMENT -->
+    <audio id="bg-music" loop src="assets/music/birthday-music.mp3" preload="auto"></audio>
 
-<!-- ================= 2. BIRTHDAY REVEAL ================= -->
-<section id="stage-reveal" class="stage stage-hidden" aria-label="Birthday reveal">
-  <div class="scene reveal-scene" id="revealScene">
-    <div class="cake-rig" id="cakeRig">
-      <div class="cake3d">
-        <div class="plate"></div>
-        <div class="tier tier-bottom">
-          <div class="tier-face front"></div>
-          <div class="tier-face back"></div>
-          <div class="tier-face left"></div>
-          <div class="tier-face right"></div>
-          <div class="tier-top"></div>
-          <div class="drip"></div>
-        </div>
-        <div class="tier tier-top-layer">
-          <div class="tier-face front"></div>
-          <div class="tier-face back"></div>
-          <div class="tier-face left"></div>
-          <div class="tier-face right"></div>
-          <div class="tier-top"></div>
-        </div>
-        <div class="candles" id="candles"></div>
-      </div>
-    </div>
-    <div class="confetti-field" id="confettiField"></div>
-    <h2 class="reveal-headline" id="revealHeadline">
-      <span class="hb-line">HAPPY BIRTHDAY</span>
-      <span class="hb-name">DISHA</span>
-    </h2>
-    <button id="continueToBanner" class="skip-btn reveal-continue">Continue ✦</button>
-  </div>
-</section>
-
-<!-- ================= 3. HANGING BANNER ================= -->
-<section id="stage-banner" class="stage stage-hidden" aria-label="Birthday banner">
-  <div class="scene banner-scene">
-    <div class="banner-rig">
-      <div class="rope rope-left"></div>
-      <div class="rope rope-right"></div>
-      <div class="cloth-banner" id="clothBanner">
-        <span class="grommet g1"></span><span class="grommet g2"></span>
-        <p class="banner-text">HAPPY BIRTHDAY<br><em>DISHA</em></p>
-        <span class="grommet g3"></span><span class="grommet g4"></span>
-      </div>
-    </div>
-    <div class="banner-deco" aria-hidden="true"></div>
-    <button id="enterSite" class="skip-btn banner-continue">Step Inside ✦</button>
-  </div>
-</section>
-
-<!-- ================= MAIN SITE ================= -->
-<div id="mainSite" class="main-site stage-hidden">
-
-  <!-- NAV -->
-  <nav class="glass-nav" id="glassNav">
-    <a href="#home" class="nav-brand" data-page="home">Disha</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <!-- FLOATING MUSIC BUTTON -->
+    <button id="music-toggle" class="glass-pill" aria-label="Toggle Birthday Music">
+        <span class="music-icon">🎵</span>
+        <span class="music-wave"></span>
     </button>
-    <div class="nav-links" id="navLinks">
-      <a href="#home" data-page="home" class="nav-link active">Home</a>
-      <a href="#gallery" data-page="gallery" class="nav-link">Gallery</a>
-      <a href="#golpo" data-page="golpo" class="nav-link">Golpo</a>
-    </div>
-  </nav>
 
-  <!-- ============ HOME PAGE ============ -->
-  <main class="page page-home active" id="page-home">
+    <!-- 1. COUNTDOWN / OPENING 3D STAGE -->
+    <div id="opening-stage" class="stage-active">
+        <div class="stage-camera">
+            
+            <!-- COUNTDOWN CARD -->
+            <div id="countdown-card" class="glass-card-3d">
+                <div class="glass-reflection"></div>
+                <h2 class="stage-subtitle">A Special Surprise Awaits...</h2>
+                <h1 class="stage-title">Counting Down To Disha's Day</h1>
+                
+                <div class="countdown-timer">
+                    <div class="time-block">
+                        <span id="cd-days" class="time-num">00</span>
+                        <span class="time-label">DAYS</span>
+                    </div>
+                    <div class="time-colon">:</div>
+                    <div class="time-block">
+                        <span id="cd-hours" class="time-num">00</span>
+                        <span class="time-label">HOURS</span>
+                    </div>
+                    <div class="time-colon">:</div>
+                    <div class="time-block">
+                        <span id="cd-mins" class="time-num">00</span>
+                        <span class="time-label">MINUTES</span>
+                    </div>
+                    <div class="time-colon">:</div>
+                    <div class="time-block">
+                        <span id="cd-secs" class="time-num">00</span>
+                        <span class="time-label">SECONDS</span>
+                    </div>
+                </div>
+            </div>
 
-    <!-- 4. HOME HERO -->
-    <section class="hero-section">
-      <div class="profile-frame3d">
-        <div class="profile-ring"></div>
-        <img src="assets/images/profile.jpg" alt="Disha" class="profile-pic" id="profilePic">
-      </div>
-      <h1 class="hero-title">Happy Birthday, <span>Disha</span></h1>
-      <p class="hero-sub">Today the whole world gets a little softer, a little brighter — because it's yours. Here's a small corner of the internet, built just to say how much you mean.</p>
-      <a href="#profile" class="scroll-hint" data-scroll="profile-section">Scroll the story ↓</a>
-    </section>
+            <!-- 3D BIRTHDAY CAKE & REVEAL SECTION -->
+            <div id="cake-reveal-container" class="hidden-stage">
+                <div class="cake-3d-wrapper">
+                    <div class="cake-tier tier-bottom">
+                        <div class="tier-top"></div>
+                        <div class="tier-side"></div>
+                    </div>
+                    <div class="cake-tier tier-middle">
+                        <div class="tier-top"></div>
+                        <div class="tier-side"></div>
+                    </div>
+                    <div class="cake-tier tier-top-layer">
+                        <div class="tier-top"></div>
+                        <div class="tier-side"></div>
+                    </div>
+                    <!-- 3D CANDLES WITH GLOWING FLAMES -->
+                    <div class="candle candle-1">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle candle-2">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle candle-3">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <div id="reveal-text-3d" class="text-3d-glowing">
+                    HAPPY BIRTHDAY DISHA
+                </div>
+            </div>
 
-    <!-- 5. PROFILE / MEMORY SECTION -->
-    <section class="section profile-section" id="profile-section">
-      <div class="section-head">
-        <h2>Little Moments</h2>
-        <p>Ten pictures, ten small feelings.</p>
-      </div>
-      <div class="tilt-grid" id="profileGrid"></div>
-    </section>
+            <!-- 2. 3D HANGING FABRIC BANNER -->
+            <div id="hanging-banner-wrapper" class="hidden-stage">
+                <div class="rope rope-left"></div>
+                <div class="rope rope-right"></div>
+                <div class="banner-cloth">
+                    <div class="banner-content">
+                        <span class="banner-star">★</span>
+                        <h1>HAPPY BIRTHDAY DISHA</h1>
+                        <span class="banner-star">★</span>
+                    </div>
+                </div>
+            </div>
 
-    <!-- 8. BILLBOARD -->
-    <section class="section billboard-section" id="billboard-section">
-      <div class="billboard-frame">
-        <div class="billboard-screen">
-          <div class="billboard-scan"></div>
-          <p class="billboard-text">HAPPY BIRTHDAY<br><span>DISHA</span></p>
-          <div class="billboard-flare"></div>
         </div>
-        <div class="billboard-stand"></div>
-      </div>
-    </section>
+    </div>
 
-    <!-- 9. PIN BOARD -->
-    <section class="section pinboard-section" id="pinboard-section">
-      <div class="section-head light">
-        <h2>Notes Pinned With Love</h2>
-        <p>A little board, a lot of heart.</p>
-      </div>
-      <div class="pinboard" id="pinboard"></div>
-    </section>
+    <!-- 3. MAIN WEBSITE WRAPPER -->
+    <div id="main-website" class="website-hidden">
+        
+        <!-- NAVIGATION BAR -->
+        <header class="glass-nav-container">
+            <nav class="glass-nav">
+                <div class="nav-brand">DISHA • 2026</div>
+                <button class="nav-hamburger" id="nav-toggle" aria-label="Open Navigation">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="nav-menu">
+                    <li><a href="#home" class="nav-link active">HOME</a></li>
+                    <li><a href="#gallery" class="nav-link">GALLERY</a></li>
+                    <li><a href="#golpo" class="nav-link">GOLPO</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <!-- 10. BLUE BADGE -->
-    <section class="section badge-section">
-      <div class="verify-badge">
-        <span class="verify-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 20.6 7.4 19.2 6z" fill="currentColor"/></svg>
-        </span>
-        <span class="verify-text">Birthday Special <span class="dot">•</span> Disha</span>
-      </div>
-    </section>
+        <!-- 4. HOME PAGE / HERO SECTION -->
+        <section id="home" class="section-container">
+            <div class="hero-3d-card glass-card-3d tilt-card">
+                <div class="glass-reflection"></div>
+                <div class="profile-frame-3d">
+                    <img src="assets/images/profile.jpg" alt="Disha Profile" class="profile-img" loading="eager">
+                </div>
+                <h1 class="hero-title">Happy Birthday Disha</h1>
+                <p class="hero-intro">
+                    Welcome to your custom-crafted cinematic realm. Here's to celebrating your elegance, radiant laughter, and the unforgettable moments you create every single day.
+                </p>
+            </div>
+        </section>
 
-    <footer class="site-footer">
-      <p>made with love, for Disha — 6 September</p>
-    </footer>
-  </main>
+        <!-- 5. PROFILE SECTION (10 SPOTLIGHT MEMORIES) -->
+        <section id="profile-memories" class="section-container">
+            <h2 class="section-heading">Spotlight Memories</h2>
+            <div class="spotlight-grid">
+                
+                <!-- 10 Glass Cards with Editable Notes -->
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo01.jpg" alt="Memory 01" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 01</span>
+                        <p>“একটা সুন্দর স্মৃতি, যেটা সবসময় মনে থাকবে।”</p>
+                    </div>
+                </div>
 
-  <!-- ============ GALLERY PAGE ============ -->
-  <main class="page page-gallery" id="page-gallery">
-    <section class="section gallery-header">
-      <h2>Gallery</h2>
-      <p>Every picture, kept safe here.</p>
-    </section>
-    <section class="section gallery-grid" id="galleryGrid"></section>
-  </main>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo02.jpg" alt="Memory 02" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 02</span>
+                        <p>“তোমার হাসিটাই এই ছবিটার সবচেয়ে সুন্দর অংশ।”</p>
+                    </div>
+                </div>
 
-  <!-- ============ GOLPO PAGE ============ -->
-  <main class="page page-golpo" id="page-golpo">
-    <section class="section golpo-header">
-      <h2>Golpo</h2>
-      <p>Stories worth keeping.</p>
-    </section>
-    <section class="section golpo-grid" id="golpoGrid"></section>
-  </main>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo03.jpg" alt="Memory 03" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 03</span>
+                        <p>“এই মুহূর্তটা হয়তো ছোট, কিন্তু স্মৃতিটা অনেক বড়।”</p>
+                    </div>
+                </div>
 
-</div>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo04.jpg" alt="Memory 04" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 04</span>
+                        <p>“প্রতিটি সাধারণ দিন তোমার উপস্থিতিতে বিশেষ হয়ে ওঠে।”</p>
+                    </div>
+                </div>
 
-<!-- ================= LIGHTBOX (Gallery) ================= -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
-  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#10094;</button>
-  <img src="" alt="" class="lb-image" id="lbImage">
-  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&#10095;</button>
-</div>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo05.jpg" alt="Memory 05" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 05</span>
+                        <p>“তোমার সাথে কাটানো সময়গুলো সবসময়ই সবচেয়ে প্রিয়।”</p>
+                    </div>
+                </div>
 
-<!-- ================= STORY MODAL (Golpo) ================= -->
-<div class="story-modal" id="storyModal" aria-hidden="true">
-  <div class="story-modal-panel glass-card">
-    <button class="lb-close" id="storyClose" aria-label="Close">&times;</button>
-    <p class="story-modal-number" id="storyModalNumber"></p>
-    <h3 class="story-modal-title" id="storyModalTitle"></h3>
-    <div class="story-modal-body" id="storyModalBody"></div>
-  </div>
-</div>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo06.jpg" alt="Memory 06" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 06</span>
+                        <p>“এই সুন্দর দিনগুলোর রঙ যেন কখনো মুছে না যায়।”</p>
+                    </div>
+                </div>
 
-<!-- ================= FLOATING MUSIC BUTTON ================= -->
-<button class="music-btn" id="musicBtn" aria-label="Toggle music" aria-pressed="false">
-  <span class="music-icon">🎵</span>
-  <span class="music-bars"><i></i><i></i><i></i></span>
-</button>
-<audio id="bgMusic" loop preload="none">
-  <source src="assets/music/birthday-music.mp3" type="audio/mpeg">
-</audio>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo07.jpg" alt="Memory 07" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 07</span>
+                        <p>“একফালি রোদ আর তোমার মিষ্টি একটি হাঁসি।”</p>
+                    </div>
+                </div>
 
-<script src="script.js"></script>
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo08.jpg" alt="Memory 08" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 08</span>
+                        <p>“জীবন ক্যানভাসে সুন্দরতম একটি ফ্রেম।”</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo09.jpg" alt="Memory 09" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 09</span>
+                        <p>“তোমার চোখজুড়ে যেন হাজারটা গল্পের মেলা।”</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-3d tilt-card memory-card">
+                    <div class="card-image-wrap">
+                        <img src="assets/images/photo10.jpg" alt="Memory 10" loading="lazy">
+                    </div>
+                    <div class="card-caption">
+                        <span class="card-tag">PHOTO 10</span>
+                        <p>“সবসময় এমন প্রাণবন্ত এবং হাসিখুশি থেকো।”</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. GALLERY PAGE (30 RESPONSIVE ITEMS WITH LIGHTBOX) -->
+        <section id="gallery" class="section-container">
+            <h2 class="section-heading">3D Photo Gallery</h2>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Dynamically generated or statically injected 30 items -->
+            </div>
+        </section>
+
+        <!-- LIGHTBOX MODAL -->
+        <div id="lightbox" class="lightbox-modal">
+            <button class="lightbox-close" id="lightbox-close">&times;</button>
+            <button class="lightbox-nav lb-prev" id="lb-prev">&#10094;</button>
+            <div class="lightbox-content glass-card-3d">
+                <img id="lightbox-img" src="" alt="Gallery Preview">
+                <p id="lightbox-caption" class="lightbox-caption-text"></p>
+            </div>
+            <button class="lightbox-nav lb-next" id="lb-next">&#10095;</button>
+        </div>
+
+        <!-- 7. GOLPO PAGE (20+ STORIES WITH MODAL VIEW) -->
+        <section id="golpo" class="section-container">
+            <h2 class="section-heading">Golpo • stories of us</h2>
+            <div class="story-grid" id="story-grid">
+                <!-- Dynamic or inline story cards populated by JS -->
+            </div>
+        </section>
+
+        <!-- STORY MODAL -->
+        <div id="story-modal" class="story-modal-overlay">
+            <div class="story-modal-content glass-card-3d">
+                <button class="story-modal-close" id="story-modal-close">&times;</button>
+                <span id="modal-story-num" class="card-tag">STORY #01</span>
+                <h2 id="modal-story-title" class="story-modal-title">Story Title</h2>
+                <div id="modal-story-body" class="story-modal-body">
+                    <p>Story body goes here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. BILLBOARD SECTION -->
+        <section id="billboard-section" class="section-container">
+            <div class="billboard-3d-frame tilt-card">
+                <div class="billboard-glass-display">
+                    <div class="billboard-light-sweep"></div>
+                    <div class="billboard-neon-text">HAPPY BIRTHDAY DISHA</div>
+                    <div class="billboard-sub-text">CELEBRATING EXCELLENCE & ELEGANCE</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. PIN BOARD SECTION (20+ PHYSICAL 3D NOTES) -->
+        <section id="pinboard-section" class="section-container">
+            <h2 class="section-heading">The Pin Board</h2>
+            <div class="pinboard-container glass-card-3d">
+                <div class="pinboard-grid" id="pinboard-grid">
+                    <!-- 20+ Pinned Paper Notes generated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. BLUE VERIFICATION BADGE -->
+        <section id="verification-section" class="section-container">
+            <div class="blue-badge-container glass-card-3d tilt-card">
+                <div class="badge-icon-wrap">
+                    <svg class="badge-svg" viewBox="0 0 24 24">
+                        <path fill="#1DA1F2" d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238 1.05 1.273 2.42 2.148 4 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-1.05 2.148-2.42 2.148-4z"/>
+                        <path fill="#FFFFFF" d="M10.2 16.2l-3.5-3.5 1.4-1.4 2.1 2.1 5.3-5.3 1.4 1.4z"/>
+                    </svg>
+                </div>
+                <div class="badge-text-wrap">
+                    <div class="badge-title">Birthday Special • Disha</div>
+                    <div class="badge-subtitle">Verified Celebration Profile</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>Crafted with 3D Precision & Glass Aesthetics for Disha • 2026</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
-  </html>
+</html>
