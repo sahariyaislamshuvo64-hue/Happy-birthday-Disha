@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy Birthday Disha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<!-- ================= AMBIENT 3D BACKGROUND ================= -->
+<div class="ambient" id="ambient" aria-hidden="true">
+  <div class="ambient-layer" data-depth="0.02" id="layerStarsFar"></div>
+  <div class="ambient-layer" data-depth="0.05" id="layerStarsNear"></div>
+  <div class="ambient-layer" data-depth="0.09" id="layerHearts"></div>
+  <div class="ambient-glow"></div>
+</div>
+
+<!-- ================= 1. COUNTDOWN ================= -->
+<section id="stage-countdown" class="stage" aria-label="Countdown to birthday">
+  <div class="scene" id="countdownScene">
+    <p class="eyebrow-line">a surprise is waiting</p>
+    <h1 class="stage-title">For Disha</h1>
+    <div class="glass-card countdown-card" id="countdownCard">
+      <div class="countdown-grid">
+        <div class="count-unit"><span class="count-num" id="cd-days">00</span><span class="count-label">days</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><span class="count-num" id="cd-hours">00</span><span class="count-label">hours</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><span class="count-num" id="cd-mins">00</span><span class="count-label">mins</span></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><span class="count-num" id="cd-secs">00</span><span class="count-label">secs</span></div>
+      </div>
+      <p class="countdown-sub">until something beautiful begins</p>
+    </div>
+    <button id="skipIntro" class="skip-btn" type="button">Already time? Enter ✦</button>
+  </div>
+</section>
+
+<!-- ================= 2. BIRTHDAY REVEAL ================= -->
+<section id="stage-reveal" class="stage stage-hidden" aria-label="Birthday reveal">
+  <div class="scene reveal-scene" id="revealScene">
+    <div class="cake-rig" id="cakeRig">
+      <div class="cake3d">
+        <div class="plate"></div>
+        <div class="tier tier-bottom">
+          <div class="tier-face front"></div>
+          <div class="tier-face back"></div>
+          <div class="tier-face left"></div>
+          <div class="tier-face right"></div>
+          <div class="tier-top"></div>
+          <div class="drip"></div>
+        </div>
+        <div class="tier tier-top-layer">
+          <div class="tier-face front"></div>
+          <div class="tier-face back"></div>
+          <div class="tier-face left"></div>
+          <div class="tier-face right"></div>
+          <div class="tier-top"></div>
+        </div>
+        <div class="candles" id="candles"></div>
+      </div>
+    </div>
+    <div class="confetti-field" id="confettiField"></div>
+    <h2 class="reveal-headline" id="revealHeadline">
+      <span class="hb-line">HAPPY BIRTHDAY</span>
+      <span class="hb-name">DISHA</span>
+    </h2>
+    <button id="continueToBanner" class="skip-btn reveal-continue">Continue ✦</button>
+  </div>
+</section>
+
+<!-- ================= 3. HANGING BANNER ================= -->
+<section id="stage-banner" class="stage stage-hidden" aria-label="Birthday banner">
+  <div class="scene banner-scene">
+    <div class="banner-rig">
+      <div class="rope rope-left"></div>
+      <div class="rope rope-right"></div>
+      <div class="cloth-banner" id="clothBanner">
+        <span class="grommet g1"></span><span class="grommet g2"></span>
+        <p class="banner-text">HAPPY BIRTHDAY<br><em>DISHA</em></p>
+        <span class="grommet g3"></span><span class="grommet g4"></span>
+      </div>
+    </div>
+    <div class="banner-deco" aria-hidden="true"></div>
+    <button id="enterSite" class="skip-btn banner-continue">Step Inside ✦</button>
+  </div>
+</section>
+
+<!-- ================= MAIN SITE ================= -->
+<div id="mainSite" class="main-site stage-hidden">
+
+  <!-- NAV -->
+  <nav class="glass-nav" id="glassNav">
+    <a href="#home" class="nav-brand" data-page="home">Disha</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-page="home" class="nav-link active">Home</a>
+      <a href="#gallery" data-page="gallery" class="nav-link">Gallery</a>
+      <a href="#golpo" data-page="golpo" class="nav-link">Golpo</a>
+    </div>
+  </nav>
+
+  <!-- ============ HOME PAGE ============ -->
+  <main class="page page-home active" id="page-home">
+
+    <!-- 4. HOME HERO -->
+    <section class="hero-section">
+      <div class="profile-frame3d">
+        <div class="profile-ring"></div>
+        <img src="assets/images/profile.jpg" alt="Disha" class="profile-pic" id="profilePic">
+      </div>
+      <h1 class="hero-title">Happy Birthday, <span>Disha</span></h1>
+      <p class="hero-sub">Today the whole world gets a little softer, a little brighter — because it's yours. Here's a small corner of the internet, built just to say how much you mean.</p>
+      <a href="#profile" class="scroll-hint" data-scroll="profile-section">Scroll the story ↓</a>
+    </section>
+
+    <!-- 5. PROFILE / MEMORY SECTION -->
+    <section class="section profile-section" id="profile-section">
+      <div class="section-head">
+        <h2>Little Moments</h2>
+        <p>Ten pictures, ten small feelings.</p>
+      </div>
+      <div class="tilt-grid" id="profileGrid"></div>
+    </section>
+
+    <!-- 8. BILLBOARD -->
+    <section class="section billboard-section" id="billboard-section">
+      <div class="billboard-frame">
+        <div class="billboard-screen">
+          <div class="billboard-scan"></div>
+          <p class="billboard-text">HAPPY BIRTHDAY<br><span>DISHA</span></p>
+          <div class="billboard-flare"></div>
+        </div>
+        <div class="billboard-stand"></div>
+      </div>
+    </section>
+
+    <!-- 9. PIN BOARD -->
+    <section class="section pinboard-section" id="pinboard-section">
+      <div class="section-head light">
+        <h2>Notes Pinned With Love</h2>
+        <p>A little board, a lot of heart.</p>
+      </div>
+      <div class="pinboard" id="pinboard"></div>
+    </section>
+
+    <!-- 10. BLUE BADGE -->
+    <section class="section badge-section">
+      <div class="verify-badge">
+        <span class="verify-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 20.6 7.4 19.2 6z" fill="currentColor"/></svg>
+        </span>
+        <span class="verify-text">Birthday Special <span class="dot">•</span> Disha</span>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>made with love, for Disha — 6 September</p>
+    </footer>
+  </main>
+
+  <!-- ============ GALLERY PAGE ============ -->
+  <main class="page page-gallery" id="page-gallery">
+    <section class="section gallery-header">
+      <h2>Gallery</h2>
+      <p>Every picture, kept safe here.</p>
+    </section>
+    <section class="section gallery-grid" id="galleryGrid"></section>
+  </main>
+
+  <!-- ============ GOLPO PAGE ============ -->
+  <main class="page page-golpo" id="page-golpo">
+    <section class="section golpo-header">
+      <h2>Golpo</h2>
+      <p>Stories worth keeping.</p>
+    </section>
+    <section class="section golpo-grid" id="golpoGrid"></section>
+  </main>
+
+</div>
+
+<!-- ================= LIGHTBOX (Gallery) ================= -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#10094;</button>
+  <img src="" alt="" class="lb-image" id="lbImage">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&#10095;</button>
+</div>
+
+<!-- ================= STORY MODAL (Golpo) ================= -->
+<div class="story-modal" id="storyModal" aria-hidden="true">
+  <div class="story-modal-panel glass-card">
+    <button class="lb-close" id="storyClose" aria-label="Close">&times;</button>
+    <p class="story-modal-number" id="storyModalNumber"></p>
+    <h3 class="story-modal-title" id="storyModalTitle"></h3>
+    <div class="story-modal-body" id="storyModalBody"></div>
+  </div>
+</div>
+
+<!-- ================= FLOATING MUSIC BUTTON ================= -->
+<button class="music-btn" id="musicBtn" aria-label="Toggle music" aria-pressed="false">
+  <span class="music-icon">🎵</span>
+  <span class="music-bars"><i></i><i></i><i></i></span>
+</button>
+<audio id="bgMusic" loop preload="none">
+  <source src="assets/music/birthday-music.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+</body>
+  </html>
