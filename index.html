@@ -3,431 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Disha</title>
+    <title>DISHA - 3D Birthday Experience</title>
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --accent-blue: #007aff;
-            --text-color: #ffffff;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Orbitron', 'Segoe UI', sans-serif; }
+        #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        
+        /* Glassmorphism UI HUD */
+        #hud-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+            pointer-events: none; display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; padding: 30px;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Glassmorphism Common Style */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        /* Countdown Overlay Screen */
-        #countdown-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .timer-box {
-            font-size: 3rem;
-            font-weight: 700;
-            padding: 20px 40px;
+        .time-badge {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(12px);
+            color: #00ffcc;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1.1rem;
             letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0,255,204,0.2);
+            text-transform: uppercase;
         }
-
-        /* Top Drop Banner Screen */
-        #banner-screen {
-            position: fixed;
-            top: -100%;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.9);
-            z-index: 8888;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            transition: top 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        
+        /* 3D Holographic Letter Modal */
+        #hologram-letter {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            width: 80%; max-width: 500px; background: rgba(10, 15, 30, 0.85);
+            border: 1px solid #00f3ff; backdrop-filter: blur(20px);
+            border-radius: 20px; padding: 30px; color: #fff; z-index: 20;
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.4);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
         }
-
-        .fabric-banner {
-            background: linear-gradient(135deg, #ff2a5f, #ff758c);
-            width: 80%;
-            max-width: 600px;
-            padding: 40px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 15px 30px rgba(255, 42, 95, 0.4);
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-            border-bottom: 5px solid #fff;
-        }
-
-        /* Main Content Container */
-        #main-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in;
-            padding-bottom: 50px;
-        }
-
-        /* Navigation Bar */
-        nav {
-            position: sticky;
-            top: 15px;
-            margin: 0 20px;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .menu-btn {
-            font-size: 1.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #fff;
-        }
-
-        .nav-links {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            flex-direction: column;
-            gap: 10px;
-            padding: 15px;
-            width: 150px;
-        }
-
-        .nav-links.active { display: flex; }
-        .nav-links a { color: #fff; text-decoration: none; padding: 5px 10px; }
-
-        /* Profile Section */
-        .profile-card {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-blue);
-        }
-
-        .profile-name {
-            font-size: 1.8rem;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .blue-badge {
-            width: 20px;
-            height: 20px;
-            background: var(--accent-blue);
-            color: #fff;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        /* Section Layouts */
-        .section-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Billboard */
-        .billboard {
-            text-align: center;
-            padding: 50px 20px;
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #00c6ff, #007aff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 40px;
-        }
-
-        /* Dynamic Grid Layout */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            padding: 15px;
-            border-radius: 15px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        /* Pin Board */
-        .pin-board {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .pin-note {
-            width: 200px;
-            padding: 15px;
-            background: rgba(255, 235, 59, 0.15);
-            border: 1px solid rgba(255, 235, 59, 0.3);
-            position: relative;
-        }
-
-        .pin-note::before {
-            content: '📌';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Canvas Fireworks */
-        #fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9990;
+        #hologram-letter.active { transform: translate(-50%, -50%) scale(1); }
+        .typewriter-text { font-size: 1.1rem; line-height: 1.6; color: #e0f7fc; text-shadow: 0 0 8px rgba(0,243,255,0.5); }
+        .close-btn {
+            margin-top: 20px; background: linear-gradient(45deg, #ff007f, #7f00ff);
+            border: none; color: #fff; padding: 10px 20px; border-radius: 8px;
+            cursor: pointer; font-weight: bold; width: 100%;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <canvas id="fireworks"></canvas>
+    <div id="canvas-container"></div>
 
-    <div id="countdown-screen">
-        <h2>Website Unlocks In</h2>
-        <br>
-        <div class="glass timer-box" id="timer">Loading...</div>
+    <div id="hud-overlay">
+        <div class="time-badge">SYSTEM TIME: 04:25 | 06-09-2026</div>
     </div>
 
-    <div id="banner-screen">
-        <div class="fabric-banner">
-            🎉 Happy Birthday Disha! 🎂
-        </div>
-    </div>
-
-    <div id="main-content">
-        <nav class="glass">
-            <div style="font-weight: bold;">HBD DISHA</div>
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <div class="nav-links glass" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#stories">Golpo</a>
-            </div>
-        </nav>
-
-        <div class="glass profile-card" id="home">
-            <img src="https://via.placeholder.com/150" alt="Disha" class="profile-img">
-            <div class="profile-name">
-                Disha <span class="blue-badge">✓</span>
-            </div>
-            <p style="margin-top: 10px; opacity: 0.8;">Happy Birthday Disha!</p>
-        </div>
-
-        <div class="section-container glass billboard">
-            ✨ HAPPY BIRTHDAY DISHA ✨
-        </div>
-
-        <div class="section-container">
-            <h3 class="section-title">Special Memories</h3>
-            <div class="grid-3" id="profileNotesContainer"></div>
-        </div>
-
-        <div class="section-container glass">
-            <h3 class="section-title">Pin Board</h3>
-            <div class="pin-board" id="pinBoardContainer"></div>
-        </div>
-
-        <div class="section-container" id="gallery">
-            <h3 class="section-title">Gallery (30 Photos)</h3>
-            <div class="grid-3" id="galleryContainer"></div>
-        </div>
-
-        <div class="section-container" id="stories">
-            <h3 class="section-title">Golpo Collection</h3>
-            <div id="storyContainer" style="display: flex; flex-direction: column; gap: 15px;"></div>
-        </div>
+    <div id="hologram-letter">
+        <h3 style="color: #00f3ff; margin-bottom: 15px;">💌 Holographic Transmission</h3>
+        <p class="typewriter-text" id="letter-content"></p>
+        <button class="close-btn" onclick="closeLetter()">Continue Experience</button>
     </div>
 
     <script>
-        // Set target date to Sept 6, 2026 03:10:00 AM
-        const targetDate = new Date("September 6, 2026 03:10:00").getTime();
+        // --- SCENE SETUP ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x020208, 0.001);
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera.position.set(0, 0, 300);
 
-            if (difference <= 0) {
-                clearInterval(timerInterval);
-                triggerUnlockSequence();
-            } else {
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                document.getElementById("timer").innerText = `${hours}h ${minutes}m ${seconds}s`;
-            }
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        container.appendChild(renderer.domElement);
+
+        // --- LIGHTING ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0x00f3ff, 2, 500);
+        pointLight.position.set(0, 50, 100);
+        scene.add(pointLight);
+
+        // --- 1. 3D UNIVERSE INTRO (Space & Glowing Stars) ---
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 10000;
+        const posArray = new Float32Array(starCount * 3);
+
+        for(let i=0; i<starCount*3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 2000;
+        }
+        starGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const starMat = new THREE.PointsMaterial({ size: 1.2, color: 0xffffff, transparent: true, opacity: 0.8 });
+        const starMesh = new THREE.Points(starGeo, starMat);
+        scene.add(starMesh);
+
+        // Glowing Planet
+        const planetGeo = new THREE.SphereGeometry(40, 64, 64);
+        const planetMat = new THREE.MeshStandardMaterial({
+            color: 0x00d2ff,
+            wireframe: true,
+            emissive: 0x003366
+        });
+        const planet = new THREE.Mesh(planetGeo, planetMat);
+        planet.position.set(0, 0, -400);
+        scene.add(planet);
+
+        // --- 4. FLOATING 3D CAKE & CANDLE ---
+        const cakeGroup = new THREE.Group();
+        const cakeTier1 = new THREE.Mesh(
+            new THREE.CylinderGeometry(30, 30, 15, 32),
+            new THREE.MeshStandardMaterial({ color: 0xff0055, roughness: 0.2, metalness: 0.5 })
+        );
+        const cakeTier2 = new THREE.Mesh(
+            new THREE.CylinderGeometry(20, 20, 12, 32),
+            new THREE.MeshStandardMaterial({ color: 0xff00aa, roughness: 0.2 })
+        );
+        cakeTier2.position.y = 135;
+        cakeTier1.position.y = 120;
+        cakeGroup.add(cakeTier1, cakeTier2);
+
+        // Candle
+        const candle = new THREE.Mesh(
+            new THREE.CylinderGeometry(1.5, 1.5, 10, 16),
+            new THREE.MeshBasicMaterial({ color: 0xffffff })
+        );
+        candle.position.y = 146;
+        const flame = new THREE.Mesh(
+            new THREE.SphereGeometry(2, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xffaa00 })
+        );
+        flame.position.y = 152;
+        cakeGroup.add(candle, flame);
+        cakeGroup.position.set(0, -500, 0); // Hide initially
+        scene.add(cakeGroup);
+
+        // --- 5. ANTI-GRAVITY BALLOONS ---
+        const balloons = [];
+        const balloonGeo = new THREE.SphereGeometry(8, 32, 32);
+        for(let i=0; i<15; i++) {
+            const mat = new THREE.MeshStandardMaterial({
+                color: Math.random() * 0xffffff,
+                roughness: 0.1,
+                metalness: 0.8
+            });
+            const balloon = new THREE.Mesh(balloonGeo, mat);
+            balloon.position.set((Math.random()-0.5)*300, (Math.random()-0.5)*200, (Math.random()-0.5)*300);
+            scene.add(balloon);
+            balloons.push(balloon);
         }
 
-        const timerInterval = setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // --- MASTER SEQUENCER (AUTOMATIC TIMELINE) ---
+        const tl = gsap.timeline();
 
-        // Unlock Site Animations
-        function triggerUnlockSequence() {
-            document.getElementById("countdown-screen").style.display = "none";
+        // Step 1 -> 2: Camera Move to Planet & Holographic Countdown
+        tl.to(camera.position, { z: -250, duration: 5, ease: "power2.inOut" })
+          .to(planet.rotation, { y: Math.PI * 2, duration: 5 }, "<")
+          .call(() => runCountdown());
+
+        function runCountdown() {
+            // Trigger 3D Hologram Countdown simulation
+            let count = 3;
+            const interval = setInterval(() => {
+                if(count > 0) {
+                    // Particle Explosion Effect simulation
+                    createExplosion(camera.position.x, camera.position.y, camera.position.z - 50);
+                    count--;
+                } else {
+                    clearInterval(interval);
+                    revealNameAndScene();
+                }
+            }, 1000);
+        }
+
+        function createExplosion(x, y, z) {
+            confetti({
+                particleCount: 50,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Step 3 & 6: Name Reveal & Magical Room Transition
+        function revealNameAndScene() {
+            // Move Camera back & bring floating cake
+            gsap.to(camera.position, { z: 200, y: 50, duration: 3 });
+            gsap.to(cakeGroup.position, { y: -100, duration: 3, ease: "back.out(1.2)" });
             
-            // Firework Blast Simulation
-            explodeFireworks();
-
-            // Drop Banner
-            const banner = document.getElementById("banner-screen");
-            banner.style.top = "0";
-
+            // Trigger Typewriter Letter Modal after 5s
             setTimeout(() => {
-                banner.style.top = "-100%";
-                const mainContent = document.getElementById("main-content");
-                mainContent.style.display = "block";
-                setTimeout(() => mainContent.style.opacity = "1", 50);
-            }, 3000);
+                openLetter();
+            }, 4000);
         }
 
-        // Generate Dynamic Elements
-        // 1. Profile Notes (10 Items)
-        const profileNotes = document.getElementById("profileNotesContainer");
-        for (let i = 1; i <= 10; i++) {
-            profileNotes.innerHTML += `
-                <div class="glass card">
-                    <img src="https://picsum.photos/300/200?random=${i}" alt="Photo">
-                    <p style="font-size: 0.9rem;">Memory Note #${i}: Happy Birthday Disha! Hope your day is amazing.</p>
-                </div>`;
+        // Step 7: Hologram Letter Typewriter
+        function openLetter() {
+            const modal = document.getElementById('hologram-letter');
+            modal.classList.add('active');
+            const message = "Today is not just another day... It's your day. Wishing you an extraordinary year ahead filled with magic and success! ✨";
+            let index = 0;
+            const target = document.getElementById('letter-content');
+            target.innerHTML = "";
+            
+            const timer = setInterval(() => {
+                if(index < message.length) {
+                    target.innerHTML += message.charAt(index);
+                    index++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, 40);
         }
 
-        // 2. Pin Board Notes
-        const pinBoard = document.getElementById("pinBoardContainer");
-        for (let i = 1; i <= 8; i++) {
-            pinBoard.innerHTML += `
-                <div class="glass pin-note">
-                    <p>Sticky Note #${i}<br>Stay smiling always, Disha!</p>
-                </div>`;
+        function closeLetter() {
+            document.getElementById('hologram-letter').classList.remove('active');
+            triggerFinalScene();
         }
 
-        // 3. Gallery (30 Photos)
-        const gallery = document.getElementById("galleryContainer");
-        for (let i = 1; i <= 30; i++) {
-            gallery.innerHTML += `
-                <div class="glass card">
-                    <img src="https://picsum.photos/300/200?random=${i+10}" alt="Gallery Photo">
-                </div>`;
-        }
+        // Step 9 & 10: Final Fireworks & Celebration
+        function triggerFinalScene() {
+            gsap.to(cakeGroup.position, { y: -500, duration: 2 });
+            
+            // Continuous Fireworks
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
 
-        // 4. Golpo (20+ Stories)
-        const stories = document.getElementById("storyContainer");
-        for (let i = 1; i <= 20; i++) {
-            stories.innerHTML += `
-                <div class="glass card">
-                    <h4>Golpo Chapter #${i}</h4>
-                    <p style="margin-top: 5px; opacity: 0.8;">Ek choto golpo ar memory likha thakbe eikhane...</p>
-                </div>`;
-        }
-
-        // Navigation Toggle
-        function toggleMenu() {
-            document.getElementById("navLinks").classList.toggle("active");
-        }
-
-        // Canvas Fireworks Effect Simple Logic
-        function explodeFireworks() {
-            const canvas = document.getElementById('fireworks');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            let particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: canvas.width / 2,
-                    y: canvas.height / 2,
-                    dx: (Math.random() - 0.5) * 10,
-                    dy: (Math.random() - 0.5) * 10,
-                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                    radius: Math.random() * 3 + 1
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
                 });
-            }
-
-            function animate() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                particles.forEach((p) => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.fill();
-                    p.x += p.dx;
-                    p.y += p.dy;
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
                 });
-                requestAnimationFrame(animate);
-            }
-            animate();
-            setTimeout(() => ctx.clearRect(0,0,canvas.width, canvas.height), 2500);
+
+                if (Date.now() < animationEnd) {
+                    requestAnimationFrame(frame);
+                }
+            })();
         }
+
+        // --- ANIMATION LOOP & INTERACTIONS ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
+
+            // Starfield motion
+            starMesh.rotation.y = time * 0.05;
+
+            // Cake floating animation
+            cakeGroup.rotation.y = time * 0.5;
+            cakeGroup.position.y += Math.sin(time * 2) * 0.2;
+
+            // Anti-gravity balloons floating
+            balloons.forEach((b, i) => {
+                b.position.y += Math.sin(time + i) * 0.1;
+                b.position.x += Math.cos(time + i) * 0.1;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive Resize Handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
