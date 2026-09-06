@@ -590,8 +590,8 @@
     </div>
 
     <script>
-        // TARGET LOCK TIME: 07-09-2026 12:00 PM (Bangladesh Time Offset: +06:00)
-        const TARGET_DATE = new Date("2026-09-07T12:00:00+06:00").getTime();
+        // TARGET LOCK TIME: 06-09-2026 04:54 PM (Bangladesh Time Offset: +06:00)
+        const TARGET_DATE = new Date("2026-09-06T4:54:00+06:00").getTime();
 
         // 1. COUNTDOWN TIMER LOGIC
         const countdownOverlay = document.getElementById("countdown-overlay");
@@ -766,43 +766,81 @@
         }
         drawStars();
     </script>
-    <div class="custom-video-container">
-  <video class="custom-video-player" id="myVideo" preload="metadata" poster="https://via.placeholder.com/800x450/111827/ffffff?text=Video+Thumbnail">
-    <!-- আপনার ভিডিওর লিংক এখানে বসান -->
-    <source src="lv_7565722130306960693_20260906144722.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
+<div class="ios-video-card">
+  <video 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    preload="metadata" 
+    class="ios-video">
+    <source src="your-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
+  
+  <div class="ios-glass-overlay"></div>
+</div>
 
-  <!-- Big Central Play Button -->
-  <button class="big-play-btn" id="bigPlayBtn" aria-label="Play Video">
-    <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-  </button>
+<style>
+  /* Container Styling */
+  .ios-video-card {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 24px; /* iOS Smooth Rounded Corners */
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    background: #000;
+    transform: translateZ(0); /* Hardware Acceleration for Ultra-Fast Render */
+    will-change: transform;
+  }
 
-  <!-- Video Controls Overlay -->
-  <div class="video-controls" id="videoControls">
-    <div class="progress-container" id="progressContainer">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
+  /* Fast Video Render */
+  .ios-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 24px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
 
-    <div class="controls-main">
-      <div class="controls-left">
-        <button class="control-btn" id="playPauseBtn" aria-label="Play/Pause">
-          <svg class="icon play-svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon pause-svg hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
+  /* Hover Effect like iOS */
+  .ios-video-card:hover .ios-video {
+    transform: scale(1.02);
+  }
 
-        <div class="time-display">
-          <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
-        </div>
-      </div>
+  /* Modern Glass Overlay Accent */
+  .ios-glass-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    pointer-events: none;
+  }
+</style>
 
-      <div class="controls-right">
-        <button class="control-btn" id="fullscreenBtn" aria-label="Fullscreen">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-    </div>
+<script>
+  // Performance Optimization: Intersection Observer for Lazy Loading Playback
+  document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector(".ios-video");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(video);
+  });
+</script>
 </body>
 </html>
