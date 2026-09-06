@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Disha ❤️</title>
     
-    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Three.js (3D Animation) & html2canvas (Export Picture) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
@@ -18,9 +15,9 @@
         :root {
             --primary: #ff4757;
             --accent: #ff6b81;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --text-color: #2f3542;
+            --glass-bg: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #ffffff;
         }
 
         * {
@@ -32,13 +29,12 @@
         }
 
         body {
-            background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #2b1055 0%, #7597de 100%);
+            color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Full Background Canvas for Floating Stars/Particles */
         #star-canvas {
             position: fixed;
             top: 0;
@@ -65,22 +61,21 @@
 
         .timer-box {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
         }
 
         .time-unit {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--glass-border);
-            padding: 20px;
+            padding: 15px;
             border-radius: 16px;
-            min-width: 80px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            min-width: 70px;
         }
 
         .time-unit span {
             display: block;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #ff4757;
         }
@@ -94,31 +89,23 @@
             display: none;
             justify-content: center;
             align-items: center;
-            perspective: 1000px;
         }
 
         .banner-card {
-            width: 80%;
-            max-width: 600px;
-            padding: 50px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            backdrop-filter: blur(10px);
+            width: 85%;
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+            border: 1px solid var(--glass-border);
             text-align: center;
-            transform-style: preserve-3d;
-            animation: flipIn 2s ease forwards, float 3s ease-in-out infinite alternate;
+            animation: flipIn 2s ease forwards;
         }
 
         @keyframes flipIn {
-            0% { transform: rotateY(-90deg) scale(0.5); opacity: 0; }
-            100% { transform: rotateY(0deg) scale(1); opacity: 1; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotateX(0deg); }
-            100% { transform: translateY(-20px) rotateX(10deg); }
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* --- MAIN CONTENT & NAVIGATION --- */
@@ -127,7 +114,6 @@
             padding-bottom: 50px;
         }
 
-        /* iOS Dynamic Floating Navbar */
         .navbar {
             position: fixed;
             top: 20px;
@@ -140,19 +126,17 @@
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             color: white;
-            padding: 15px 20px;
+            padding: 12px 18px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1.2rem;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            transition: 0.3s;
         }
 
         .nav-links {
             position: absolute;
-            top: 60px;
+            top: 55px;
             right: 0;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(20, 20, 35, 0.85);
             backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
@@ -161,67 +145,50 @@
             flex-direction: column;
             gap: 10px;
             width: 180px;
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 12px;
-            transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         /* Profile Section */
         .profile-section {
             text-align: center;
-            padding-top: 100px;
+            padding-top: 90px;
         }
 
         .profile-avatar {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             border: 4px solid white;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
             object-fit: cover;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
         .profile-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-top: 15px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
 
         /* 3D Billboard Carousel */
         .billboard-container {
             width: 90%;
-            max-width: 700px;
-            height: 350px;
-            margin: 40px auto;
-            perspective: 1000px;
+            max-width: 650px;
+            height: 320px;
+            margin: 30px auto;
         }
 
         .billboard {
             width: 100%;
             height: 100%;
             position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s ease-in-out;
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
             border-radius: 24px;
@@ -230,7 +197,6 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
         .billboard-slide {
@@ -241,7 +207,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 1s ease;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
@@ -258,86 +224,125 @@
         .letter-container {
             width: 90%;
             max-width: 800px;
-            margin: 50px auto;
-            background: rgba(255, 255, 255, 0.15);
+            margin: 40px auto;
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            padding: 30px;
             line-height: 1.8;
-            font-size: 1.1rem;
-            color: #fff;
         }
 
-        /* Pinboard / Whiteboard & Sticky Notes */
+        /* Video Section */
+        .video-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-top: 15px;
+        }
+
+        .video-wrapper video, .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+        }
+
+        /* Pinboard Section */
         .pinboard-container {
             width: 90%;
             max-width: 1000px;
-            margin: 50px auto;
-            background: rgba(255, 255, 255, 0.1);
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
-            border: 2px dashed rgba(255,255,255,0.4);
+            border: 2px dashed rgba(255,255,255,0.3);
             border-radius: 30px;
-            padding: 30px;
+            padding: 25px;
         }
 
         .pinboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
             margin-top: 20px;
         }
 
         .sticky-note {
             background: #fff9c4;
             color: #333;
-            padding: 20px;
-            border-radius: 10px 0 10px 10px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
-            transform: rotate(-2deg);
-            transition: 0.3s;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             position: relative;
-        }
-
-        .sticky-note:nth-child(even) { transform: rotate(3deg); background: #ffcdd2; }
-        .sticky-note:nth-child(3n) { transform: rotate(-4deg); background: #c8e6c9; }
-        .sticky-note:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
-
-        .sticky-note::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 15px;
-            background: #ff5252;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .sticky-note img {
             width: 100%;
-            height: 120px;
+            height: 110px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        /* 3D Cake Cutting Section */
-        .cake-section {
-            text-align: center;
-            margin: 60px 0;
+        /* Wishes Section (5 Profiles) */
+        .wishes-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
         }
 
-        #cake-canvas {
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
-            cursor: pointer;
+        .wish-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
+        .wish-avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff4757;
+            flex-shrink: 0;
+        }
+
+        .wish-content h4 {
+            color: #ff6b81;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .wish-content p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Action Buttons */
         .action-btn {
             background: linear-gradient(45deg, #ff4757, #ff6b81);
             border: none;
@@ -348,28 +353,20 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
-            transition: 0.3s;
-            margin-top: 15px;
         }
 
-        .action-btn:hover {
-            transform: translateY(-3deg);
-            box-shadow: 0 12px 25px rgba(255, 71, 87, 0.6);
-        }
-
-        /* Share Button Bar */
-        .share-bar {
-            text-align: center;
-            margin-top: 40px;
+        @media (max-width: 600px) {
+            .wish-card {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Particle Star Background -->
     <canvas id="star-canvas"></canvas>
 
-    <!-- 1. COUNTDOWN LOCK SCREEN -->
     <div id="countdown-screen">
         <h2>🎉 Waiting for Disha's Birthday 🎉</h2>
         <div class="timer-box">
@@ -380,79 +377,108 @@
         </div>
     </div>
 
-    <!-- 2. 3D INTRO BANNER -->
     <div id="banner-3d">
         <div class="banner-card">
-            <h1 style="font-size: 3rem; color: #fff; margin-bottom: 10px;">✨ Happy Birthday ✨</h1>
-            <h2 style="font-size: 3.5rem; color: #ff4757;">DISHA ❤️</h2>
+            <h1 style="font-size: 2.5rem;">✨ Happy Birthday ✨</h1>
+            <h2 style="font-size: 3rem; color: #ff4757;">DISHA ❤️</h2>
         </div>
     </div>
 
-    <!-- 3. MAIN WEBSITE CONTENT -->
     <div id="main-content">
         
-        <!-- Navigation Bar -->
         <nav class="navbar">
             <button class="menu-btn" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
             <div class="nav-links" id="navLinks">
                 <a href="#profile"><i class="fas fa-home"></i> Home</a>
+                <a href="#video-section"><i class="fas fa-video"></i> Video</a>
+                <a href="#wishes-section"><i class="fas fa-heart"></i> Wishes</a>
                 <a href="#pinboard"><i class="fas fa-images"></i> Gallery</a>
-                <a href="#letter"><i class="fas fa-envelope"></i> Note</a>
             </div>
         </nav>
 
-        <!-- Main Profile -->
         <section class="profile-section" id="profile">
-            <!-- Profile Image Placeholder -->
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Disha Profile" class="profile-avatar">
+            <img src="images/profile.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.src='https://picsum.photos/200'">
             <h1 class="profile-title">Happy Birthday Disha ❤️</h1>
         </section>
 
-        <!-- 3D Billboard Carousel -->
         <div class="billboard-container">
             <div class="billboard" id="billboard">
-                <!-- Slide 1: Welcome Text (Shows for 5 seconds) -->
-                <div class="billboard-slide active" id="text-slide">
-                    <h2 style="font-size: 2.2rem; color: #fff;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.2rem; font-weight: 300;">Welcome to your special world!</span></h2>
+                <div class="billboard-slide active">
+                    <h2 style="font-size: 2rem;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.1rem; font-weight: 300;">Welcome to your special website!</span></h2>
                 </div>
-                <!-- Dynamic Image Slides (Populated via JS) -->
             </div>
         </div>
 
-        <!-- 2000 Word Love Letter Section -->
-        <section id="letter" class="letter-container">
-            <h2 style="text-align: center; color: #ff6b81; margin-bottom: 20px;"><i class="fas fa-heart"></i> A Letter For You</h2>
-            <p>
-                প্রিয় দিশা,<br><br>
-                আজকের এই বিশেষ দিনে তোমাকে জানাই শুভ জন্মদিন! তোমার জীবনের প্রতিটি মুহূর্ত যেন আলো, আনন্দ আর ভালোবাসায় ভরে থাকে। তুমি আমার জীবনে আসা সবচেয়ে সুন্দর উপহার। তোমার মিষ্টি হাসি, তোমার কথা বলার ধরন এবং তোমার প্রতিটি ছোট ছোট চাওয়া আমার জীবনকে নতুন অর্থ দিয়েছে। 
-                <br><br>
-                তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার কাছে স্মৃতি হয়ে থাকবে। তুমি যখন হাসো, মনে হয় পুরো পৃথিবী যেন আরও সুন্দর হয়ে ওঠে। যখন তুমি মন খারাপ করো, তখন মনে হয় তোমার সব কষ্ট আমি এক নিমেষে কেড়ে নিই। আজকের এই দিনে আমি তোমাকে প্রতিশ্রুতি দিচ্ছি—জীবনের প্রতিটি মোড়ে, সহজ কিংবা কঠিন সময়ে, আমি সবসময় তোমার পাশে থাকব।
-                <br><br>
-                তুমি শুধু আমার ভালোবাসাই নও, তুমি আমার সেরা বন্ধু, আমার প্রেরণা। তোমার প্রতিটি স্বপ্ন যেন সত্যি হয়, তুমি যেন তোমার জীবনের সব লক্ষ্য অর্জন করতে পারো—এই কামনাই করি। আজকে তোমার জন্য সাজানো এই ছোট্ট ডিজিটাল দুনিয়াটি কেবল তোমার জন্যই। এখানে থাকা প্রতিটি ছবি, প্রতিটি লেখা আর প্রতিটি অ্যানিমেশন কেবল এটাই প্রকাশ করে যে তুমি আমার কাছে কতটা স্পেশাল!
-                <br><br>
-                শুভ জন্মদিন আমার ভালোবাসা! সারাজীবন এভাবেই হেসে খেলে আমার পাশে থেকো। ❤️✨
-            </p>
-        </section>
-
-        <!-- Whiteboard / Pinboard Section with 30 Photos & Sticky Notes -->
-        <section id="pinboard" class="pinboard-container">
-            <h2 style="text-align: center; margin-bottom: 10px;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
-            <p style="text-align: center; opacity: 0.8; margin-bottom: 25px;">Our Precious Moments & Memories</p>
-            
-            <div class="pinboard-grid" id="pinboard-grid">
-                <!-- 30 Dynamic Sticky Notes with Images will be generated by JavaScript -->
+        <section id="video-section" class="video-container">
+            <h2>🎬 Special Birthday Video 🎬</h2>
+            <div class="video-wrapper">
+                <video controls poster="https://picsum.photos/800/450">
+                    <source src="videos/birthday.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </section>
 
-        <!-- 3D Interactive Cake Cutting Section -->
-        <section class="cake-section">
-            <h2 style="margin-bottom: 15px;">🎂 Cut Your Birthday Cake 🎂</h2>
-            <div id="cake-canvas"></div>
-            <button class="action-btn" onclick="cutCake()"><i class="fas fa-cut"></i> Click to Cut Cake!</button>
+        <section id="wishes-section" class="wishes-container">
+            <h2 style="text-align: center; margin-bottom: 25px;"><i class="fas fa-comments"></i> Birthday Wishes</h2>
+            
+            <div class="wish-card">
+                <img src="images/friend1.jpg" alt="Wish 1" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=1'">
+                <div class="wish-content">
+                    <h4>আরিফ (Arif)</h4>
+                    <p>"শুভ জন্মদিন দিশা ভাবি! আপনার আগামী দিনগুলো হাসি-আনন্দে ভরে উঠুক। সবসময় এমন হাসিখুশি থাকবেন!"</p>
+                </div>
+            </div>
+
+            <div class="wish-card">
+                <img src="images/friend2.jpg" alt="Wish 2" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=5'">
+                <div class="wish-content">
+                    <h4>তানজিনা (Tanjina)</h4>
+                    <p>"Happy Birthday Disha! Life a অনাবিল আনন্দ আর সফলতা নেমে আসুক। Have a blast today!"</p>
+                </div>
+            </div>
+
+            <div class="wish-card">
+                <img src="images/friend3.jpg" alt="Wish 3" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=8'">
+                <div class="wish-content">
+                    <h4>রাহাত (Rahat)</h4>
+                    <p>"শুভ জন্মদিন! ভাই আর তোমার এই সুন্দর বন্ধন সারাজীবন অটুট থাকুক। Enjoy your special day!"</p>
+                </div>
+            </div>
+
+            <div class="wish-card">
+                <img src="images/friend4.jpg" alt="Wish 4" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=9'">
+                <div class="wish-content">
+                    <h4>সাদিয়া (Sadia)</h4>
+                    <p>"Many many happy returns of the day dear! Stay blessed and happy always!"</p>
+                </div>
+            </div>
+
+            <div class="wish-card">
+                <img src="images/friend5.jpg" alt="Wish 5" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=12'">
+                <div class="wish-content">
+                    <h4>নাহিয়ান (Nahian)</h4>
+                    <p>"শুভ জন্মদিন দিশা! আজকের দিনটা তোমার জন্য অনেক স্পেশাল আর স্মৃতিময় হয়ে থাকুক!"</p>
+                </div>
+            </div>
         </section>
 
-        <!-- Share/Capture Button Section -->
-        <div class="share-bar">
+        <section id="letter" class="letter-container">
+            <h2 style="text-align: center; color: #ff6b81; margin-bottom: 15px;"><i class="fas fa-heart"></i> A Letter For You</h2>
+            <p>
+                প্রিয় দিশা,<br><br>
+                আজকের এই বিশেষ দিনে তোমাকে জানাই জন্মদিনের অসীম ভালোবাসা! তুমি আমার জীবনের আলো। তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার হৃদয়ে স্বর্ণাক্ষরে লেখা থাকবে।
+                <br><br>
+                তোমার মিষ্টি হাসি, তোমার কথা বলার মায়াবী সুর আমাকে সবসময় মুগ্ধ করে। আজকের দিনে আমার একটিই চাওয়া, তুমি সারাজীবন এভাবে হেসেখেলে আমার পাশে থাকো। শুভ জন্মদিন প্রিয়তম! ❤️✨
+            </p>
+        </section>
+
+        <section id="pinboard" class="pinboard-container">
+            <h2 style="text-align: center; margin-bottom: 20px;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
+            <div class="pinboard-grid" id="pinboard-grid"></div>
+        </section>
+
+        <div style="text-align: center; margin-top: 30px;">
             <button class="action-btn" style="background: #3b5998;" onclick="shareToFacebook()">
                 <i class="fab fa-facebook"></i> Capture & Share to Facebook
             </button>
@@ -460,11 +486,8 @@
 
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* ----------------------------------------------------
-           1. COUNTDOWN TIMER & UNLOCK LOGIC (06-09-2026 1:20 PM)
-        ---------------------------------------------------- */
+        // Countdown Logic (Target: 06-09-2026 1:20 PM)
         const targetDate = new Date("September 6, 2026 13:20:00").getTime();
 
         const countdownInterval = setInterval(() => {
@@ -488,113 +511,79 @@
             }
         }, 1000);
 
-        /* ----------------------------------------------------
-           2. 3D BANNER TRANSITION
-        ---------------------------------------------------- */
         function trigger3DBanner() {
             const banner = document.getElementById("banner-3d");
             banner.style.display = "flex";
-            
-            // Show banner for 4 seconds, then fade into main website
             setTimeout(() => {
-                banner.style.transition = "opacity 1s ease";
                 banner.style.opacity = "0";
                 setTimeout(() => {
                     banner.style.display = "none";
                     document.getElementById("main-content").style.display = "block";
                     initStars();
-                    initCake3D();
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
                 }, 1000);
             }, 4000);
         }
 
-        /* ----------------------------------------------------
-           3. NAVBAR TOGGLE
-        ---------------------------------------------------- */
         function toggleNav() {
             const nav = document.getElementById("navLinks");
             nav.style.display = nav.style.display === "flex" ? "none" : "flex";
         }
 
-        /* ----------------------------------------------------
-           4. 3D BILLBOARD CAROUSEL (Text for 5s -> Images)
-        ---------------------------------------------------- */
-        // Demo Images array for Billboard & Pinboard (30 Photos)
-        const photoGallery = Array.from({length: 30}, (_, i) => 
-            `https://picsum.photos/400/300?random=${i + 1}`
-        );
-
+        // Gallery & Sticky Notes Logic (30 Photos)
+        const photoGallery = Array.from({length: 30}, (_, i) => `images/${i + 1}.jpg`);
         const billboard = document.getElementById("billboard");
-        
-        // Populate Billboard with Images
+        const pinboardGrid = document.getElementById("pinboard-grid");
+
         photoGallery.forEach((src, idx) => {
+            // Billboard images
             const slide = document.createElement("div");
             slide.className = "billboard-slide";
-            slide.innerHTML = `<img src="${src}" alt="Disha Photo ${idx + 1}">`;
+            slide.innerHTML = `<img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">`;
             billboard.appendChild(slide);
-        });
 
-        let currentSlide = 0;
-        const slides = document.querySelectorAll(".billboard-slide");
-
-        function startBillboard() {
-            // First Slide (Text) stays for 5000ms (5 Seconds)
-            setTimeout(() => {
-                slides[0].classList.remove("active");
-                currentSlide = 1;
-                slides[currentSlide].classList.add("active");
-
-                // Subsequent image slides change every 3 seconds
-                setInterval(() => {
-                    slides[currentSlide].classList.remove("active");
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add("active");
-                }, 3000);
-            }, 5000);
-        }
-        startBillboard();
-
-        /* ----------------------------------------------------
-           5. GENERATE 30 STICKY NOTES ON PINBOARD
-        ---------------------------------------------------- */
-        const pinboardGrid = document.getElementById("pinboard-grid");
-        const stickyNotesText = [
-            "You are awesome! ✨", "Best Smile Ever 😊", "My Sunshine ☀️", 
-            "Precious Moment 💖", "Beautiful Days 🌸", "Forever & Always 💍"
-        ];
-
-        photoGallery.forEach((imgUrl, i) => {
+            // Sticky Note
             const note = document.createElement("div");
             note.className = "sticky-note";
-            const randomText = stickyNotesText[i % stickyNotesText.length];
             note.innerHTML = `
-                <img src="${imgUrl}" alt="Memory ${i+1}">
-                <p><strong>Memory #${i+1}</strong></p>
-                <p style="font-size: 0.85rem; opacity:0.8;">${randomText}</p>
+                <img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">
+                <p><strong>Memory #${idx + 1}</strong></p>
+                <p style="font-size: 0.8rem;">Forever Together ❤️</p>
             `;
             pinboardGrid.appendChild(note);
         });
 
-        /* ----------------------------------------------------
-           6. FALLING STARS (Canvas Animation)
-        ---------------------------------------------------- */
+        // Billboard Rotation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".billboard-slide");
+        setTimeout(() => {
+            slides[0].classList.remove("active");
+            currentSlide = 1;
+            slides[currentSlide].classList.add("active");
+            setInterval(() => {
+                slides[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add("active");
+            }, 3000);
+        }, 5000);
+
+        // Background Star Effect
         function initStars() {
             const canvas = document.getElementById("star-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            const stars = Array.from({length: 100}, () => ({
+            const stars = Array.from({length: 80}, () => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 2 + 1,
+                size: Math.random() * 2,
                 speed: Math.random() * 0.5 + 0.2
             }));
 
             function animateStars() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "#ffffff";
-                
                 stars.forEach(star => {
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
@@ -602,70 +591,16 @@
                     star.y += star.speed;
                     if (star.y > canvas.height) star.y = 0;
                 });
-
                 requestAnimationFrame(animateStars);
             }
             animateStars();
         }
 
-        /* ----------------------------------------------------
-           7. 3D CAKE RENDERING & CUTTING (Three.js)
-        ---------------------------------------------------- */
-        let scene, camera, renderer, cakeMesh;
-
-        function initCake3D() {
-            const container = document.getElementById("cake-canvas");
-            scene = new THREE.Scene();
-            
-            camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-            camera.position.set(0, 3, 5);
-            camera.lookAt(0, 0, 0);
-
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(300, 300);
-            container.appendChild(renderer.domElement);
-
-            // Lighting
-            const light = new THREE.DirectionalLight(0xffffff, 1);
-            light.position.set(2, 5, 3);
-            scene.add(light);
-            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
-            // Cake Geometry (Cylinder)
-            const cakeGeo = new THREE.CylinderGeometry(1.5, 1.5, 1, 32);
-            const cakeMat = new THREE.MeshPhongMaterial({ color: 0xff6b81 });
-            cakeMesh = new THREE.Mesh(cakeGeo, cakeMat);
-            scene.add(cakeMesh);
-
-            function animateCake() {
-                requestAnimationFrame(animateCake);
-                cakeMesh.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            animateCake();
-        }
-
-        function cutCake() {
-            // Confetti Blast Effect
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-
-            // Scale down / slice animation simulation
-            cakeMesh.scale.set(0.8, 0.8, 0.8);
-            alert("🎉 Happy Birthday Disha! You cut the cake! 🎂");
-        }
-
-        /* ----------------------------------------------------
-           8. WEBPAGE CAPTURE FOR FACEBOOK POST
-        ---------------------------------------------------- */
+        // Facebook Capture Share
         function shareToFacebook() {
-            alert("ওয়েবসাইটের ছবি জেনারেট হচ্ছে! ডাউনলোড করে ফেসবুকে পোস্ট করতে পারবে।");
             html2canvas(document.body).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Disha-Birthday-Website.png';
+                link.download = 'Disha-Birthday-Special.png';
                 link.href = canvas.toDataURL();
                 link.click();
             });
