@@ -1,95 +1,138 @@
-/* PINBOARD & TYPOGRAPHY STYLES */
-.pinboard-container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 2px dashed rgba(255, 255, 255, 0.25);
-    border-radius: 32px;
-    padding: 30px;
+.custom-video-container {
+  position: relative;
+  max-width: 850px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-.pinboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 22px;
+.custom-video-player {
+  width: 100%;
+  display: block;
+  cursor: pointer;
 }
 
-.sticky-note {
-    background: #ffffff;
-    color: #222;
-    padding: 15px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Big Play Button */
+.big-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
 }
 
-/* Red Pin Accent */
-.sticky-note::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 16px;
-    height: 16px;
-    background: #ff4757;
-    border-radius: 50%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-    z-index: 2;
+.big-play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.sticky-note:nth-child(3n+1) { transform: rotate(-2.5deg); background: #fffde7; }
-.sticky-note:nth-child(3n+2) { transform: rotate(2deg); background: #fff0f5; }
-.sticky-note:nth-child(3n+3) { transform: rotate(-1.5deg); background: #f0f8ff; }
-
-.sticky-note:hover {
-    transform: scale(1.07) rotate(0deg);
-    z-index: 10;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+.play-icon {
+  width: 32px;
+  height: 32px;
+  fill: #ffffff;
+  margin-left: 4px;
 }
 
-.sticky-note img {
-    width: 100%;
-    height: 165px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    background-color: #e0e0e0;
+.big-play-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
-/* 3-Line Typography Layout */
-.note-typography {
-    text-align: center;
+/* Glassmorphism Controls */
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 20px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
 }
 
-.note-line-1 {
-    font-family: 'Cinzel', 'Poppins', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #ff4757;
-    margin-bottom: 3px;
+.custom-video-container:hover .video-controls {
+  opacity: 1;
 }
 
-.note-line-2 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 3px;
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-.note-line-3 {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #7f8c8d;
-    font-style: italic;
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+  transition: width 0.1s linear;
 }
 
-@media (max-width: 600px) {
-    .pinboard-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
+.controls-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.controls-left, .controls-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.control-btn:hover {
+  transform: scale(1.15);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  fill: #ffffff;
+}
+
+.time-display {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.hidden {
+  display: none !important;
+}
