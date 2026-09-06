@@ -1,19 +1,15 @@
-
 /* =========================================================
    Happy Birthday Disha — script.js
-   Vanilla JS, no frameworks/libraries.
-   Edit the CONFIG block below to personalize everything.
    ========================================================= */
 
-/* =============== CONFIG (edit this) =============== */
 const CONFIG = {
   NAME: "Disha",
-  BIRTHDAY: "2026-09-06T03:10:00",     // YYYY-MM-DDTHH:MM:SS, local device time
+  BIRTHDAY: "2026-09-06T03:10:00",
   INTRO_DATE_TEXT: "06 September 2026 • 3:10 AM",
 
   PHOTO_COUNT: 30,
-  PHOTO_DIR: "images/",                 // expects photo1.jpg ... photo30.jpg
-  PHOTO_CAPTION_PREFIX: "Memory",       // caption shown under each photo in lightbox
+  PHOTO_DIR: "images/",
+  PHOTO_CAPTION_PREFIX: "Memory",
 
   NOTE_COUNT: 20,
   NOTES: [
@@ -59,7 +55,6 @@ const CONFIG = {
 
   MUSIC_SRC: "audio/birthday.mp3"
 };
-/* =============== END CONFIG =============== */
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -89,7 +84,6 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     }, 200);
   }
 
-  // Safety net
   setTimeout(finish, 3000);
 
   if (!fill || !pct || !screen) { finish(); return; }
@@ -110,7 +104,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 })();
 
 /* ---------------------------------------------------------
-   START CELEBRATION -> reveal app
+   START CELEBRATION
 --------------------------------------------------------- */
 document.getElementById('startBtn')?.addEventListener('click', () => {
   document.getElementById('introScene')?.classList.add('hidden');
@@ -123,7 +117,7 @@ document.getElementById('startBtn')?.addEventListener('click', () => {
 });
 
 /* ---------------------------------------------------------
-   BACKGROUND PARTICLES (stars + floating hearts + gold dust)
+   BACKGROUND PARTICLES
 --------------------------------------------------------- */
 (function bgParticles(){
   const canvas = document.getElementById('bgParticles');
@@ -303,7 +297,6 @@ document.getElementById('lbPrev')?.addEventListener('click', () => { lbIndex = (
 document.getElementById('lbNext')?.addEventListener('click', () => { lbIndex = (lbIndex + 1) % photoList.length; renderLightbox(); });
 lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.add('hidden'); });
 
-// swipe support
 let touchStartX = null;
 lightbox?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
 lightbox?.addEventListener('touchend', (e) => {
@@ -431,7 +424,7 @@ function setupVisualizer(){
     sourceNode = audioCtx.createMediaElementSource(bgMusic);
     sourceNode.connect(analyser);
     analyser.connect(audioCtx.destination);
-  } catch (e) { /* visualizer unsupported */ }
+  } catch (e) { }
 }
 
 function runVisualizer(){
@@ -452,7 +445,7 @@ function startMusic(){
   if (!bgMusic) return;
   setupVisualizer();
   bgMusic.volume = 0.6;
-  bgMusic.play().then(() => runVisualizer()).catch(() => { /* autoplay blocked */ });
+  bgMusic.play().then(() => runVisualizer()).catch(() => { });
 }
 
 musicBtn?.addEventListener('click', () => {
