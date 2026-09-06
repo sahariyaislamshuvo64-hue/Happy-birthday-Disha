@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Disha ❤️</title>
 
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Hind+Siliguri:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -37,7 +35,6 @@
             min-height: 100vh;
         }
 
-        /* 3D Canvas Background */
         #star-canvas {
             position: fixed;
             top: 0;
@@ -231,7 +228,7 @@
 
         /* MAIN CONTENT AREA */
         #main-content {
-            display: none; /* Controlled by JS Timer */
+            display: none;
             position: relative;
             z-index: 1;
             padding-top: 100px;
@@ -309,7 +306,62 @@
             color: var(--accent-pink);
         }
 
-        /* 6. 2000 WORDS LETTER SECTION */
+        /* 6. VIDEO GALLERY SECTION */
+        .video-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .video-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .video-header h2 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: var(--ios-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--ios-glass-border);
+            border-radius: 22px;
+            padding: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5deg);
+            box-shadow: 0 20px 40px rgba(255, 42, 95, 0.25);
+        }
+
+        .video-card video {
+            width: 100%;
+            height: 180px;
+            border-radius: 14px;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .video-title {
+            margin-top: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* 7. LETTER SECTION */
         .letter-container {
             max-width: 850px;
             margin: 60px auto;
@@ -325,7 +377,6 @@
             line-height: 2;
             color: #e0e0e0;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            position: relative;
         }
 
         .glass-letter h2 {
@@ -343,7 +394,7 @@
             text-align: justify;
         }
 
-        /* 7. PINBOARD & STICKY NOTES */
+        /* 8. PINBOARD & STICKY NOTES */
         .pinboard-section {
             max-width: 1100px;
             margin: 60px auto;
@@ -387,7 +438,6 @@
             z-index: 10;
         }
 
-        /* Pin Accent */
         .sticky-note::before {
             content: '';
             position: absolute;
@@ -422,7 +472,6 @@
             line-height: 1.4;
         }
 
-        /* POST CREATOR SECTION */
         .post-creator-box {
             max-width: 600px;
             margin: 40px auto 0 auto;
@@ -481,10 +530,8 @@
 </head>
 <body>
 
-    <!-- Background Star Canvas -->
     <canvas id="star-canvas"></canvas>
 
-    <!-- 1. COUNTDOWN LOCK SCREEN -->
     <div id="countdown-overlay">
         <div class="timer-box">
             <h2><i class="fas fa-lock"></i> Website Locked</h2>
@@ -498,7 +545,6 @@
         </div>
     </div>
 
-    <!-- 2. 3D INTRO BANNER -->
     <div id="intro-banner">
         <div class="banner-3d">
             <h1>Happy Birthday Disha ❤️</h1>
@@ -506,7 +552,6 @@
         </div>
     </div>
 
-    <!-- 3. iOS DYNAMIC ISLAND NAVIGATION -->
     <div class="dynamic-island-container">
         <div class="dynamic-island" id="dynamicIsland" onclick="toggleIsland()">
             <div class="island-header">
@@ -518,16 +563,15 @@
             <div class="island-nav-links">
                 <a href="#profile"><i class="fas fa-home"></i> Home Page</a>
                 <a href="#billboard-section"><i class="fas fa-images"></i> 3D Gallery</a>
+                <a href="#video-section"><i class="fas fa-video"></i> Video Gallery</a>
                 <a href="#letter-section"><i class="fas fa-envelope-open-text"></i> Letter Page</a>
                 <a href="#pinboard-section"><i class="fas fa-thumbtack"></i> Memory Notes</a>
             </div>
         </div>
     </div>
 
-    <!-- 4. MAIN WEBSITE CONTENT -->
     <div id="main-content">
 
-        <!-- Profile Section -->
         <section class="profile-section" id="profile">
             <div class="profile-card">
                 <img src="images/profile.jpg" alt="Disha Profile" class="profile-img" onerror="this.src='https://picsum.photos/300/300';">
@@ -535,7 +579,6 @@
             <h1 class="profile-title">Happy Birthday Disha 🎉</h1>
         </section>
 
-        <!-- 3D Billboard Carousel Section -->
         <section class="billboard-container" id="billboard-section">
             <div class="billboard-card" id="billboardCard">
                 <h3 id="billboardText">Loading 3D Memories...</h3>
@@ -543,7 +586,47 @@
             </div>
         </section>
 
-        <!-- 2000 Words Letter Section -->
+        <section id="video-section" class="video-container">
+            <div class="video-header">
+                <h2><i class="fas fa-video" style="color: var(--accent-pink);"></i> Special Video Memories</h2>
+                <p style="color: var(--text-sub);">ভিডিওতে বন্দি থাকা বিশেষ কিছু মুহূর্ত</p>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <video controls poster="https://picsum.photos/400/225?random=101">
+                        <source src="videos/video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-title">Special Moment #1</div>
+                </div>
+
+                <div class="video-card">
+                    <video controls poster="https://picsum.photos/400/225?random=102">
+                        <source src="videos/video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-title">Special Moment #2</div>
+                </div>
+
+                <div class="video-card">
+                    <video controls poster="https://picsum.photos/400/225?random=103">
+                        <source src="videos/video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-title">Special Moment #3</div>
+                </div>
+
+                <div class="video-card">
+                    <video controls poster="https://picsum.photos/400/225?random=104">
+                        <source src="videos/video4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-title">Special Moment #4</div>
+                </div>
+            </div>
+        </section>
+
         <section class="letter-container" id="letter-section">
             <div class="glass-letter">
                 <h2><i class="fas fa-heart"></i> আমার হৃদয়ের গভীর থেকে...</h2>
@@ -566,19 +649,14 @@
             </div>
         </section>
 
-        <!-- Memory Pinboard Section (10 Fixed Pictures + Dynamic Post Option) -->
         <section class="pinboard-section" id="pinboard-section">
             <div class="board-header">
                 <h2><i class="fas fa-thumbtack" style="color: var(--accent-pink);"></i> Memory Pinboard</h2>
                 <p style="color: var(--text-sub);">আমাদের বিশেষ ১০টি স্মৃতি এবং বন্ধুদের শুভকামনা নোট</p>
             </div>
 
-            <!-- Pinboard Grid -->
-            <div class="pinboard-grid" id="pinboardGrid">
-                <!-- 10 Static Memory Cards with separate images -->
-            </div>
+            <div class="pinboard-grid" id="pinboardGrid"></div>
 
-            <!-- User Interactive Post Creator -->
             <div class="post-creator-box">
                 <h3><i class="fas fa-pen-nib"></i> একটি শুভকামনা পোস্ট করুন</h3>
                 <input type="text" id="userName" class="post-input" placeholder="আপনার নাম...">
@@ -590,19 +668,17 @@
     </div>
 
     <script>
-        // TARGET LOCK TIME: 06-09-2026 1:20 PM (Bangladesh Time Offset: +06:00)
+        // TARGET TIME: 06-09-2026 1:20 PM
         const TARGET_DATE = new Date("2026-09-06T13:20:00+06:00").getTime();
 
-        // 1. COUNTDOWN TIMER LOGIC
         const countdownOverlay = document.getElementById("countdown-overlay");
         const mainContent = document.getElementById("main-content");
 
-        const timerInterval = setInterval(() => {
+        function updateTimer() {
             const now = new Date().getTime();
             const difference = TARGET_DATE - now;
 
             if (difference <= 0) {
-                clearInterval(timerInterval);
                 unlockWebsite();
             } else {
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -615,36 +691,37 @@
                 document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
                 document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
             }
-        }, 1000);
+        }
 
-        // Function to Unlock Website & Play Intro Banner
+        // Run Immediately
+        const now = new Date().getTime();
+        if (TARGET_DATE - now <= 0) {
+            unlockWebsite();
+        } else {
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
         function unlockWebsite() {
             countdownOverlay.style.display = "none";
             const introBanner = document.getElementById("intro-banner");
             introBanner.style.display = "flex";
 
-            // Confetti Blast
             confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
 
-            // Hide 3D Banner after 4 seconds and load Main Content
             setTimeout(() => {
-                introBanner.style.fadeOut = "0.8s";
-                setTimeout(() => {
-                    introBanner.style.display = "none";
-                    mainContent.style.display = "block";
-                    initBillboard();
-                    initPinboard();
-                }, 800);
-            }, 3500);
+                introBanner.style.display = "none";
+                mainContent.style.display = "block";
+                initBillboard();
+                initPinboard();
+            }, 3000);
         }
 
-        // 2. iOS DYNAMIC ISLAND TOGGLE
         function toggleIsland() {
             const island = document.getElementById("dynamicIsland");
             island.classList.toggle("expanded");
         }
 
-        // 3. 3D BILLBOARD CAROUSEL LOGIC
         const billboardData = [
             { text: "Happy Birthday Disha 🎉", img: "images/pic1.jpg" },
             { text: "You Make Every Moment Magical ✨", img: "images/pic2.jpg" },
@@ -673,10 +750,9 @@
             }
 
             updateSlide();
-            setInterval(updateSlide, 5000); // 5 Seconds interval
+            setInterval(updateSlide, 5000);
         }
 
-        // 4. MEMORY PINBOARD (10 SEPARATE IMAGES)
         const staticMemories = [
             { img: "images/pic1.jpg", title: "Memory #1", desc: "প্রথম দেখার সুন্দর মুহূর্ত ❤️" },
             { img: "images/pic2.jpg", title: "Memory #2", desc: "মিষ্টি এক চিলতে হাসি ✨" },
@@ -692,6 +768,7 @@
 
         function initPinboard() {
             const grid = document.getElementById("pinboardGrid");
+            grid.innerHTML = "";
             staticMemories.forEach((item, i) => {
                 const note = document.createElement("div");
                 note.className = "sticky-note";
@@ -704,7 +781,6 @@
             });
         }
 
-        // Add Interactive Note Post
         function addNewNote() {
             const name = document.getElementById("userName").value.trim();
             const msg = document.getElementById("userMsg").value.trim();
@@ -717,7 +793,7 @@
             const grid = document.getElementById("pinboardGrid");
             const note = document.createElement("div");
             note.className = "sticky-note";
-            note.style.background = "#e1f5fe"; // Light blue for user post
+            note.style.background = "#e1f5fe";
             note.innerHTML = `
                 <div class="note-title"><i class="fas fa-comment"></i> ${name}</div>
                 <div class="note-desc">"${msg}"</div>
@@ -725,13 +801,11 @@
             `;
             grid.prepend(note);
 
-            // Reset inputs
             document.getElementById("userName").value = "";
             document.getElementById("userMsg").value = "";
             alert("আপনার নোটটি বোর্ডে পিন করা হয়েছে!");
         }
 
-        // 5. 3D STARFALL CANVAS ANIMATION
         const canvas = document.getElementById("star-canvas");
         const ctx = canvas.getContext("2d");
         let stars = [];
@@ -765,46 +839,6 @@
             requestAnimationFrame(drawStars);
         }
         drawStars();
-        <section id="video-section" class="video-container">
-    <div class="video-header">
-        <h2><i class="fas fa-video" style="color: var(--accent-pink);"></i> Special Video Memories</h2>
-        <p style="color: var(--text-sub);">ভিডিওতে বন্দি থাকা বিশেষ কিছু মুহূর্ত</p>
-    </div>
-
-    <div class="video-grid">
-        <div class="video-card">
-            <video controls poster="https://picsum.photos/400/225?random=101">
-                <source src="videos/video1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-title">Special Moment #1</div>
-        </div>
-
-        <div class="video-card">
-            <video controls poster="https://picsum.photos/400/225?random=102">
-                <source src="videos/video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-title">Special Moment #2</div>
-        </div>
-
-        <div class="video-card">
-            <video controls poster="https://picsum.photos/400/225?random=103">
-                <source src="videos/video3.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-title">Special Moment #3</div>
-        </div>
-
-        <div class="video-card">
-            <video controls poster="https://picsum.photos/400/225?random=104">
-                <source src="videos/video4.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-title">Special Moment #4</div>
-        </div>
-    </div>
-</section>
     </script>
 </body>
 </html>
