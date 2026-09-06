@@ -13,10 +13,10 @@
 
     <style>
         :root {
-            --primary: #ff4757;
-            --accent: #ff6b81;
-            --glass-bg: rgba(255, 255, 255, 0.18);
-            --glass-border: rgba(255, 255, 255, 0.3);
+            --primary-pink: #ff4757;
+            --accent-pink: #ff6b81;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
             --text-color: #ffffff;
         }
 
@@ -29,10 +29,27 @@
         }
 
         body {
-            background: linear-gradient(135deg, #2b1055 0%, #7597de 100%);
+            background: linear-gradient(135deg, #1e0538 0%, #431259 50%, #6c1361 100%);
             color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Background Hearts */
+        .heart-particle {
+            position: fixed;
+            color: rgba(255, 107, 129, 0.4);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         #star-canvas {
@@ -41,46 +58,56 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
 
-        /* Countdown Screen */
+        /* --- COUNTDOWN LOCK SCREEN --- */
         #countdown-screen {
             position: fixed;
             inset: 0;
-            background: rgba(15, 15, 26, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 5, 20, 0.95);
+            backdrop-filter: blur(25px);
             z-index: 99999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 20px;
+        }
+
+        .countdown-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ff6b81;
+            text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
         }
 
         .timer-box {
             display: flex;
             gap: 12px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .time-unit {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--glass-border);
             padding: 15px;
-            border-radius: 16px;
-            min-width: 70px;
+            border-radius: 18px;
+            min-width: 75px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .time-unit span {
             display: block;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #ff4757;
+            color: var(--primary-pink);
         }
 
-        /* 3D Intro Banner */
+        /* --- 3D INTRO BANNER --- */
         #banner-3d {
             position: fixed;
             inset: 0;
@@ -96,22 +123,25 @@
             max-width: 500px;
             padding: 40px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border-radius: 30px;
             border: 1px solid var(--glass-border);
             text-align: center;
             animation: flipIn 2s ease forwards;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         @keyframes flipIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(0.3) rotateY(90deg); opacity: 0; }
+            100% { transform: scale(1) rotateY(0deg); opacity: 1; }
         }
 
-        /* Main Content */
+        /* --- MAIN CONTENT & NAVBAR --- */
         #main-content {
             display: none;
-            padding-bottom: 50px;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 60px;
         }
 
         .navbar {
@@ -130,13 +160,14 @@
             border-radius: 30px;
             cursor: pointer;
             font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .nav-links {
             position: absolute;
             top: 55px;
             right: 0;
-            background: rgba(20, 20, 35, 0.85);
+            background: rgba(25, 10, 40, 0.9);
             backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
@@ -150,33 +181,40 @@
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 10px 14px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: 0.3s;
         }
 
+        .nav-links a:hover {
+            background: rgba(255, 71, 87, 0.3);
+        }
+
+        /* --- PROFILE SECTION --- */
         .profile-section {
             text-align: center;
             padding-top: 90px;
         }
 
         .profile-avatar {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            border: 4px solid white;
+            border: 4px solid rgba(255,255,255,0.8);
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
         }
 
         .profile-title {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             margin-top: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        /* Billboard */
+        /* --- 3D BILLBOARD CAROUSEL --- */
         .billboard-container {
             width: 90%;
             max-width: 650px;
@@ -196,6 +234,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .billboard-slide {
@@ -219,7 +258,7 @@
             border-radius: 16px;
         }
 
-        /* Video Section */
+        /* --- VIDEO SECTION --- */
         .video-container {
             width: 90%;
             max-width: 800px;
@@ -230,6 +269,7 @@
             border-radius: 24px;
             padding: 25px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .video-wrapper {
@@ -250,7 +290,7 @@
             border-radius: 16px;
         }
 
-        /* Wishes Section */
+        /* --- WISHES SECTION --- */
         .wishes-container {
             width: 90%;
             max-width: 800px;
@@ -267,7 +307,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
 
         .wish-avatar {
@@ -275,23 +315,23 @@
             height: 75px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ff4757;
+            border: 2px solid var(--primary-pink);
             flex-shrink: 0;
         }
 
         .wish-content h4 {
             color: #ff6b81;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 5px;
         }
 
         .wish-content p {
             font-size: 0.95rem;
-            opacity: 0.9;
+            opacity: 0.95;
             line-height: 1.5;
         }
 
-        /* Letter Section */
+        /* --- LETTER SECTION --- */
         .letter-container {
             width: 90%;
             max-width: 800px;
@@ -302,14 +342,15 @@
             border-radius: 24px;
             padding: 30px;
             line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Pinboard Section */
+        /* --- MEMORY PINBOARD SECTION --- */
         .pinboard-container {
             width: 90%;
             max-width: 1000px;
             margin: 40px auto;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
             border: 2px dashed rgba(255,255,255,0.3);
             border-radius: 30px;
@@ -318,23 +359,34 @@
 
         .pinboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
 
         .sticky-note {
-            background: #fff9c4;
-            color: #333;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #fff8c5;
+            color: #222;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
             position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-note:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .sticky-note:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
         }
 
         .sticky-note img {
             width: 100%;
-            height: 110px;
+            height: 120px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 8px;
@@ -350,6 +402,11 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2deg);
         }
 
         @media (max-width: 600px) {
@@ -364,8 +421,10 @@
 
     <canvas id="star-canvas"></canvas>
 
+    <div id="hearts-container"></div>
+
     <div id="countdown-screen">
-        <h2>🎉 Waiting for Disha's Birthday 🎉</h2>
+        <h2 class="countdown-title">🎉 Waiting for Disha's Birthday 🎉</h2>
         <div class="timer-box">
             <div class="time-unit"><span id="days">00</span>Days</div>
             <div class="time-unit"><span id="hours">00</span>Hours</div>
@@ -376,8 +435,8 @@
 
     <div id="banner-3d">
         <div class="banner-card">
-            <h1 style="font-size: 2.5rem;">✨ Happy Birthday ✨</h1>
-            <h2 style="font-size: 3rem; color: #ff4757;">DISHA ❤️</h2>
+            <h1 style="font-size: 2.2rem;">✨ Happy Birthday ✨</h1>
+            <h2 style="font-size: 3rem; color: #ff4757; margin-top: 10px;">DISHA ❤️</h2>
         </div>
     </div>
 
@@ -401,7 +460,7 @@
         <div class="billboard-container">
             <div class="billboard" id="billboard">
                 <div class="billboard-slide active">
-                    <h2 style="font-size: 2rem;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.1rem; font-weight: 300;">Welcome to your special website!</span></h2>
+                    <h2 style="font-size: 1.8rem;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.1rem; font-weight: 300;">Welcome to your special memory website!</span></h2>
                 </div>
             </div>
         </div>
@@ -423,7 +482,7 @@
                 <img src="images/friend1.jpg" alt="Wish 1" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=1'">
                 <div class="wish-content">
                     <h4>রিহান ভাই (Rihan vai)</h4>
-                    <p>"শুভ জন্মদিন দিশা ভাবি! আপনার শুভকামনায় সবসময় আমরা আছি। আজকের দিনটি অনেক আনন্দে কাটুক!"</p>
+                    <p>"শুভ জন্মদিন দিশা ভাবি! আপনার আগামী দিনগুলো অনেক বেশি আনন্দ ও সুখে ভরে উঠুক।"</p>
                 </div>
             </div>
 
@@ -431,7 +490,7 @@
                 <img src="images/friend2.jpg" alt="Wish 2" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=5'">
                 <div class="wish-content">
                     <h4>আব্দুল্লাহ (Abdullah)</h4>
-                    <p>"Happy Birthday Disha! জীবনের প্রতিটি পদক্ষেপে অনেক সফলতা ও আনন্দ নেমে আসুক। Have a great day!"</p>
+                    <p>"Happy Birthday Disha! জীবনের প্রতিটি পদক্ষেপে অনেক সফলতা ও সুখ নেমে আসুক। Have a blast today!"</p>
                 </div>
             </div>
 
@@ -455,7 +514,7 @@
                 <img src="images/friend5.jpg" alt="Wish 5" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=12'">
                 <div class="wish-content">
                     <h4>আব্দুল্লাহ (Abdullah)</h4>
-                    <p>"শুভ জন্মদিন দিশা! তোমার আগামী দিনগুলো আরও সুন্দর ও রঙিন হয়ে উঠুক!"</p>
+                    <p>"শুভ জন্মদিন দিশা! তোমার নতুন বছরটি যেন আরও সুন্দর ও রঙিন অভিজ্ঞতা দিয়ে ভরপুর থাকে!"</p>
                 </div>
             </div>
         </section>
@@ -464,9 +523,9 @@
             <h2 style="text-align: center; color: #ff6b81; margin-bottom: 15px;"><i class="fas fa-heart"></i> A Letter For You</h2>
             <p>
                 প্রিয় দিশা,<br><br>
-                আজকের এই বিশেষ দিনে তোমাকে জানাই জন্মদিনের অসীম ভালোবাসা! তুমি আমার জীবনের আলো। তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার হৃদয়ে স্বর্ণাক্ষরে লেখা থাকবে।
+                আজকের এই বিশেষ দিনে তোমাকে জানাই জন্মদিনের অসীম ভালোবাসা! তুমি আমার জীবনের আলো। তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার হৃদয়ে অত্যন্ত যত্নে জমা হয়ে আছে।
                 <br><br>
-                তোমার মিষ্টি হাসি, তোমার কথা বলার মায়াবী সুর আমাকে সবসময় মুগ্ধ করে। আজকের দিনে আমার একটিই চাওয়া, তুমি সারাজীবন এভাবে হেসেখেলে আমার পাশে থাকো। শুভ জন্মদিন প্রিয়তম! ❤️✨
+                তোমার মিষ্টি হাসি, তোমার কথা বলার সুন্দর ভঙ্গি আমাকে সবসময় মুগ্ধ করে। আজকের দিনে আমার একটাই প্রার্থনা, তুমি সারাজীবন এভাবে হেসেখেলে আমার পাশে থাকো। শুভ জন্মদিন প্রিয়তম! ❤️✨
             </p>
         </section>
 
@@ -484,7 +543,7 @@
     </div>
 
     <script>
-        // Target Date: 06-09-2026 1:20 PM
+        // Countdown Target Date
         const targetDate = new Date("September 6, 2026 13:20:00").getTime();
 
         const countdownInterval = setInterval(() => {
@@ -517,7 +576,8 @@
                     banner.style.display = "none";
                     document.getElementById("main-content").style.display = "block";
                     initStars();
-                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    createFloatingHearts();
+                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
                 }, 1000);
             }, 4000);
         }
@@ -597,17 +657,18 @@
             }, 3000);
         }, 5000);
 
+        // Canvas Stars Logic
         function initStars() {
             const canvas = document.getElementById("star-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            const stars = Array.from({length: 80}, () => ({
+            const stars = Array.from({length: 70}, () => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 2,
-                speed: Math.random() * 0.5 + 0.2
+                speed: Math.random() * 0.4 + 0.1
             }));
 
             function animateStars() {
@@ -625,6 +686,21 @@
             animateStars();
         }
 
+        // Floating Hearts
+        function createFloatingHearts() {
+            const container = document.getElementById("hearts-container");
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.className = "heart-particle";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }, 600);
+        }
+
+        // Share to FB
         function shareToFacebook() {
             html2canvas(document.body).then(canvas => {
                 const link = document.createElement('a');
