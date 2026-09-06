@@ -966,5 +966,129 @@
     });
   });
 </script>
+    <!-- iOS Style Video Card with Custom Sound Toggle -->
+<div class="ios-video-card">
+  <video 
+    id="iosVideo" 
+    playsinline 
+    preload="metadata" 
+    loop
+    class="ios-video">
+    <source src="skip" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  
+  <!-- Glass Control Overlay -->
+  <div class="ios-controls">
+    <button id="soundBtn" class="ios-btn" aria-label="Toggle Sound">
+      <!-- Mute Icon (Default) -->
+      <svg id="muteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <!-- Unmute Icon -->
+      <svg id="unmuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .ios-video-card {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: #000;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .ios-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+  }
+
+  /* iOS Glassmorphic Control Button */
+  .ios-controls {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10;
+  }
+
+  .ios-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ios-btn:active {
+    transform: scale(0.92);
+  }
+
+  .ios-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("iosVideo");
+    const soundBtn = document.getElementById("soundBtn");
+    const muteIcon = document.getElementById("muteIcon");
+    const unmuteIcon = document.getElementById("unmuteIcon");
+
+    // Browsers block autoplay with sound by default.
+    // Solution: Video starts muted for instant ultra-fast play, user toggles sound on click.
+    video.muted = true;
+
+    // Fast autoplay using Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(video);
+
+    // Toggle Sound Logic
+    soundBtn.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        muteIcon.style.display = "none";
+        unmuteIcon.style.display = "block";
+      } else {
+        video.muted = true;
+        muteIcon.style.display = "block";
+        unmuteIcon.style.display = "none";
+      }
+    });
+  });
+</script>
 </body>
 </html>
