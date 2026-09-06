@@ -128,3 +128,643 @@
             animation: bannerEntrance 1.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 40px 80px rgba(255, 42, 95, 0.3);
         }
+
+        @keyframes bannerEntrance {
+            0% { transform: rotateX(45deg) rotateY(-30deg) scale(0.3) translateY(200px); opacity: 0; }
+            100% { transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0); opacity: 1; }
+        }
+
+        .banner-3d h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff2a5f, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        /* 3. iOS 26 DYNAMIC ISLAND NAVIGATION */
+        .dynamic-island-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 8000;
+        }
+
+        .dynamic-island {
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 220px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .dynamic-island.expanded {
+            width: 90vw;
+            max-width: 450px;
+            border-radius: 25px;
+            flex-direction: column;
+            padding: 20px;
+            background: rgba(15, 15, 20, 0.95);
+            backdrop-filter: blur(25px);
+        }
+
+        .island-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .island-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-pink);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .island-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .island-nav-links {
+            display: none;
+            width: 100%;
+            margin-top: 15px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dynamic-island.expanded .island-nav-links {
+            display: flex;
+        }
+
+        .island-nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .island-nav-links a:hover {
+            background: var(--accent-pink);
+        }
+
+        /* MAIN CONTENT AREA */
+        #main-content {
+            display: none; /* Controlled by JS Timer */
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        /* 4. PROFILE SECTION */
+        .profile-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-card {
+            position: relative;
+            display: inline-block;
+            padding: 8px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 42, 95, 0.4);
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 4px solid #000;
+        }
+
+        .profile-title {
+            margin-top: 18px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 5. 3D BILLBOARD CAROUSEL */
+        .billboard-container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 0 20px;
+            perspective: 1000px;
+        }
+
+        .billboard-card {
+            background: var(--ios-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--ios-glass-border);
+            border-radius: 28px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .billboard-card img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 18px;
+            object-fit: cover;
+            margin-top: 15px;
+        }
+
+        .billboard-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent-pink);
+        }
+
+        /* 6. 2000 WORDS LETTER SECTION */
+        .letter-container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .glass-letter {
+            background: var(--ios-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--ios-glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            line-height: 2;
+            color: #e0e0e0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .glass-letter h2 {
+            color: var(--accent-pink);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .glass-letter p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        /* 7. PINBOARD & STICKY NOTES */
+        .pinboard-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .board-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .board-header h2 {
+            font-size: 2.2rem;
+            color: #fff;
+        }
+
+        .pinboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .sticky-note {
+            background: rgba(255, 255, 255, 0.95);
+            color: #111;
+            padding: 18px;
+            border-radius: 20px;
+            position: relative;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .sticky-note:nth-child(even) {
+            transform: rotate(2deg);
+            background: #fff0f5;
+        }
+
+        .sticky-note:hover {
+            transform: scale(1.06) rotate(0deg);
+            z-index: 10;
+        }
+
+        /* Pin Accent */
+        .sticky-note::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: var(--accent-pink);
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .sticky-note img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .note-title {
+            font-weight: 700;
+            color: #ff2a5f;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .note-desc {
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        /* POST CREATOR SECTION */
+        .post-creator-box {
+            max-width: 600px;
+            margin: 40px auto 0 auto;
+            background: var(--ios-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--ios-glass-border);
+            padding: 25px;
+            border-radius: 25px;
+        }
+
+        .post-creator-box h3 {
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--accent-pink);
+        }
+
+        .post-input, .post-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 12px 15px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .post-textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .post-btn {
+            width: 100%;
+            background: linear-gradient(45deg, var(--accent-pink), var(--accent-purple));
+            border: none;
+            color: white;
+            padding: 14px;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .post-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2deg);
+        }
+
+        @media (max-width: 600px) {
+            .profile-img { width: 130px; height: 130px; }
+            .glass-letter { padding: 25px; }
+            .banner-3d h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Star Canvas -->
+    <canvas id="star-canvas"></canvas>
+
+    <!-- 1. COUNTDOWN LOCK SCREEN -->
+    <div id="countdown-overlay">
+        <div class="timer-box">
+            <h2><i class="fas fa-lock"></i> Website Locked</h2>
+            <p style="color: var(--text-sub);">দিশার জন্মদিনের বিশেষ মুহূর্ত আসার আগে সাইট আনলক হবে না!</p>
+            <div class="timer-grid">
+                <div class="time-card"><span id="days">00</span><label>Days</label></div>
+                <div class="time-card"><span id="hours">00</span><label>Hours</label></div>
+                <div class="time-card"><span id="minutes">00</span><label>Minutes</label></div>
+                <div class="time-card"><span id="seconds">00</span><label>Seconds</label></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 3D INTRO BANNER -->
+    <div id="intro-banner">
+        <div class="banner-3d">
+            <h1>Happy Birthday Disha ❤️</h1>
+            <p style="font-size: 1.2rem; color: #fff;">Welcome to your 3D Birthday Experience!</p>
+        </div>
+    </div>
+
+    <!-- 3. iOS DYNAMIC ISLAND NAVIGATION -->
+    <div class="dynamic-island-container">
+        <div class="dynamic-island" id="dynamicIsland" onclick="toggleIsland()">
+            <div class="island-header">
+                <div class="island-title">
+                    <i class="fas fa-heart" style="color: var(--accent-pink);"></i> Disha's Day
+                </div>
+                <button class="island-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+            <div class="island-nav-links">
+                <a href="#profile"><i class="fas fa-home"></i> Home Page</a>
+                <a href="#billboard-section"><i class="fas fa-images"></i> 3D Gallery</a>
+                <a href="#letter-section"><i class="fas fa-envelope-open-text"></i> Letter Page</a>
+                <a href="#pinboard-section"><i class="fas fa-thumbtack"></i> Memory Notes</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MAIN WEBSITE CONTENT -->
+    <div id="main-content">
+
+        <!-- Profile Section -->
+        <section class="profile-section" id="profile">
+            <div class="profile-card">
+                <img src="images/profile.jpg" alt="Disha Profile" class="profile-img" onerror="this.src='https://picsum.photos/300/300';">
+            </div>
+            <h1 class="profile-title">Happy Birthday Disha 🎉</h1>
+        </section>
+
+        <!-- 3D Billboard Carousel Section -->
+        <section class="billboard-container" id="billboard-section">
+            <div class="billboard-card" id="billboardCard">
+                <h3 id="billboardText">Loading 3D Memories...</h3>
+                <img id="billboardImg" src="" alt="Billboard Image" style="display: none;">
+            </div>
+        </section>
+
+        <!-- 2000 Words Letter Section -->
+        <section class="letter-container" id="letter-section">
+            <div class="glass-letter">
+                <h2><i class="fas fa-heart"></i> আমার হৃদয়ের গভীর থেকে...</h2>
+                <p>
+                    প্রিয় দিশা,<br><br>
+                    আজকের এই দিনটি আমার পুরো বছরের সবচেয়ে পছন্দের এবং বিশেষ একটি দিন। শুভ জন্মদিন আমার জীবনের সবচেয়ে সুন্দর মানুষটিকে! দেখতে দেখতে তোমার জীবনের আরও একটি নতুন বসন্ত যুক্ত হলো। তোমার এই বিশেষ দিনে তোমাকে দেওয়ার মতো কোনো সাধারণ উপহার আমার কাছে হয়তো যথেষ্ট নয়, তাই আমার সমস্ত আবেগ, অনুভুতি আর ভালোবাসাকে ডিজিটাল ক্যানভাসে বন্দি করে তৈরি করলাম এই ছোট্ট ওয়েবসাইটটি।
+                </p>
+                <p>
+                    তুমি আমার জীবনে আসা এমন এক উপহার, যার কথা আমি কখনো লিখে শেষ করতে পারবো না। তোমার মিষ্টি এক চিলতে হাসি আমার সারাদিনের ক্লান্তি দূর করে দিতে পারে। প্রতিটি মুহূর্তে তোমার উপস্থিতি আমাকে নতুন করে বাঁচতে শেখায়, স্বপ্ন দেখতে শেখায়। যখনই আমি পিছনে ফিরে তাকাই, প্রতিটি সুন্দর স্মৃতিতে তোমার প্রতিচ্ছবি দেখতে পাই। তোমার সাথে কাটানো প্রতিটি মুহূর্ত, ছোট ছোট আড্ডা, আর মিষ্টি অভিমানগুলো আমার হৃদয়ের গভীরে খুব যত্ন করে জমা করা আছে।
+                </p>
+                <p>
+                    আমি সবসময় স্রষ্টার কাছে প্রার্থনা করি যেন তোমার জীবনের প্রতিটি পথ আলোয় ভরে উঠে। জীবনে যত বাধা-বিপত্তি আসুক না কেন, আমি যেন সবসময় তোমার পাশে ছায়া হয়ে থাকতে পারি। তোমার প্রতিটি ইচ্ছা, প্রতিটি স্বপ্ন যেন বাস্তবে রূপ নেয়। তুমি যেন জীবনে সফলতার সর্বোচ্চ শিখরে পৌঁছাতে পারো এবং তোমার মুখের এই নিষ্পাপ হাসিটি যেন সারাজীবন এভাবেই অমলিন থাকে।
+                </p>
+                <p>
+                    আজকের এই দিনে তোমাকে শুধুই এই প্রতিশ্রুতি দিতে চাই—সময় যত বদলাক, পরিস্থিতি যত কঠিনই হোক না কেন, আমার ভালোবাসা তোমার জন্য কখনোই কমবে না। তুমি যেভাবে আমার জীবনকে সুখে ভরিয়ে দিয়েছো, ঠিক সেভাবেই আমিও চেষ্টা করবো তোমাকে পৃথিবীর সবচেয়ে সুখী মানুষ করে রাখতে।
+                </p>
+                <p>
+                    অনেক অনেক শুভকামনা ও ভালোবাসা নিও। তোমার আগামী দিনগুলো হয়ে উঠুক আরও রঙিন, আরও আনন্দময় এবং সাফল্যে ভরপুর। শুভ জন্মদিন প্রিয়তম! ❤️✨
+                </p>
+            </div>
+        </section>
+
+        <!-- Memory Pinboard Section (10 Fixed Pictures + Dynamic Post Option) -->
+        <section class="pinboard-section" id="pinboard-section">
+            <div class="board-header">
+                <h2><i class="fas fa-thumbtack" style="color: var(--accent-pink);"></i> Memory Pinboard</h2>
+                <p style="color: var(--text-sub);">আমাদের বিশেষ ১০টি স্মৃতি এবং বন্ধুদের শুভকামনা নোট</p>
+            </div>
+
+            <!-- Pinboard Grid -->
+            <div class="pinboard-grid" id="pinboardGrid">
+                <!-- 10 Static Memory Cards with separate images -->
+            </div>
+
+            <!-- User Interactive Post Creator -->
+            <div class="post-creator-box">
+                <h3><i class="fas fa-pen-nib"></i> একটি শুভকামনা পোস্ট করুন</h3>
+                <input type="text" id="userName" class="post-input" placeholder="আপনার নাম...">
+                <textarea id="userMsg" class="post-textarea" placeholder="আপনার সুন্দর বার্তা বা স্মৃতি লিখুন..."></textarea>
+                <button class="post-btn" onclick="addNewNote()"><i class="fas fa-paper-plane"></i> বোর্ডে পিন করুন</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // TARGET LOCK TIME: 06-09-2026 1:20 PM (Bangladesh Time Offset: +06:00)
+        const TARGET_DATE = new Date("2026-09-06T13:20:00+06:00").getTime();
+
+        // 1. COUNTDOWN TIMER LOGIC
+        const countdownOverlay = document.getElementById("countdown-overlay");
+        const mainContent = document.getElementById("main-content");
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const difference = TARGET_DATE - now;
+
+            if (difference <= 0) {
+                clearInterval(timerInterval);
+                unlockWebsite();
+            } else {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+        }, 1000);
+
+        // Function to Unlock Website & Play Intro Banner
+        function unlockWebsite() {
+            countdownOverlay.style.display = "none";
+            const introBanner = document.getElementById("intro-banner");
+            introBanner.style.display = "flex";
+
+            // Confetti Blast
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+
+            // Hide 3D Banner after 4 seconds and load Main Content
+            setTimeout(() => {
+                introBanner.style.fadeOut = "0.8s";
+                setTimeout(() => {
+                    introBanner.style.display = "none";
+                    mainContent.style.display = "block";
+                    initBillboard();
+                    initPinboard();
+                }, 800);
+            }, 3500);
+        }
+
+        // 2. iOS DYNAMIC ISLAND TOGGLE
+        function toggleIsland() {
+            const island = document.getElementById("dynamicIsland");
+            island.classList.toggle("expanded");
+        }
+
+        // 3. 3D BILLBOARD CAROUSEL LOGIC
+        const billboardData = [
+            { text: "Happy Birthday Disha 🎉", img: "images/pic1.jpg" },
+            { text: "You Make Every Moment Magical ✨", img: "images/pic2.jpg" },
+            { text: "Forever & Always With You ❤️", img: "images/pic3.jpg" },
+            { text: "May Your Dreams Come True 🌟", img: "images/pic4.jpg" },
+            { text: "Stay Happy & Blessed Always 🌸", img: "images/pic5.jpg" }
+        ];
+
+        let billboardIndex = 0;
+        function initBillboard() {
+            const card = document.getElementById("billboardCard");
+            const textEl = document.getElementById("billboardText");
+            const imgEl = document.getElementById("billboardImg");
+
+            function updateSlide() {
+                card.style.transform = "rotateY(90deg)";
+                setTimeout(() => {
+                    const current = billboardData[billboardIndex];
+                    textEl.innerText = current.text;
+                    imgEl.src = current.img;
+                    imgEl.style.display = "block";
+                    imgEl.onerror = () => { imgEl.src = `https://picsum.photos/500/300?random=${billboardIndex}`; };
+                    card.style.transform = "rotateY(0deg)";
+                    billboardIndex = (billboardIndex + 1) % billboardData.length;
+                }, 400);
+            }
+
+            updateSlide();
+            setInterval(updateSlide, 5000); // 5 Seconds interval
+        }
+
+        // 4. MEMORY PINBOARD (10 SEPARATE IMAGES)
+        const staticMemories = [
+            { img: "images/pic1.jpg", title: "Memory #1", desc: "প্রথম দেখার সুন্দর মুহূর্ত ❤️" },
+            { img: "images/pic2.jpg", title: "Memory #2", desc: "মিষ্টি এক চিলতে হাসি ✨" },
+            { img: "images/pic3.jpg", title: "Memory #3", desc: "একসাথে কাটানো সেই বিকেল 🌆" },
+            { img: "images/pic4.jpg", title: "Memory #4", desc: "অফুরন্ত গল্প আর আনন্দ 🌸" },
+            { img: "images/pic5.jpg", title: "Memory #5", desc: "বিশেষ স্মৃতির ফ্রেম 📸" },
+            { img: "images/pic6.jpg", title: "Memory #6", desc: "সুন্দর মুহূর্তের মিষ্টি গল্প ❤️" },
+            { img: "images/pic7.jpg", title: "Memory #7", desc: "তোমার ওই নিষ্পাপ চোখ 👀" },
+            { img: "images/pic8.jpg", title: "Memory #8", desc: "এক সাথে চলার পথ 🛣️" },
+            { img: "images/pic9.jpg", title: "Memory #9", desc: "প্রিয় এক সন্ধ্যার স্মৃতি 🌙" },
+            { img: "images/pic10.jpg", title: "Memory #10", desc: "চিরদিন থেকো আমার হয়ে ✨" }
+        ];
+
+        function initPinboard() {
+            const grid = document.getElementById("pinboardGrid");
+            staticMemories.forEach((item, i) => {
+                const note = document.createElement("div");
+                note.className = "sticky-note";
+                note.innerHTML = `
+                    <img src="${item.img}" onerror="this.src='https://picsum.photos/300/200?random=${i+1}';">
+                    <div class="note-title">${item.title}</div>
+                    <div class="note-desc">${item.desc}</div>
+                `;
+                grid.appendChild(note);
+            });
+        }
+
+        // Add Interactive Note Post
+        function addNewNote() {
+            const name = document.getElementById("userName").value.trim();
+            const msg = document.getElementById("userMsg").value.trim();
+
+            if (!name || !msg) {
+                alert("দয়া করে নাম এবং বার্তা দুইটিই লিখুন!");
+                return;
+            }
+
+            const grid = document.getElementById("pinboardGrid");
+            const note = document.createElement("div");
+            note.className = "sticky-note";
+            note.style.background = "#e1f5fe"; // Light blue for user post
+            note.innerHTML = `
+                <div class="note-title"><i class="fas fa-comment"></i> ${name}</div>
+                <div class="note-desc">"${msg}"</div>
+                <small style="display:block; margin-top:8px; font-size:0.7rem; color:#888;">Just now</small>
+            `;
+            grid.prepend(note);
+
+            // Reset inputs
+            document.getElementById("userName").value = "";
+            document.getElementById("userMsg").value = "";
+            alert("আপনার নোটটি বোর্ডে পিন করা হয়েছে!");
+        }
+
+        // 5. 3D STARFALL CANVAS ANIMATION
+        const canvas = document.getElementById("star-canvas");
+        const ctx = canvas.getContext("2d");
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 90; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ffffff";
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+                star.y += star.speed;
+                if (star.y > canvas.height) star.y = 0;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+    </script>
+</body>
+</html>
