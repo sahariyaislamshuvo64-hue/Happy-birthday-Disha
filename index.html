@@ -45,7 +45,7 @@
             pointer-events: none;
         }
 
-        /* --- COUNTDOWN LOCK SCREEN --- */
+        /* Countdown Screen */
         #countdown-screen {
             position: fixed;
             inset: 0;
@@ -80,7 +80,7 @@
             color: #ff4757;
         }
 
-        /* --- 3D INTRO BANNER --- */
+        /* 3D Intro Banner */
         #banner-3d {
             position: fixed;
             inset: 0;
@@ -108,7 +108,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* --- MAIN CONTENT & NAVIGATION --- */
+        /* Main Content */
         #main-content {
             display: none;
             padding-bottom: 50px;
@@ -157,7 +157,6 @@
             gap: 10px;
         }
 
-        /* Profile Section */
         .profile-section {
             text-align: center;
             padding-top: 90px;
@@ -177,7 +176,7 @@
             margin-top: 15px;
         }
 
-        /* 3D Billboard Carousel */
+        /* Billboard */
         .billboard-container {
             width: 90%;
             max-width: 650px;
@@ -220,19 +219,6 @@
             border-radius: 16px;
         }
 
-        /* Letter Section */
-        .letter-container {
-            width: 90%;
-            max-width: 800px;
-            margin: 40px auto;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            line-height: 1.8;
-        }
-
         /* Video Section */
         .video-container {
             width: 90%;
@@ -248,60 +234,23 @@
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 16px;
             margin-top: 15px;
         }
 
-        .video-wrapper video, .video-wrapper iframe {
+        .video-wrapper video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
             border-radius: 16px;
         }
 
-        /* Pinboard Section */
-        .pinboard-container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border: 2px dashed rgba(255,255,255,0.3);
-            border-radius: 30px;
-            padding: 25px;
-        }
-
-        .pinboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .sticky-note {
-            background: #fff9c4;
-            color: #333;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .sticky-note img {
-            width: 100%;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        /* Wishes Section (5 Profiles) */
+        /* Wishes Section */
         .wishes-container {
             width: 90%;
             max-width: 800px;
@@ -342,7 +291,55 @@
             line-height: 1.5;
         }
 
-        /* Action Buttons */
+        /* Letter Section */
+        .letter-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            line-height: 1.8;
+        }
+
+        /* Pinboard Section */
+        .pinboard-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 30px;
+            padding: 25px;
+        }
+
+        .pinboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .sticky-note {
+            background: #fff9c4;
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .sticky-note img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
         .action-btn {
             background: linear-gradient(45deg, #ff4757, #ff6b81);
             border: none;
@@ -397,7 +394,7 @@
         </nav>
 
         <section class="profile-section" id="profile">
-            <img src="20260321_120031.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.src='https://picsum.photos/200'">
+            <img src="images/20260321_120031.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.src='https://picsum.photos/200'">
             <h1 class="profile-title">Happy Birthday Disha ❤️</h1>
         </section>
 
@@ -425,40 +422,40 @@
             <div class="wish-card">
                 <img src="images/friend1.jpg" alt="Wish 1" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=1'">
                 <div class="wish-content">
-                    <h4>সুমাইয়া (sumaiya)</h4>
-                    <p>"শুভ জন্মদিন দিশা ভাবি! আপনার আগামী দিনগুলো হাসি-আনন্দে ভরে উঠুক। সবসময় এমন হাসিখুশি থাকবেন!"</p>
+                    <h4>রিহান ভাই (Rihan vai)</h4>
+                    <p>"শুভ জন্মদিন দিশা ভাবি! আপনার শুভকামনায় সবসময় আমরা আছি। আজকের দিনটি অনেক আনন্দে কাটুক!"</p>
                 </div>
             </div>
 
             <div class="wish-card">
                 <img src="images/friend2.jpg" alt="Wish 2" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=5'">
                 <div class="wish-content">
-                    <h4>শিহাব  (Sihab)</h4>
-                    <p>"Happy Birthday Disha! Life a অনাবিল আনন্দ আর সফলতা নেমে আসুক। Have a blast today!"</p>
+                    <h4>আব্দুল্লাহ (Abdullah)</h4>
+                    <p>"Happy Birthday Disha! জীবনের প্রতিটি পদক্ষেপে অনেক সফলতা ও আনন্দ নেমে আসুক। Have a great day!"</p>
                 </div>
             </div>
 
             <div class="wish-card">
                 <img src="images/friend3.jpg" alt="Wish 3" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=8'">
                 <div class="wish-content">
-                    <h4> আব্দুল্লাহ (Abdullah )</h4>
-                    <p>"শুভ জন্মদিন! ভাই আর তোমার এই সুন্দর বন্ধন সারাজীবন অটুট থাকুক। Enjoy your special day!"</p>
+                    <h4>লামিয়া (Lamia)</h4>
+                    <p>"শুভ জন্মদিন প্রিয় দিশা! সারাজীবন এভাবেই হাসিখুশি থেকো। আজকের দিনটা তোমার জন্য অনেক স্পেশাল!"</p>
                 </div>
             </div>
 
             <div class="wish-card">
                 <img src="images/friend4.jpg" alt="Wish 4" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=9'">
                 <div class="wish-content">
-                    <h4>লামিয়া (lamia)</h4>
-                    <p>"Many many happy returns of the day dear! Stay blessed and happy always!"</p>
+                    <h4>শিহাব (Sihab)</h4>
+                    <p>"Many many happy returns of the day! Stay blessed and happy always!"</p>
                 </div>
             </div>
 
             <div class="wish-card">
                 <img src="images/friend5.jpg" alt="Wish 5" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=12'">
                 <div class="wish-content">
-                    <h4>Rihan vai(Rihan vai)</h4>
-                    <p>"শুভ জন্মদিন দিশা! আজকের দিনটা তোমার জন্য অনেক স্পেশাল আর স্মৃতিময় হয়ে থাকুক!"</p>
+                    <h4>আব্দুল্লাহ (Abdullah)</h4>
+                    <p>"শুভ জন্মদিন দিশা! তোমার আগামী দিনগুলো আরও সুন্দর ও রঙিন হয়ে উঠুক!"</p>
                 </div>
             </div>
         </section>
@@ -487,7 +484,7 @@
     </div>
 
     <script>
-        // Countdown Logic (Target: 06-09-2026 1:20 PM)
+        // Target Date: 06-09-2026 1:20 PM
         const targetDate = new Date("September 6, 2026 13:20:00").getTime();
 
         const countdownInterval = setInterval(() => {
@@ -530,19 +527,53 @@
             nav.style.display = nav.style.display === "flex" ? "none" : "flex";
         }
 
-        // Gallery & Sticky Notes Logic (30 Photos)
-        const photoGallery = Array.from({length: 30}, (_, i) => `images/${i + 1}.jpg`);
+        // List of 30 exact image files provided
+        const photoGallery = [
+            "FB_IMG_1755072234905.jpg",
+            "FB_IMG_1758384891305.jpg",
+            "IMG-20241115-WA0015~3.jpg",
+            "IMG-20250518-WA0065.jpg",
+            "IMG-20250629-WA0000.jpg",
+            "IMG-20250629-WA0020.jpg",
+            "IMG-20250630-WA0001.jpg",
+            "IMG-20250921-WA0007.jpg",
+            "IMG_1718467955702.jpg",
+            "IMG_1756393251764.jpg",
+            "IMG_1758384847409.jpg",
+            "Messenger_creation_008D4634-712F-4B07-A0FE-E38382F02FA1.jpeg",
+            "Messenger_creation_0ABBDCC0-762F-4E46-A43F-CAF86CBE9B2C.jpeg",
+            "Messenger_creation_9B76B2B3-5CCA-4DF5-A6C8-3AEF9861B73F.jpeg",
+            "Messenger_creation_B23C9E01-B61A-4AF5-9E8F-8E359C7E43A9.jpeg",
+            "Messenger_creation_F8E1372F-15B3-4B88-AA16-9EF15FE8B91E.jpeg",
+            "Messenger_creation_FB351AF0-F050-4AB5-9D76-89B076180C28~2.jpeg",
+            "Screenshot_20240614-130150~2.jpg",
+            "Screenshot_20240614-130609~2.jpg",
+            "Screenshot_20240823-154950~2.jpg",
+            "Screenshot_20240921-125122~2.jpg",
+            "Screenshot_20250111-120355~2.jpg",
+            "Screenshot_20250501-144233.jpg",
+            "Screenshot_20250508-152816.jpg",
+            "Screenshot_20250528-094823.jpg",
+            "Screenshot_20250706-144032.jpg",
+            "Screenshot_20250924-174952.jpg",
+            "Screenshot_20251005-181223.jpg",
+            "Screenshot_20251012-143302.jpg",
+            "Snapchat-1167169927.jpg"
+        ];
+
         const billboard = document.getElementById("billboard");
         const pinboardGrid = document.getElementById("pinboard-grid");
 
-        photoGallery.forEach((src, idx) => {
-            // Billboard images
+        photoGallery.forEach((filename, idx) => {
+            const src = `images/${filename}`;
+
+            // Billboard Slide
             const slide = document.createElement("div");
             slide.className = "billboard-slide";
             slide.innerHTML = `<img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">`;
             billboard.appendChild(slide);
 
-            // Sticky Note
+            // Sticky Note Slide
             const note = document.createElement("div");
             note.className = "sticky-note";
             note.innerHTML = `
@@ -553,7 +584,6 @@
             pinboardGrid.appendChild(note);
         });
 
-        // Billboard Rotation
         let currentSlide = 0;
         const slides = document.querySelectorAll(".billboard-slide");
         setTimeout(() => {
@@ -567,7 +597,6 @@
             }, 3000);
         }, 5000);
 
-        // Background Star Effect
         function initStars() {
             const canvas = document.getElementById("star-canvas");
             const ctx = canvas.getContext("2d");
@@ -596,7 +625,6 @@
             animateStars();
         }
 
-        // Facebook Capture Share
         function shareToFacebook() {
             html2canvas(document.body).then(canvas => {
                 const link = document.createElement('a');
