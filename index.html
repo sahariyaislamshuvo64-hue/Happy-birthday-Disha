@@ -766,5 +766,43 @@
         }
         drawStars();
     </script>
+    <div class="custom-video-container">
+  <video class="custom-video-player" id="myVideo" preload="metadata" poster="https://via.placeholder.com/800x450/111827/ffffff?text=Video+Thumbnail">
+    <!-- আপনার ভিডিওর লিংক এখানে বসান -->
+    <source src="your-video-file.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Big Central Play Button -->
+  <button class="big-play-btn" id="bigPlayBtn" aria-label="Play Video">
+    <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+
+  <!-- Video Controls Overlay -->
+  <div class="video-controls" id="videoControls">
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="controls-main">
+      <div class="controls-left">
+        <button class="control-btn" id="playPauseBtn" aria-label="Play/Pause">
+          <svg class="icon play-svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon pause-svg hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+
+        <div class="time-display">
+          <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls-right">
+        <button class="control-btn" id="fullscreenBtn" aria-label="Fullscreen">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+    </div>
 </body>
 </html>
