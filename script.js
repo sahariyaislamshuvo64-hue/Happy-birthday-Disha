@@ -1,53 +1,5 @@
-
-const photoGallery = Array.from({length: 30}, (_, i) => 
-    `https://picsum.photos/400/300?random=${i + 1}`
-);
-
-// Target Date: 06-09-2026 1:20 PM
-const targetDate = new Date("September 6, 2026 13:20:00").getTime();
-
-const countdownInterval = setInterval(() => {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    if (difference <= 0) {
-        clearInterval(countdownInterval);
-        document.getElementById("countdown-screen").style.display = "none";
-        trigger3DBanner();
-    } else {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-    }
-}, 1000);
-
-function trigger3DBanner() {
-    const banner = document.getElementById("banner-3d");
-    banner.style.display = "flex";
-    setTimeout(() => {
-        banner.style.opacity = "0";
-        setTimeout(() => {
-            banner.style.display = "none";
-            document.getElementById("main-content").style.display = "block";
-            initStars();
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        }, 1000);
-    }, 4000);
-}
-
-function toggleNav() {
-    const nav = document.getElementById("navLinks");
-    nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-}
-
-// তোর দেওয়া নির্দিষ্ট ৩০টি ছবির নামের অ্যারো
-const photoGallery = [
+// Array of 35 Image Names
+const pinImages = [
     "FB_IMG_1755072234905.jpg",
     "FB_IMG_1758384891305.jpg",
     "IMG-20241115-WA0015~3.jpg",
@@ -77,78 +29,37 @@ const photoGallery = [
     "Screenshot_20250924-174952.jpg",
     "Screenshot_20251005-181223.jpg",
     "Screenshot_20251012-143302.jpg",
-    "Snapchat-1167169927.jpg"
+    "Snapchat-1167169927.jpg",
+    "Snapchat-1635970030.jpg",
+    "Snapchat-1790199894.jpg",
+    "Snapchat-562710592.jpg",
+    "Snapchat-860467066~2.jpg",
+    "received_1164893104479408.jpeg"
 ];
 
-const billboard = document.getElementById("billboard");
-const pinboardGrid = document.getElementById("pinboard-grid");
+// Generate Memory Pinboard Cards Dynamically
+function renderMemoryPinboard() {
+    const gridContainer = document.getElementById("pinboard-grid");
+    if (!gridContainer) return;
 
-photoGallery.forEach((filename, idx) => {
-    const src = `images/${filename}`;
+    gridContainer.innerHTML = "";
 
-    // Billboard Slide
-    const slide = document.createElement("div");
-    slide.className = "billboard-slide";
-    slide.innerHTML = `<img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">`;
-    billboard.appendChild(slide);
+    pinImages.forEach((filename, idx) => {
+        const imagePath = `images/${filename}`;
 
-    // Sticky Note Slide
-    const note = document.createElement("div");
-    note.className = "sticky-note";
-    note.innerHTML = `
-        <img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">
-        <p><strong>Memory #${idx + 1}</strong></p>
-        <p style="font-size: 0.8rem;">Forever Together ❤️</p>
-    `;
-    pinboardGrid.appendChild(note);
-});
-
-let currentSlide = 0;
-const slides = document.querySelectorAll(".billboard-slide");
-setTimeout(() => {
-    slides[0].classList.remove("active");
-    currentSlide = 1;
-    slides[currentSlide].classList.add("active");
-    setInterval(() => {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add("active");
-    }, 3000);
-}, 5000);
-
-function initStars() {
-    const canvas = document.getElementById("star-canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const stars = Array.from({length: 80}, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2,
-        speed: Math.random() * 0.5 + 0.2
-    }));
-
-    function animateStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#ffffff";
-        stars.forEach(star => {
-            ctx.beginPath();
-            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-            ctx.fill();
-            star.y += star.speed;
-            if (star.y > canvas.height) star.y = 0;
-        });
-        requestAnimationFrame(animateStars);
-    }
-    animateStars();
-}
-
-function shareToFacebook() {
-    html2canvas(document.body).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'Disha-Birthday-Special.png';
-        link.href = canvas.toDataURL();
-        link.click();
+        const noteCard = document.createElement("div");
+        noteCard.className = "sticky-note";
+        noteCard.innerHTML = `
+            <img src="${imagePath}" alt="Memory ${idx + 1}" onerror="this.onerror=null; this.src='https://picsum.photos/400/300?random=${idx + 10}';">
+            <div class="note-typography">
+                <div class="note-line-1">Memory #${idx + 1}</div>
+                <div class="note-line-2">বিশেষ একটি মুহূর্ত ❤️</div>
+                <div class="note-line-3">Forever in my heart</div>
+            </div>
+        `;
+        gridContainer.appendChild(noteCard);
     });
 }
+
+// Call on load
+document.addEventListener("DOMContentLoaded", renderMemoryPinboard);
