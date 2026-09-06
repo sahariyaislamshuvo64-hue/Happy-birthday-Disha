@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Disha ❤️</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- External JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
@@ -200,12 +202,12 @@
         }
 
         .profile-avatar {
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
-            border: 4px solid rgba(255,255,255,0.8);
+            border: 4px solid var(--accent-pink);
             object-fit: cover;
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.6);
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.7);
         }
 
         .profile-title {
@@ -345,51 +347,95 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* --- MEMORY PINBOARD SECTION --- */
+        /* --- MEMORY PINBOARD SECTION (30 PINS) --- */
         .pinboard-container {
             width: 90%;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 40px auto;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            border: 2px dashed rgba(255,255,255,0.3);
+            border: 2px dashed rgba(255, 255, 255, 0.25);
             border-radius: 30px;
             padding: 25px;
         }
 
         .pinboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
         }
 
+        /* Dynamic Sticky Note Styling */
         .sticky-note {
-            background: #fff8c5;
+            background: #fffdf0;
             color: #222;
-            padding: 12px;
+            padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             position: relative;
-            transform: rotate(-1deg);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .sticky-note:nth-child(even) {
-            transform: rotate(2deg);
+        /* Real Pin Design */
+        .sticky-note::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            background: #ff4757;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            z-index: 2;
         }
+
+        .sticky-note:nth-child(3n+1) { transform: rotate(-2deg); background: #fff8c5; }
+        .sticky-note:nth-child(3n+2) { transform: rotate(1.5deg); background: #ffeaa7; }
+        .sticky-note:nth-child(3n+3) { transform: rotate(-1deg); background: #ffffff; }
 
         .sticky-note:hover {
-            transform: scale(1.05) rotate(0deg);
+            transform: scale(1.06) rotate(0deg);
             z-index: 10;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         }
 
         .sticky-note img {
             width: 100%;
-            height: 120px;
+            height: 160px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* 3-Line Typography Layout */
+        .note-typography {
+            text-align: center;
+        }
+
+        .note-line-1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ff4757;
+            margin-bottom: 3px;
+        }
+
+        .note-line-2 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+            line-height: 1.2;
+        }
+
+        .note-line-3 {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #666;
+            font-style: italic;
         }
 
         .action-btn {
@@ -414,6 +460,9 @@
                 flex-direction: column;
                 text-align: center;
             }
+            .pinboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
         }
     </style>
 </head>
@@ -421,8 +470,10 @@
 
     <canvas id="star-canvas"></canvas>
 
+    <!-- FLOATING HEARTS CONTAINER -->
     <div id="hearts-container"></div>
 
+    <!-- 1. COUNTDOWN LOCK SCREEN -->
     <div id="countdown-screen">
         <h2 class="countdown-title">🎉 Waiting for Disha's Birthday 🎉</h2>
         <div class="timer-box">
@@ -433,6 +484,7 @@
         </div>
     </div>
 
+    <!-- 2. 3D INTRO BANNER -->
     <div id="banner-3d">
         <div class="banner-card">
             <h1 style="font-size: 2.2rem;">✨ Happy Birthday ✨</h1>
@@ -440,6 +492,7 @@
         </div>
     </div>
 
+    <!-- 3. MAIN WEBSITE CONTENT -->
     <div id="main-content">
         
         <nav class="navbar">
@@ -448,15 +501,17 @@
                 <a href="#profile"><i class="fas fa-home"></i> Home</a>
                 <a href="#video-section"><i class="fas fa-video"></i> Video</a>
                 <a href="#wishes-section"><i class="fas fa-heart"></i> Wishes</a>
-                <a href="#pinboard"><i class="fas fa-images"></i> Gallery</a>
+                <a href="#pinboard"><i class="fas fa-thumbtack"></i> Pin Gallery</a>
             </div>
         </nav>
 
+        <!-- Main Profile (Exact Image Set) -->
         <section class="profile-section" id="profile">
             <img src="images/20260321_120031.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.src='https://picsum.photos/200'">
             <h1 class="profile-title">Happy Birthday Disha ❤️</h1>
         </section>
 
+        <!-- 3D Billboard Carousel -->
         <div class="billboard-container">
             <div class="billboard" id="billboard">
                 <div class="billboard-slide active">
@@ -465,6 +520,7 @@
             </div>
         </div>
 
+        <!-- Birthday Video Section -->
         <section id="video-section" class="video-container">
             <h2>🎬 Special Birthday Video 🎬</h2>
             <div class="video-wrapper">
@@ -475,6 +531,7 @@
             </div>
         </section>
 
+        <!-- 5 Friends Wish Profiles Section -->
         <section id="wishes-section" class="wishes-container">
             <h2 style="text-align: center; margin-bottom: 25px;"><i class="fas fa-comments"></i> Birthday Wishes</h2>
             
@@ -519,6 +576,7 @@
             </div>
         </section>
 
+        <!-- Special Love Letter Section -->
         <section id="letter" class="letter-container">
             <h2 style="text-align: center; color: #ff6b81; margin-bottom: 15px;"><i class="fas fa-heart"></i> A Letter For You</h2>
             <p>
@@ -529,8 +587,10 @@
             </p>
         </section>
 
+        <!-- Memory Pinboard Section (All 30 Pictures Embedded) -->
         <section id="pinboard" class="pinboard-container">
-            <h2 style="text-align: center; margin-bottom: 20px;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
+            <h2 style="text-align: center; margin-bottom: 10px;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
+            <p style="text-align: center; opacity: 0.8; font-size: 0.95rem;">৩০টি সুন্দর মুহূর্তের সংগ্রহশালা</p>
             <div class="pinboard-grid" id="pinboard-grid"></div>
         </section>
 
@@ -542,8 +602,9 @@
 
     </div>
 
+    <!-- JavaScript Script -->
     <script>
-        // Countdown Target Date
+        // Target Countdown Date
         const targetDate = new Date("September 6, 2026 13:20:00").getTime();
 
         const countdownInterval = setInterval(() => {
@@ -587,7 +648,7 @@
             nav.style.display = nav.style.display === "flex" ? "none" : "flex";
         }
 
-        // List of 30 exact image files provided
+        // List of exactly 30 images provided in uploaded folder
         const photoGallery = [
             "FB_IMG_1755072234905.jpg",
             "FB_IMG_1758384891305.jpg",
@@ -627,37 +688,43 @@
         photoGallery.forEach((filename, idx) => {
             const src = `images/${filename}`;
 
-            // Billboard Slide
+            // 1. Billboard Slide
             const slide = document.createElement("div");
             slide.className = "billboard-slide";
             slide.innerHTML = `<img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">`;
             billboard.appendChild(slide);
 
-            // Sticky Note Slide
+            // 2. Pinboard Sticky Note with 3-Line Typography
             const note = document.createElement("div");
             note.className = "sticky-note";
             note.innerHTML = `
                 <img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">
-                <p><strong>Memory #${idx + 1}</strong></p>
-                <p style="font-size: 0.8rem;">Forever Together ❤️</p>
+                <div class="note-typography">
+                    <div class="note-line-1">Memory #${idx + 1}</div>
+                    <div class="note-line-2">বিশেষ একটি মুহূর্ত ❤️</div>
+                    <div class="note-line-3">Forever in my heart</div>
+                </div>
             `;
             pinboardGrid.appendChild(note);
         });
 
+        // Billboard Auto-Slide
         let currentSlide = 0;
         const slides = document.querySelectorAll(".billboard-slide");
         setTimeout(() => {
-            slides[0].classList.remove("active");
-            currentSlide = 1;
-            slides[currentSlide].classList.add("active");
-            setInterval(() => {
-                slides[currentSlide].classList.remove("active");
-                currentSlide = (currentSlide + 1) % slides.length;
+            if(slides.length > 1) {
+                slides[0].classList.remove("active");
+                currentSlide = 1;
                 slides[currentSlide].classList.add("active");
-            }, 3000);
+                setInterval(() => {
+                    slides[currentSlide].classList.remove("active");
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add("active");
+                }, 3000);
+            }
         }, 5000);
 
-        // Canvas Stars Logic
+        // Canvas Stars Animation
         function initStars() {
             const canvas = document.getElementById("star-canvas");
             const ctx = canvas.getContext("2d");
@@ -700,7 +767,7 @@
             }, 600);
         }
 
-        // Share to FB
+        // Share to Facebook
         function shareToFacebook() {
             html2canvas(document.body).then(canvas => {
                 const link = document.createElement('a');
