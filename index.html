@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Disha ❤️</title>
     
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- External JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
@@ -17,8 +15,8 @@
         :root {
             --primary-pink: #ff4757;
             --accent-pink: #ff6b81;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --text-color: #ffffff;
         }
 
@@ -31,27 +29,11 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e0538 0%, #431259 50%, #6c1361 100%);
+            background: linear-gradient(135deg, #0f0c20 0%, #2b1055 50%, #59124e 100%);
             color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-        }
-
-        /* Floating Background Hearts */
-        .heart-particle {
-            position: fixed;
-            color: rgba(255, 107, 129, 0.4);
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatUp 8s linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         #star-canvas {
@@ -64,88 +46,23 @@
             pointer-events: none;
         }
 
-        /* --- COUNTDOWN LOCK SCREEN --- */
-        #countdown-screen {
+        /* Floating Hearts */
+        .heart-particle {
             position: fixed;
-            inset: 0;
-            background: rgba(10, 5, 20, 0.95);
-            backdrop-filter: blur(25px);
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
+            color: rgba(255, 107, 129, 0.5);
+            font-size: 22px;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 7s linear infinite;
         }
 
-        .countdown-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #ff6b81;
-            text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        .timer-box {
-            display: flex;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .time-unit {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--glass-border);
-            padding: 15px;
-            border-radius: 18px;
-            min-width: 75px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .time-unit span {
-            display: block;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary-pink);
-        }
-
-        /* --- 3D INTRO BANNER --- */
-        #banner-3d {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .banner-card {
-            width: 85%;
-            max-width: 500px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
-            text-align: center;
-            animation: flipIn 2s ease forwards;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        @keyframes flipIn {
-            0% { transform: scale(0.3) rotateY(90deg); opacity: 0; }
-            100% { transform: scale(1) rotateY(0deg); opacity: 1; }
-        }
-
-        /* --- MAIN CONTENT & NAVBAR --- */
-        #main-content {
-            display: none;
-            position: relative;
-            z-index: 1;
-            padding-bottom: 60px;
-        }
-
+        /* NAVBAR */
         .navbar {
             position: fixed;
             top: 20px;
@@ -154,22 +71,22 @@
         }
 
         .menu-btn {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             color: white;
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .nav-links {
             position: absolute;
             top: 55px;
             right: 0;
-            background: rgba(25, 10, 40, 0.9);
+            background: rgba(15, 10, 30, 0.95);
             backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
@@ -177,7 +94,7 @@
             display: none;
             flex-direction: column;
             gap: 10px;
-            width: 180px;
+            width: 190px;
         }
 
         .nav-links a {
@@ -195,33 +112,43 @@
             background: rgba(255, 71, 87, 0.3);
         }
 
-        /* --- PROFILE SECTION --- */
+        /* PROFILE SECTION */
         .profile-section {
             text-align: center;
-            padding-top: 90px;
+            padding-top: 100px;
+        }
+
+        .profile-card {
+            display: inline-block;
+            padding: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            box-shadow: 0 0 35px rgba(255, 71, 87, 0.5);
         }
 
         .profile-avatar {
-            width: 170px;
-            height: 170px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid var(--accent-pink);
             object-fit: cover;
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.7);
+            display: block;
         }
 
         .profile-title {
-            font-size: 2.3rem;
-            margin-top: 15px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-size: 2.5rem;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 129, 0.6);
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
-        /* --- 3D BILLBOARD CAROUSEL --- */
+        /* 3D BILLBOARD CAROUSEL */
         .billboard-container {
             width: 90%;
-            max-width: 650px;
-            height: 320px;
-            margin: 30px auto;
+            max-width: 700px;
+            height: 350px;
+            margin: 40px auto;
         }
 
         .billboard {
@@ -229,14 +156,14 @@
             height: 100%;
             position: relative;
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
             border: 1px solid var(--glass-border);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .billboard-slide {
@@ -246,7 +173,7 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1s ease-in-out;
             padding: 15px;
             text-align: center;
         }
@@ -257,21 +184,21 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 16px;
+            border-radius: 20px;
         }
 
-        /* --- VIDEO SECTION --- */
+        /* VIDEO SECTION */
         .video-container {
             width: 90%;
             max-width: 800px;
-            margin: 40px auto;
+            margin: 50px auto;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .video-wrapper {
@@ -279,8 +206,8 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 16px;
-            margin-top: 15px;
+            border-radius: 18px;
+            margin-top: 18px;
         }
 
         .video-wrapper video {
@@ -289,152 +216,151 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 16px;
         }
 
-        /* --- WISHES SECTION --- */
+        /* WISHES SECTION */
         .wishes-container {
             width: 90%;
-            max-width: 800px;
-            margin: 40px auto;
+            max-width: 850px;
+            margin: 50px auto;
         }
 
         .wish-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 24px;
+            padding: 22px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            gap: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .wish-avatar {
-            width: 75px;
-            height: 75px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary-pink);
+            border: 3px solid var(--primary-pink);
             flex-shrink: 0;
         }
 
         .wish-content h4 {
             color: #ff6b81;
-            font-size: 1.25rem;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
         }
 
         .wish-content p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             opacity: 0.95;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* --- LETTER SECTION --- */
+        /* LETTER SECTION */
         .letter-container {
             width: 90%;
-            max-width: 800px;
-            margin: 40px auto;
+            max-width: 850px;
+            margin: 50px auto;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 28px;
+            padding: 35px;
+            line-height: 1.9;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            font-size: 1.05rem;
         }
 
-        /* --- MEMORY PINBOARD SECTION (30 PINS) --- */
+        /* MEMORY PINBOARD (30 PICTURES) */
         .pinboard-container {
             width: 90%;
             max-width: 1100px;
-            margin: 40px auto;
+            margin: 50px auto;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 2px dashed rgba(255, 255, 255, 0.25);
-            border-radius: 30px;
-            padding: 25px;
+            border-radius: 32px;
+            padding: 30px;
         }
 
         .pinboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            gap: 22px;
             margin-top: 25px;
         }
 
-        /* Dynamic Sticky Note Styling */
         .sticky-note {
-            background: #fffdf0;
+            background: #ffffff;
             color: #222;
             padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             position: relative;
             transition: all 0.3s ease;
         }
 
-        /* Real Pin Design */
+        /* Red Push Pin Header */
         .sticky-note::before {
             content: '';
             position: absolute;
             top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             background: #ff4757;
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
             z-index: 2;
         }
 
-        .sticky-note:nth-child(3n+1) { transform: rotate(-2deg); background: #fff8c5; }
-        .sticky-note:nth-child(3n+2) { transform: rotate(1.5deg); background: #ffeaa7; }
-        .sticky-note:nth-child(3n+3) { transform: rotate(-1deg); background: #ffffff; }
+        .sticky-note:nth-child(3n+1) { transform: rotate(-2.5deg); background: #fffde7; }
+        .sticky-note:nth-child(3n+2) { transform: rotate(2deg); background: #fff0f5; }
+        .sticky-note:nth-child(3n+3) { transform: rotate(-1.5deg); background: #f0f8ff; }
 
         .sticky-note:hover {
-            transform: scale(1.06) rotate(0deg);
+            transform: scale(1.08) rotate(0deg);
             z-index: 10;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         .sticky-note img {
             width: 100%;
-            height: 160px;
+            height: 165px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 12px;
+            background-color: #eee;
         }
 
-        /* 3-Line Typography Layout */
+        /* 3-LINE TYPOGRAPHY */
         .note-typography {
             text-align: center;
         }
 
         .note-line-1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #ff4757;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .note-line-2 {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 3px;
-            line-height: 1.2;
+            color: #2c3e50;
+            margin-bottom: 4px;
         }
 
         .note-line-3 {
             font-size: 0.8rem;
             font-weight: 400;
-            color: #666;
+            color: #7f8c8d;
             font-style: italic;
         }
 
@@ -442,17 +368,17 @@
             background: linear-gradient(45deg, #ff4757, #ff6b81);
             border: none;
             color: white;
-            padding: 14px 28px;
-            font-size: 1.1rem;
+            padding: 15px 32px;
+            font-size: 1.15rem;
             font-weight: 600;
-            border-radius: 30px;
+            border-radius: 35px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
             transition: 0.3s;
         }
 
         .action-btn:hover {
-            transform: translateY(-2deg);
+            transform: translateY(-3deg);
         }
 
         @media (max-width: 600px) {
@@ -469,30 +395,8 @@
 <body>
 
     <canvas id="star-canvas"></canvas>
-
-    <!-- FLOATING HEARTS CONTAINER -->
     <div id="hearts-container"></div>
 
-    <!-- 1. COUNTDOWN LOCK SCREEN -->
-    <div id="countdown-screen">
-        <h2 class="countdown-title">🎉 Waiting for Disha's Birthday 🎉</h2>
-        <div class="timer-box">
-            <div class="time-unit"><span id="days">00</span>Days</div>
-            <div class="time-unit"><span id="hours">00</span>Hours</div>
-            <div class="time-unit"><span id="minutes">00</span>Min</div>
-            <div class="time-unit"><span id="seconds">00</span>Sec</div>
-        </div>
-    </div>
-
-    <!-- 2. 3D INTRO BANNER -->
-    <div id="banner-3d">
-        <div class="banner-card">
-            <h1 style="font-size: 2.2rem;">✨ Happy Birthday ✨</h1>
-            <h2 style="font-size: 3rem; color: #ff4757; margin-top: 10px;">DISHA ❤️</h2>
-        </div>
-    </div>
-
-    <!-- 3. MAIN WEBSITE CONTENT -->
     <div id="main-content">
         
         <nav class="navbar">
@@ -505,38 +409,36 @@
             </div>
         </nav>
 
-        <!-- Main Profile (Exact Image Set) -->
         <section class="profile-section" id="profile">
-            <img src="images/20260321_120031.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.src='https://picsum.photos/200'">
+            <div class="profile-card">
+                <img src="images/20260321_120031.jpg" alt="Disha Profile" class="profile-avatar" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500';">
+            </div>
             <h1 class="profile-title">Happy Birthday Disha ❤️</h1>
         </section>
 
-        <!-- 3D Billboard Carousel -->
         <div class="billboard-container">
             <div class="billboard" id="billboard">
                 <div class="billboard-slide active">
-                    <h2 style="font-size: 1.8rem;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.1rem; font-weight: 300;">Welcome to your special memory website!</span></h2>
+                    <h2 style="font-size: 1.9rem;">Happy Birthday Disha! 🎉<br><span style="font-size: 1.1rem; font-weight: 300;">Welcome to your special memory website!</span></h2>
                 </div>
             </div>
         </div>
 
-        <!-- Birthday Video Section -->
         <section id="video-section" class="video-container">
-            <h2>🎬 Special Birthday Video 🎬</h2>
+            <h2 style="font-size: 1.8rem;"><i class="fas fa-film"></i> Special Birthday Video</h2>
             <div class="video-wrapper">
-                <video controls poster="https://picsum.photos/800/450">
+                <video controls poster="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800">
                     <source src="videos/birthday.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+                    Your browser does not support video.
                 </video>
             </div>
         </section>
 
-        <!-- 5 Friends Wish Profiles Section -->
         <section id="wishes-section" class="wishes-container">
-            <h2 style="text-align: center; margin-bottom: 25px;"><i class="fas fa-comments"></i> Birthday Wishes</h2>
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem;"><i class="fas fa-comments"></i> Birthday Wishes</h2>
             
             <div class="wish-card">
-                <img src="images/friend1.jpg" alt="Wish 1" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=1'">
+                <img src="images/friend1.jpg" class="wish-avatar" onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=11';">
                 <div class="wish-content">
                     <h4>রিহান ভাই (Rihan vai)</h4>
                     <p>"শুভ জন্মদিন দিশা ভাবি! আপনার আগামী দিনগুলো অনেক বেশি আনন্দ ও সুখে ভরে উঠুক।"</p>
@@ -544,7 +446,7 @@
             </div>
 
             <div class="wish-card">
-                <img src="images/friend2.jpg" alt="Wish 2" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=5'">
+                <img src="images/friend2.jpg" class="wish-avatar" onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=12';">
                 <div class="wish-content">
                     <h4>আব্দুল্লাহ (Abdullah)</h4>
                     <p>"Happy Birthday Disha! জীবনের প্রতিটি পদক্ষেপে অনেক সফলতা ও সুখ নেমে আসুক। Have a blast today!"</p>
@@ -552,7 +454,7 @@
             </div>
 
             <div class="wish-card">
-                <img src="images/friend3.jpg" alt="Wish 3" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=8'">
+                <img src="images/friend3.jpg" class="wish-avatar" onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=20';">
                 <div class="wish-content">
                     <h4>লামিয়া (Lamia)</h4>
                     <p>"শুভ জন্মদিন প্রিয় দিশা! সারাজীবন এভাবেই হাসিখুশি থেকো। আজকের দিনটা তোমার জন্য অনেক স্পেশাল!"</p>
@@ -560,7 +462,7 @@
             </div>
 
             <div class="wish-card">
-                <img src="images/friend4.jpg" alt="Wish 4" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=9'">
+                <img src="images/friend4.jpg" class="wish-avatar" onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=33';">
                 <div class="wish-content">
                     <h4>শিহাব (Sihab)</h4>
                     <p>"Many many happy returns of the day! Stay blessed and happy always!"</p>
@@ -568,7 +470,7 @@
             </div>
 
             <div class="wish-card">
-                <img src="images/friend5.jpg" alt="Wish 5" class="wish-avatar" onerror="this.src='https://i.pravatar.cc/150?img=12'">
+                <img src="images/friend5.jpg" class="wish-avatar" onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=60';">
                 <div class="wish-content">
                     <h4>আব্দুল্লাহ (Abdullah)</h4>
                     <p>"শুভ জন্মদিন দিশা! তোমার নতুন বছরটি যেন আরও সুন্দর ও রঙিন অভিজ্ঞতা দিয়ে ভরপুর থাকে!"</p>
@@ -576,9 +478,8 @@
             </div>
         </section>
 
-        <!-- Special Love Letter Section -->
         <section id="letter" class="letter-container">
-            <h2 style="text-align: center; color: #ff6b81; margin-bottom: 15px;"><i class="fas fa-heart"></i> A Letter For You</h2>
+            <h2 style="text-align: center; color: #ff6b81; margin-bottom: 20px;"><i class="fas fa-envelope-open-text"></i> A Letter For You</h2>
             <p>
                 প্রিয় দিশা,<br><br>
                 আজকের এই বিশেষ দিনে তোমাকে জানাই জন্মদিনের অসীম ভালোবাসা! তুমি আমার জীবনের আলো। তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার হৃদয়ে অত্যন্ত যত্নে জমা হয়ে আছে।
@@ -587,68 +488,34 @@
             </p>
         </section>
 
-        <!-- Memory Pinboard Section (All 30 Pictures Embedded) -->
         <section id="pinboard" class="pinboard-container">
-            <h2 style="text-align: center; margin-bottom: 10px;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
-            <p style="text-align: center; opacity: 0.8; font-size: 0.95rem;">৩০টি সুন্দর মুহূর্তের সংগ্রহশালা</p>
+            <h2 style="text-align: center; margin-bottom: 10px; font-size: 2rem;"><i class="fas fa-thumbtack"></i> Memory Pinboard</h2>
+            <p style="text-align: center; opacity: 0.85; margin-bottom: 20px;">৩০টি সুন্দর মুহূর্তের দারুণ সংগ্রহশালা</p>
             <div class="pinboard-grid" id="pinboard-grid"></div>
         </section>
 
-        <div style="text-align: center; margin-top: 30px;">
+        <div style="text-align: center; margin-top: 40px;">
             <button class="action-btn" style="background: #3b5998;" onclick="shareToFacebook()">
-                <i class="fab fa-facebook"></i> Capture & Share to Facebook
+                <i class="fab fa-facebook"></i> Share Special Moments
             </button>
         </div>
 
     </div>
 
-    <!-- JavaScript Script -->
     <script>
-        // Target Countdown Date
-        const targetDate = new Date("September 6, 2026 13:20:00").getTime();
-
-        const countdownInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
-
-            if (difference <= 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown-screen").style.display = "none";
-                trigger3DBanner();
-            } else {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = String(days).padStart(2, '0');
-                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-                document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-                document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-            }
-        }, 1000);
-
-        function trigger3DBanner() {
-            const banner = document.getElementById("banner-3d");
-            banner.style.display = "flex";
-            setTimeout(() => {
-                banner.style.opacity = "0";
-                setTimeout(() => {
-                    banner.style.display = "none";
-                    document.getElementById("main-content").style.display = "block";
-                    initStars();
-                    createFloatingHearts();
-                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-                }, 1000);
-            }, 4000);
-        }
+        // Init Background Animations Immediately
+        window.onload = () => {
+            initStars();
+            createFloatingHearts();
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        };
 
         function toggleNav() {
             const nav = document.getElementById("navLinks");
             nav.style.display = nav.style.display === "flex" ? "none" : "flex";
         }
 
-        // List of exactly 30 images provided in uploaded folder
+        // Exact List of 30 Images Provided
         const photoGallery = [
             "FB_IMG_1755072234905.jpg",
             "FB_IMG_1758384891305.jpg",
@@ -691,14 +558,14 @@
             // 1. Billboard Slide
             const slide = document.createElement("div");
             slide.className = "billboard-slide";
-            slide.innerHTML = `<img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">`;
+            slide.innerHTML = `<img src="${src}" onerror="this.onerror=null; this.src='https://picsum.photos/600/400?random=${idx+10}';">`;
             billboard.appendChild(slide);
 
-            // 2. Pinboard Sticky Note with 3-Line Typography
+            // 2. Memory Pin Note with 3-Line Typography
             const note = document.createElement("div");
             note.className = "sticky-note";
             note.innerHTML = `
-                <img src="${src}" onerror="this.src='https://picsum.photos/400/300?random=${idx}'">
+                <img src="${src}" onerror="this.onerror=null; this.src='https://picsum.photos/400/300?random=${idx+10}';">
                 <div class="note-typography">
                     <div class="note-line-1">Memory #${idx + 1}</div>
                     <div class="note-line-2">বিশেষ একটি মুহূর্ত ❤️</div>
@@ -708,30 +575,25 @@
             pinboardGrid.appendChild(note);
         });
 
-        // Billboard Auto-Slide
+        // Billboard Auto Slide
         let currentSlide = 0;
         const slides = document.querySelectorAll(".billboard-slide");
-        setTimeout(() => {
-            if(slides.length > 1) {
-                slides[0].classList.remove("active");
-                currentSlide = 1;
+        if(slides.length > 1) {
+            setInterval(() => {
+                slides[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add("active");
-                setInterval(() => {
-                    slides[currentSlide].classList.remove("active");
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add("active");
-                }, 3000);
-            }
-        }, 5000);
+            }, 3000);
+        }
 
-        // Canvas Stars Animation
+        // Stars Background
         function initStars() {
             const canvas = document.getElementById("star-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            const stars = Array.from({length: 70}, () => ({
+            const stars = Array.from({length: 80}, () => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 2,
@@ -763,11 +625,11 @@
                 heart.style.left = Math.random() * 100 + "vw";
                 heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
                 container.appendChild(heart);
-                setTimeout(() => heart.remove(), 8000);
-            }, 600);
+                setTimeout(() => heart.remove(), 7000);
+            }, 500);
         }
 
-        // Share to Facebook
+        // Capture Screenshot / Share
         function shareToFacebook() {
             html2canvas(document.body).then(canvas => {
                 const link = document.createElement('a');
