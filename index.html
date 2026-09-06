@@ -8,31 +8,19 @@
 <meta name="theme-color" content="#170821">
 <title>Happy Birthday Disha</title>
 
-<!--
-  ============================================================
-  কীভাবে নিজের মতো করে সাজাবেন (কাস্টমাইজেশন গাইড):
-  1) কাউন্টডাউনের তারিখ/সময়  -> নিচে JS অংশে TARGET_DATE খুঁজুন
-  2) প্রোফাইল ছবি            -> ".ph-avatar" ডিভটি <img src="your-photo.jpg"> দিয়ে বদলান
-  3) বিলবোর্ডের ছবি          -> ".billboard-back .ph-photo" ডিভটি <img> দিয়ে বদলান
-  4) গ্যালারির ছবি           -> "#page-gallery" এর ভেতরের ".ph-photo" গুলো <img> দিয়ে বদলান
-  5) চিঠি                    -> "#letterBody" এর প্যারাগ্রাফগুলো এডিট করুন
-  6) স্টিকি নোট               -> "#page-note" এর ".sticky" গুলোর লেখা বদলান
-  ============================================================
--->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg-deep:#170821;
-    --bg-mid:#33123f;
-    --bg-glow:#5a1f52;
+    --bg-deep:#110519;
+    --bg-mid:#2a0d35;
+    --bg-glow:#52194b;
     --accent-rose:#f7a8c4;
     --accent-gold:#f3cd8a;
-    --glass:rgba(255,255,255,0.10);
-    --glass-strong:rgba(255,255,255,0.16);
+    --glass:rgba(255,255,255,0.08);
+    --glass-strong:rgba(255,255,255,0.15);
     --glass-border:rgba(255,255,255,0.22);
     --text-light:#fdf6f2;
     --text-muted:#d9c3e0;
@@ -61,37 +49,34 @@
 
   .bangla{font-family:'Hind Siliguri',sans-serif;}
   .display{font-family:'Playfair Display',serif;}
-
   .hidden{display:none !important;}
 
-  /* ---------- glass utility ---------- */
+  /* ---------- Glass UI ---------- */
   .glass{
     background:var(--glass);
     backdrop-filter:blur(22px) saturate(180%);
     -webkit-backdrop-filter:blur(22px) saturate(180%);
     border:1px solid var(--glass-border);
     border-radius:var(--radius-lg);
-    box-shadow:0 8px 32px rgba(0,0,0,0.35);
+    box-shadow:0 12px 40px rgba(0,0,0,0.45);
   }
   button{font-family:inherit;cursor:pointer;}
 
   /* ================= FALLING STARS ================= */
-  #starField{
-    position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;
-  }
+  #starField{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
   .star{
     position:absolute;top:-5vh;
     width:3px;height:3px;border-radius:50%;
     background:var(--accent-gold);
-    box-shadow:0 0 6px 1px rgba(243,205,138,0.8);
+    box-shadow:0 0 8px 2px rgba(243,205,138,0.9);
     animation-name:fallStar;
     animation-timing-function:linear;
     animation-iteration-count:infinite;
   }
   @keyframes fallStar{
     0%{transform:translateY(-5vh) translateX(0) rotate(0deg);opacity:0;}
-    8%{opacity:1;}
-    100%{transform:translateY(110vh) translateX(20px) rotate(200deg);opacity:0.15;}
+    10%{opacity:1;}
+    100%{transform:translateY(110vh) translateX(30px) rotate(360deg);opacity:0.1;}
   }
 
   /* ================= GATE / COUNTDOWN ================= */
@@ -100,20 +85,18 @@
     min-height:100vh;display:flex;align-items:center;justify-content:center;
     padding:24px;text-align:center;
   }
-  .gate-card{padding:40px 28px;max-width:380px;width:100%;}
-  .gate-card h1{
-    font-size:1.5rem;margin:0 0 6px;
-    letter-spacing:.02em;
-  }
-  .gate-card p.sub{color:var(--text-muted);margin:0 0 26px;font-size:.92rem;}
-  .timer-grid{display:flex;gap:10px;justify-content:center;margin-bottom:22px;}
+  .gate-card{padding:42px 28px;max-width:400px;width:100%;transform-style:preserve-3d;perspective:1000px;}
+  .gate-card h1{font-size:1.6rem;margin:0 0 8px;letter-spacing:.02em;color:var(--accent-gold);}
+  .gate-card p.sub{color:var(--text-muted);margin:0 0 28px;font-size:.92rem;}
+  .timer-grid{display:flex;gap:10px;justify-content:center;margin-bottom:24px;}
   .timer-cell{
     background:var(--glass-strong);border:1px solid var(--glass-border);
-    border-radius:16px;padding:12px 8px;min-width:64px;
+    border-radius:18px;padding:12px 6px;min-width:68px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.25);
   }
-  .timer-cell .num{font-size:1.7rem;font-weight:700;font-variant-numeric:tabular-nums;}
+  .timer-cell .num{font-size:1.8rem;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;}
   .timer-cell .lbl{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
-  .gate-footnote{font-size:.78rem;color:var(--text-muted);}
+  .gate-footnote{font-size:.8rem;color:var(--text-muted);margin-top:10px;}
 
   /* ================= INTRO 3D BANNER ================= */
   #introBanner{
@@ -122,11 +105,11 @@
     perspective:1400px;background:radial-gradient(circle at 50% 40%, var(--bg-mid), var(--bg-deep));
   }
   #introBanner h1{
-    font-size:2.4rem;text-align:center;padding:0 20px;
+    font-size:2.8rem;text-align:center;padding:0 20px;
     transform:rotateY(-100deg) translateZ(-120px) scale(.6);
     opacity:0;
     color:var(--accent-rose);
-    text-shadow:0 0 30px rgba(247,168,196,.6);
+    text-shadow:0 0 35px rgba(247,168,196,.8);
   }
   #introBanner h1.play{
     animation:bannerIn 1.1s cubic-bezier(.2,.8,.25,1) forwards,
@@ -134,7 +117,7 @@
               bannerOut 0.9s cubic-bezier(.5,0,.75,0) forwards 2.5s;
   }
   @keyframes bannerIn{ to{transform:rotateY(0) translateZ(0) scale(1);opacity:1;} }
-  @keyframes bannerHold{ from{transform:rotateY(0) translateZ(0) scale(1);} to{transform:rotateY(0) translateZ(0) scale(1.03);} }
+  @keyframes bannerHold{ from{transform:rotateY(0) translateZ(0) scale(1);} to{transform:rotateY(0) translateZ(0) scale(1.05);} }
   @keyframes bannerOut{ to{transform:rotateY(100deg) translateZ(-200px) scale(.55);opacity:0;} }
 
   /* ================= APP SHELL ================= */
@@ -149,101 +132,135 @@
 
   .nav-sheet{
     position:fixed;top:72px;right:16px;z-index:50;
-    padding:10px;display:flex;flex-direction:column;gap:4px;min-width:150px;
+    padding:12px;display:flex;flex-direction:column;gap:6px;min-width:160px;
     transform:translateY(-10px) scale(.95);opacity:0;pointer-events:none;
     transition:all .25s ease;
   }
   .nav-sheet.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto;}
   .nav-sheet button{
     background:transparent;border:none;color:var(--text-light);
-    text-align:left;padding:10px 12px;border-radius:12px;font-size:.95rem;
+    text-align:left;padding:10px 14px;border-radius:12px;font-size:.95rem;
   }
   .nav-sheet button:active{background:var(--glass-strong);}
   .nav-sheet button.active{color:var(--accent-rose);font-weight:600;}
 
-  main.page{max-width:480px;margin:0 auto;padding:90px 18px 30px;}
+  main.page{max-width:520px;margin:0 auto;padding:90px 18px 30px;}
   .page-hidden{display:none;}
 
-  /* ---------- profile ---------- */
-  .profile-pic-wrap{display:flex;justify-content:center;margin-bottom:14px;}
+  /* ---------- Profile ---------- */
+  .profile-pic-wrap{display:flex;justify-content:center;margin-bottom:14px;perspective:1000px;}
   .ph-avatar{
-    width:132px;height:132px;border-radius:50%;
+    width:136px;height:136px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;
+    font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;
     background:linear-gradient(150deg,#f7a8c4,#f3cd8a);
     color:#3a1330;
-    border:3px solid rgba(255,255,255,.35);
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    border:4px solid rgba(255,255,255,.4);
+    box-shadow:0 12px 35px rgba(0,0,0,.5);
+    overflow:hidden;
   }
-  .greeting{text-align:center;font-size:1.7rem;margin:6px 0 26px;color:var(--accent-rose);}
+  .ph-avatar img{width:100%;height:100%;object-fit:cover;}
+  .greeting{text-align:center;font-size:1.8rem;margin:8px 0 26px;color:var(--accent-rose);}
 
-  /* ---------- 3D billboard ---------- */
+  /* ---------- 3D Billboard ---------- */
   .billboard{perspective:1200px;margin-bottom:30px;}
   .billboard-inner{
-    position:relative;height:190px;transform-style:preserve-3d;
+    position:relative;height:220px;transform-style:preserve-3d;
     transition:transform 1.3s cubic-bezier(.4,.2,.15,1);
+    border-radius:var(--radius-lg);
   }
   .billboard.flipped .billboard-inner{transform:rotateY(180deg);}
   .billboard-face{
     position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
     display:flex;align-items:center;justify-content:center;overflow:hidden;
+    border-radius:var(--radius-lg);border:1px solid var(--glass-border);
   }
-  .billboard-front{
-    background:linear-gradient(135deg,#4a1a4f,#7a2f5c);
-  }
+  .billboard-front{background:linear-gradient(135deg,#4a1a4f,#7a2f5c);}
   .billboard-front span{
-    font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent-gold);
-    text-shadow:0 0 20px rgba(243,205,138,.5);
+    font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--accent-gold);
+    text-shadow:0 0 25px rgba(243,205,138,.6);
   }
   .billboard-back{transform:rotateY(180deg);}
   .ph-photo{
     width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
     background:linear-gradient(135deg,#5c2350,#8a3a63);color:var(--text-muted);gap:6px;
+    overflow:hidden;position:relative;
   }
+  .ph-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
   .ph-photo .icon{font-size:2rem;}
   .ph-photo .cap{font-size:.8rem;}
 
-  /* ---------- letter ---------- */
-  .letter-card{padding:26px 22px;margin-bottom:32px;}
-  .letter-card h2{margin:0 0 16px;font-size:1.15rem;color:var(--accent-gold);text-align:center;font-weight:600;}
+  /* ---------- Letter ---------- */
+  .letter-card{padding:28px 22px;margin-bottom:32px;}
+  .letter-card h2{margin:0 0 18px;font-size:1.2rem;color:var(--accent-gold);text-align:center;font-weight:600;}
   #letterBody p{line-height:1.95;font-size:.98rem;color:var(--text-light);margin:0 0 16px;}
   #letterBody p:last-child{margin-bottom:0;text-align:right;color:var(--accent-rose);}
 
-  /* ---------- cake ---------- */
-  .cake-section{text-align:center;margin-bottom:20px;}
-  .cake-section h2{font-size:1.1rem;color:var(--accent-gold);margin-bottom:6px;font-weight:600;}
-  .cake-hint{font-size:.8rem;color:var(--text-muted);margin-bottom:18px;}
-  .cake-stage{position:relative;width:230px;height:200px;margin:0 auto;}
-  .cake-half{position:absolute;inset:0;transition:transform 1.1s cubic-bezier(.22,1,.36,1), opacity .8s;}
-  .half-left{clip-path:inset(0 50% 0 0);}
-  .half-right{clip-path:inset(0 0 0 50%);}
-  .cake-stage.is-cut .half-left{transform:translateX(-34px) rotate(-5deg);}
-  .cake-stage.is-cut .half-right{transform:translateX(34px) rotate(5deg);}
-  .cake-render{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:190px;}
-  .tier{border-radius:14px;margin:0 auto;box-shadow:inset 0 -6px 10px rgba(0,0,0,.2);}
-  .tier-bottom{width:190px;height:64px;background:linear-gradient(180deg,#f4d7e6,#e79cc0);}
-  .tier-middle{width:150px;height:54px;background:linear-gradient(180deg,#fbe6cf,#f0c68a);margin-top:-8px;}
-  .tier-top{width:112px;height:46px;background:linear-gradient(180deg,#e9d5f7,#c99bea);margin-top:-8px;}
-  .candles{position:relative;display:flex;justify-content:center;gap:14px;margin-top:-10px;height:34px;}
-  .candle{width:4px;height:26px;background:var(--accent-gold);border-radius:2px;position:relative;}
-  .flame{
-    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-    width:8px;height:13px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-    background:radial-gradient(circle,#fff6cf,#f3a13a 70%);
-    animation:flicker 1s ease-in-out infinite alternate;
+  /* ================= REALISTIC 3D CAKE ================= */
+  .cake-section{text-align:center;margin-bottom:30px;}
+  .cake-section h2{font-size:1.2rem;color:var(--accent-gold);margin-bottom:6px;font-weight:600;}
+  .cake-hint{font-size:.82rem;color:var(--text-muted);margin-bottom:20px;}
+  
+  .cake-stage{
+    position:relative;width:260px;height:230px;margin:0 auto;
+    perspective:1000px;cursor:pointer;
   }
-  .cake-stage.is-cut .candles{opacity:0;transition:opacity .4s;}
-  @keyframes flicker{0%{transform:translateX(-50%) scale(1);}100%{transform:translateX(-50%) scale(.85) rotate(4deg);}}
+  .cake-container{
+    width:100%;height:100%;position:relative;transform-style:preserve-3d;
+    transition:transform 0.8s ease;
+  }
+  .cake-stage.is-cut .cake-half-left{transform:translateX(-38px) rotateY(-15deg) rotateZ(-3deg);}
+  .cake-stage.is-cut .cake-half-right{transform:translateX(38px) rotateY(15deg) rotateZ(3deg);}
+  
+  .cake-half{
+    position:absolute;inset:0;transition:transform 1.1s cubic-bezier(.22,1,.36,1);
+  }
+  .cake-half-left{clip-path:inset(0 50% 0 0);}
+  .cake-half-right{clip-path:inset(0 0 0 50%);}
+
+  .cake-3d{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);width:210px;}
+  .tier-3d{
+    position:relative;margin:0 auto;border-radius:18px/10px;
+    box-shadow:0 8px 15px rgba(0,0,0,0.4), inset 0 -8px 12px rgba(0,0,0,0.25);
+  }
+  /* Cream Drips */
+  .tier-3d::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:12px;
+    background:rgba(255,255,255,0.7);border-radius:10px 10px 12px 12px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  }
+  .tier-bottom-3d{width:210px;height:68px;background:linear-gradient(180deg,#f8c2d8,#d978a3);}
+  .tier-middle-3d{width:165px;height:58px;background:linear-gradient(180deg,#fde3be,#e2a862);margin-top:-10px;}
+  .tier-top-3d{width:120px;height:48px;background:linear-gradient(180deg,#e8cbf5,#a769cb);margin-top:-10px;}
+  
+  .candles-wrap{position:relative;display:flex;justify-content:center;gap:12px;margin-top:-12px;height:38px;z-index:10;}
+  .candle-3d{
+    width:6px;height:28px;
+    background:repeating-linear-gradient(45deg, #f3cd8a, #f3cd8a 4px, #fff 4px, #fff 8px);
+    border-radius:3px;position:relative;box-shadow:0 2px 4px rgba(0,0,0,0.3);
+  }
+  .flame-3d{
+    position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+    width:10px;height:16px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background:radial-gradient(circle,#ffffff,#ffcd38 60%, #ff5200 90%);
+    box-shadow:0 0 12px #ffb400, 0 0 20px #ff5200;
+    animation:realFlicker 0.8s ease-in-out infinite alternate;
+  }
+  .cake-stage.is-cut .flame-3d{opacity:0;transition:opacity .3s;}
+  @keyframes realFlicker{
+    0%{transform:translateX(-50%) scale(1) rotate(-2deg);opacity:0.95;}
+    100%{transform:translateX(-50%) scale(1.15) rotate(3deg);opacity:1;}
+  }
   .cake-btn{
-    margin-top:20px;padding:12px 26px;border-radius:999px;border:1px solid var(--glass-border);
-    background:var(--glass-strong);color:var(--text-light);font-size:.9rem;font-weight:500;
+    margin-top:22px;padding:12px 28px;border-radius:999px;border:1px solid var(--glass-border);
+    background:var(--glass-strong);color:var(--text-light);font-size:.92rem;font-weight:500;
   }
   .cake-btn:active{transform:scale(.96);}
 
-  /* ---------- share button ---------- */
+  /* ---------- Share Button ---------- */
   .share-wrap{text-align:center;margin-top:36px;}
   .share-btn{
-    padding:14px 26px;border-radius:999px;border:none;
+    padding:14px 28px;border-radius:999px;border:none;
     background:linear-gradient(135deg,var(--accent-rose),var(--accent-gold));
     color:#3a1330;font-weight:600;font-size:.92rem;
     box-shadow:0 8px 24px rgba(247,168,196,.35);
@@ -251,35 +268,52 @@
   .share-btn:active{transform:scale(.97);}
   .share-note{font-size:.75rem;color:var(--text-muted);margin-top:10px;max-width:320px;margin-left:auto;margin-right:auto;}
 
-  /* ---------- gallery page ---------- */
-  .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .gallery-grid .ph-photo{aspect-ratio:1/1;border-radius:18px;}
+  /* ================= GALLERY PAGE (30+ PHOTOS) ================= */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(2, 1fr);gap:14px;
+    perspective:1000px;
+  }
+  .gallery-item{
+    aspect-ratio:1/1;border-radius:20px;overflow:hidden;
+    position:relative;border:1px solid var(--glass-border);
+    box-shadow:0 6px 18px rgba(0,0,0,0.3);
+    transition:transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .gallery-item:hover{
+    transform:scale(1.03) translateZ(10px);
+    box-shadow:0 12px 25px rgba(247,168,196,0.3);
+  }
+  .gallery-item img{width:100%;height:100%;object-fit:cover;}
 
-  /* ---------- note / pinboard page ---------- */
+  /* ================= NOTE BOARD (20 STICKY NOTES) ================= */
   .corkboard{
-    position:relative;min-height:520px;border-radius:24px;padding:24px 14px;
+    position:relative;min-height:1250px;border-radius:28px;padding:20px 10px;
     background:
       repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 2px, transparent 2px 4px),
-      linear-gradient(160deg,#8a5a3c,#6b4128);
-    border:1px solid rgba(255,255,255,.15);
-    overflow:hidden;
+      linear-gradient(160deg,#6b4128,#4a2a16);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:inset 0 0 40px rgba(0,0,0,0.6);
   }
   .sticky{
-    position:absolute;width:130px;padding:14px 12px 16px;
-    font-family:'Hind Siliguri',sans-serif;font-size:.85rem;line-height:1.5;color:#332;
-    border-radius:3px;box-shadow:3px 6px 12px rgba(0,0,0,.35);
+    position:absolute;width:138px;padding:14px 12px;
+    font-family:'Hind Siliguri',sans-serif;font-size:.85rem;line-height:1.45;color:#222;
+    border-radius:4px;box-shadow:4px 8px 16px rgba(0,0,0,0.4);
+    transition:transform 0.3s ease;
   }
+  .sticky:hover{transform:scale(1.08) rotate(0deg) !important;z-index:20;}
   .sticky::before{
     content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);
     width:12px;height:12px;border-radius:50%;
     background:radial-gradient(circle at 30% 30%, #fff, #b9433f 60%);
     box-shadow:0 2px 4px rgba(0,0,0,.4);
   }
-  .s1{background:#fdf1a8;top:20px;left:12px;transform:rotate(-6deg);}
-  .s2{background:#c9ecff;top:10px;right:10px;transform:rotate(5deg);}
-  .s3{background:#ffd6e7;top:190px;left:24px;transform:rotate(4deg);}
-  .s4{background:#d8ffd6;top:210px;right:20px;transform:rotate(-4deg);}
-  .s5{background:#ffe3c2;top:370px;left:60px;transform:rotate(-3deg);}
+
+  /* Note Colors */
+  .c-yellow{background:#fdf1a8;}
+  .c-blue{background:#c9ecff;}
+  .c-pink{background:#ffd6e7;}
+  .c-green{background:#d8ffd6;}
+  .c-orange{background:#ffe3c2;}
 
 </style>
 </head>
@@ -298,7 +332,7 @@
       <div class="timer-cell"><div class="num" id="cd-mins">00</div><div class="lbl">মিনিট</div></div>
       <div class="timer-cell"><div class="num" id="cd-secs">00</div><div class="lbl">সেকেন্ড</div></div>
     </div>
-    <p class="gate-footnote bangla">সময় হলে ওয়েবসাইট নিজে থেকেই খুলে যাবে</p>
+    <p class="gate-footnote bangla">০৬ সেপ্টেম্বর ২০২৬, সকাল ৮:১৫ AM এ পেজটি আনলক হবে</p>
   </div>
 </div>
 
@@ -307,15 +341,15 @@
   <h1 class="display" id="introText">Happy Birthday Disha</h1>
 </div>
 
-<!-- ================= APP ================= -->
+<!-- ================= APP SHELL ================= -->
 <div id="app" class="hidden">
 
   <div class="navbar">
     <button class="hamburger-btn glass" id="hamburgerBtn"><span></span><span></span><span></span></button>
     <div class="nav-sheet glass" id="navSheet">
       <button data-page="home" class="active">Home</button>
-      <button data-page="gallery">Gallery</button>
-      <button data-page="note">Note</button>
+      <button data-page="gallery">Gallery (30)</button>
+      <button data-page="note">Notes (20)</button>
     </div>
   </div>
 
@@ -323,7 +357,7 @@
   <main class="page" id="page-home">
 
     <div class="profile-pic-wrap">
-      <!-- এখানে <img src="disha.jpg" class="ph-avatar"> দিয়ে বদলান -->
+      <!-- ছবি দিতে চাইলে src="disha.jpg" ব্যবহার করো -->
       <div class="ph-avatar">D</div>
     </div>
     <h2 class="greeting display">Happy Birthday Disha</h2>
@@ -334,7 +368,6 @@
           <span>Happy Birthday</span>
         </div>
         <div class="billboard-face billboard-back">
-          <!-- এখানে <img> দিয়ে বদলে ছবি দিন -->
           <div class="ph-photo">
             <span class="icon">📷</span>
             <span class="cap bangla">এখানে তোমার পছন্দের ছবি বসবে</span>
@@ -361,36 +394,36 @@
       </div>
     </div>
 
+    <!-- Realistic 3D Cake Section -->
     <div class="cake-section">
       <h2 class="bangla">কেক কাটার পালা 🎂</h2>
-      <p class="cake-hint bangla">কেকে ট্যাপ করে কাটো</p>
+      <p class="cake-hint bangla">কেকে ট্যাপ করে কেক কাটো</p>
+      
       <div class="cake-stage" id="cakeStage">
-        <div class="cake-half half-left">
-          <div class="cake-render">
-            <div class="candles">
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
+        <div class="cake-container">
+          <div class="cake-half cake-half-left">
+            <div class="cake-3d">
+              <div class="candles-wrap">
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+              </div>
+              <div class="tier-3d tier-top-3d"></div>
+              <div class="tier-3d tier-middle-3d"></div>
+              <div class="tier-3d tier-bottom-3d"></div>
             </div>
-            <div class="tier tier-top"></div>
-            <div class="tier tier-middle"></div>
-            <div class="tier tier-bottom"></div>
           </div>
-        </div>
-        <div class="cake-half half-right">
-          <div class="cake-render">
-            <div class="candles">
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
-              <div class="candle"><i class="flame"></i></div>
+          <div class="cake-half cake-half-right">
+            <div class="cake-3d">
+              <div class="candles-wrap">
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+                <div class="candle-3d"><i class="flame-3d"></i></div>
+              </div>
+              <div class="tier-3d tier-top-3d"></div>
+              <div class="tier-3d tier-middle-3d"></div>
+              <div class="tier-3d tier-bottom-3d"></div>
             </div>
-            <div class="tier tier-top"></div>
-            <div class="tier tier-middle"></div>
-            <div class="tier tier-bottom"></div>
           </div>
         </div>
       </div>
@@ -399,33 +432,23 @@
 
     <div class="share-wrap">
       <button class="share-btn bangla" id="shareBtn">ছবি হিসেবে সেভ / ফেসবুকে শেয়ার</button>
-      <p class="share-note bangla">মোবাইলে এই বাটনে চাপলে শেয়ার শিট খুলবে (Facebook সহ)। না খুললে ছবিটি ডাউনলোড হয়ে যাবে, সেটা Facebook-এ আপলোড করে দিও।</p>
+      <p class="share-note bangla">মোবাইলে এই বাটনে চাপলে শেয়ার শিট খুলবে। না খুললে ছবিটি ডাউনলোড হবে, ফেসবুক অ্যাপে আপলোড করে দিও।</p>
     </div>
   </main>
 
-  <!-- ---------- GALLERY PAGE ---------- -->
+  <!-- ---------- GALLERY PAGE (30 PHOTOS) ---------- -->
   <main class="page page-hidden" id="page-gallery">
-    <h2 class="display" style="text-align:center;margin-bottom:20px;">Gallery</h2>
-    <div class="gallery-grid">
-      <!-- প্রতিটা ph-photo কে <img src="..."> দিয়ে বদলাও -->
-      <div class="ph-photo"><span class="icon">📷</span></div>
-      <div class="ph-photo"><span class="icon">📷</span></div>
-      <div class="ph-photo"><span class="icon">📷</span></div>
-      <div class="ph-photo"><span class="icon">📷</span></div>
-      <div class="ph-photo"><span class="icon">📷</span></div>
-      <div class="ph-photo"><span class="icon">📷</span></div>
+    <h2 class="display" style="text-align:center;margin-bottom:20px;">Photo Gallery</h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- JS দিয়ে ৩০টি ছবি লোড হবে -->
     </div>
   </main>
 
-  <!-- ---------- NOTE / PINBOARD PAGE ---------- -->
+  <!-- ---------- NOTE / PINBOARD PAGE (20 NOTES) ---------- -->
   <main class="page page-hidden" id="page-note">
-    <h2 class="display" style="text-align:center;margin-bottom:20px;">Notes</h2>
-    <div class="corkboard">
-      <div class="sticky s1 bangla">তোমার হাসিটাই আমার প্রিয় সুর 🎵</div>
-      <div class="sticky s2 bangla">শুভ জন্মদিন, লক্ষ্মীটি 🎂</div>
-      <div class="sticky s3 bangla">তুমি থাকলে সব ঠিক হয়ে যায় ❤️</div>
-      <div class="sticky s4 bangla">এই বছরটা তোমার হোক, পুরোপুরি তোমার</div>
-      <div class="sticky s5 bangla">ভালোবাসি, আজও প্রথম দিনের মতোই</div>
+    <h2 class="display" style="text-align:center;margin-bottom:20px;">Special Notes</h2>
+    <div class="corkboard" id="corkboard">
+      <!-- JS দিয়ে ২০টি স্টিকি নোট লোড হবে -->
     </div>
   </main>
 
@@ -434,18 +457,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 /* ============ CONFIG ============ */
-// কাউন্টডাউনের টার্গেট তারিখ/সময় (ডিভাইসের লোকাল টাইমজোন অনুযায়ী)
-const TARGET_DATE = new Date('2026-09-06T08:00:00');
+// টার্গেট তারিখ ও সময়: ০৬ সেপ্টেম্বর ২০২৬, সকাল ৮:১৫ AM
+const TARGET_DATE = new Date('2026-09-06T08:15:00');
 
 /* ============ FALLING STARS ============ */
 (function initStars(){
   const field = document.getElementById('starField');
-  const count = 45;
+  const count = 50;
   for(let i=0;i<count;i++){
     const s = document.createElement('div');
     s.className = 'star';
     s.style.left = Math.random()*100 + 'vw';
-    const dur = 6 + Math.random()*10;
+    const dur = 6 + Math.random()*9;
     s.style.animationDuration = dur + 's';
     s.style.animationDelay = (Math.random()*dur) + 's';
     s.style.width = s.style.height = (1.5 + Math.random()*2.5) + 'px';
@@ -492,7 +515,7 @@ function startUnlockSequence(){
   }, 3400);
 }
 
-/* ============ NAV ============ */
+/* ============ NAV SYSTEM ============ */
 const hamburgerBtn = document.getElementById('hamburgerBtn');
 const navSheet = document.getElementById('navSheet');
 hamburgerBtn.addEventListener('click', ()=> navSheet.classList.toggle('open'));
@@ -513,7 +536,7 @@ document.querySelectorAll('.nav-sheet button').forEach(btn=>{
 function startBillboard(){
   setTimeout(()=>{
     document.getElementById('billboard').classList.add('flipped');
-  }, 5000);
+  }, 4000);
 }
 
 /* ============ CAKE CUT ============ */
@@ -529,35 +552,105 @@ cakeStage.addEventListener('click', cutCake);
 cakeBtn.addEventListener('click', cutCake);
 
 function burstConfetti(){
-  const colors = ['#f7a8c4','#f3cd8a','#c99bea','#fff'];
-  for(let i=0;i<24;i++){
+  const colors = ['#f7a8c4','#f3cd8a','#c99bea','#fff','#ff5200'];
+  for(let i=0;i<35;i++){
     const p = document.createElement('div');
     p.style.position='fixed';
     p.style.left='50%';
-    p.style.top='55%';
-    p.style.width='7px';p.style.height='11px';
+    p.style.top='50%';
+    p.style.width='8px';p.style.height='12px';
     p.style.background=colors[i%colors.length];
     p.style.zIndex=100;
     p.style.borderRadius='2px';
     p.style.pointerEvents='none';
     document.body.appendChild(p);
     const angle = Math.random()*Math.PI*2;
-    const dist = 80 + Math.random()*160;
+    const dist = 90 + Math.random()*180;
     const dx = Math.cos(angle)*dist;
-    const dy = Math.sin(angle)*dist - 60;
+    const dy = Math.sin(angle)*dist - 70;
     p.animate([
       {transform:'translate(0,0) rotate(0deg)',opacity:1},
-      {transform:`translate(${dx}px, ${dy+220}px) rotate(${360+Math.random()*360}deg)`,opacity:0}
-    ], {duration:1100+Math.random()*500, easing:'cubic-bezier(.2,.7,.3,1)'});
-    setTimeout(()=>p.remove(), 1700);
+      {transform:`translate(${dx}px, ${dy+240}px) rotate(${360+Math.random()*360}deg)`,opacity:0}
+    ], {duration:1200+Math.random()*600, easing:'cubic-bezier(.2,.7,.3,1)'});
+    setTimeout(()=>p.remove(), 1800);
   }
 }
+
+/* ============ GENERATE 30 GALLERY ITEMS ============ */
+(function generateGallery(){
+  const grid = document.getElementById('galleryGrid');
+  for(let i=1; i<=30; i++){
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    
+    // ছবি ব্যবহার করতে চাইলে নিচের লাইনটি থেকে কমেন্ট সরিয়ে দাও এবং img path দাও
+    // item.innerHTML = `<img src="photos/photo${i}.jpg" alt="Memory ${i}">`;
+    
+    item.innerHTML = `
+      <div class="ph-photo">
+        <span class="icon">📷</span>
+        <span class="cap bangla">ছবি নম্বর ${i}</span>
+      </div>`;
+    grid.appendChild(item);
+  }
+})();
+
+/* ============ GENERATE 20 STICKY NOTES ============ */
+const noteTexts = [
+  "তোমার হাসিটাই আমার প্রিয় সুর 🎵",
+  "শুভ জন্মদিন, লক্ষ্মীটি 🎂",
+  "তুমি থাকলে সব ঠিক হয়ে যায় ❤️",
+  "এই বছরটা তোমার হোক, পুরোপুরি তোমার ✨",
+  "ভালোবাসি, আজও প্রথম দিনের মতোই 💖",
+  "তোমার স্বপ্নগুলো সব পূরণ হোক 🌟",
+  "সবচেয়ে সুন্দর মুহূর্তগুলো তোমার সাথেই 🌸",
+  "তোমার হাসির চেয়ে সুন্দর কিছু হতে পারে না 😊",
+  "চিরকাল এভাবেই পাশে থেকো 🤝",
+  "তোমার সব কষ্টের দিন শেষ হয়ে আলো আসুক ☀️",
+  "হ্যাপি বার্থডে মাই স্পেশাল পার্সন 🎈",
+  "তোমার সাথেই কাটাতে চাই বাকিটা জীবন ✨",
+  "তুমি আমার জীবনের সবচেয়ে সুন্দর উপহার 🎁",
+  "আজকের দিনটা শুধুই তোমার জন্য 🥳",
+  "তোমার ভালো থাকাটাই আমার আনন্দ 😇",
+  "পৃথিবীর সব সুখ তোমার ঝুলিতে আসুক 🌺",
+  "তোমার মিষ্টি রাগগুলোও খুব প্রিয় 🙈",
+  "তোমার সাথে কাটানো প্রতিটি মুহূর্ত অমূল্য 💕",
+  "আজকের দিনে অনেক অনেক ভালোবাসা রইল 💌",
+  "শুভ জন্মদিন দিশা! সদাই হাসিখুশি থেকো 👑"
+];
+
+const colors = ['c-yellow', 'c-blue', 'c-pink', 'c-green', 'c-orange'];
+
+(function generateNotes(){
+  const board = document.getElementById('corkboard');
+  const cols = 2;
+  
+  for(let i=0; i<20; i++){
+    const note = document.createElement('div');
+    const colorClass = colors[i % colors.length];
+    const rot = (Math.random() * 12 - 6).toFixed(1); // Random angle between -6 and 6 deg
+    
+    const colIdx = i % cols;
+    const rowIdx = Math.floor(i / cols);
+    
+    const topPos = 20 + rowIdx * 120 + (Math.random() * 10);
+    const leftPos = colIdx === 0 ? (12 + Math.random()*8) : (52 + Math.random()*8);
+
+    note.className = `sticky ${colorClass} bangla`;
+    note.style.top = topPos + 'px';
+    note.style.left = leftPos + '%';
+    note.style.transform = `rotate(${rot}deg)`;
+    note.textContent = noteTexts[i] || `Note ${i+1}`;
+
+    board.appendChild(note);
+  }
+})();
 
 /* ============ CAPTURE & SHARE ============ */
 document.getElementById('shareBtn').addEventListener('click', async ()=>{
   const target = document.getElementById('page-home');
   try{
-    const canvas = await html2canvas(target, {backgroundColor:'#170821', scale:2, useCORS:true});
+    const canvas = await html2canvas(target, {backgroundColor:'#110519', scale:2, useCORS:true});
     canvas.toBlob(async (blob)=>{
       if(!blob) return;
       const file = new File([blob], 'happy-birthday-disha.png', {type:'image/png'});
@@ -565,14 +658,14 @@ document.getElementById('shareBtn').addEventListener('click', async ()=>{
         try{
           await navigator.share({files:[file], title:'Happy Birthday Disha'});
           return;
-        }catch(e){ /* user cancelled or unsupported, fall through to download */ }
+        }catch(e){}
       }
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url; a.download = 'happy-birthday-disha.png';
       document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(url);
-      alert('ছবিটি ডাউনলোড হয়েছে। এবার Facebook অ্যাপ/ওয়েবসাইটে গিয়ে আপলোড করে পোস্ট করো।');
+      alert('ছবিটি ডাউনলোড হয়েছে। এবার সোশ্যাল মিডিয়ায় শেয়ার করতে পারো।');
     }, 'image/png');
   }catch(err){
     alert('ছবি তৈরি করতে সমস্যা হয়েছে, আবার চেষ্টা করো।');
